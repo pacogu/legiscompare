@@ -1,17 +1,12 @@
-// LegisCompare - flujo simplificado: escribir y Enter/Buscar. Jurisdicciones
-// y ejes son filtros opcionales colapsados por defecto (buscan en todas las
-// jurisdicciones disponibles si no se filtra nada).
+// LegisCompare - busqueda de legislacion comparada via Gemini + Google Search
+// grounding (un solo backend, sin conectores por pais). Flujo simplificado:
+// escribir y Enter/Buscar. Jurisdicciones y ejes son filtros opcionales.
 
-const JURISDICCIONES = [
-  { nombre: "Espana", fuente: "BOE", disponible: true },
-  { nombre: "Brasil", fuente: "LexML", disponible: true },
-  { nombre: "Reino Unido", fuente: "legislation.gov.uk", disponible: true },
-  { nombre: "Estados Unidos", fuente: "Congress.gov", disponible: true },
-  { nombre: "Union Europea", fuente: "EUR-Lex / CELLAR", disponible: true },
-  { nombre: "Francia", fuente: "Legifrance (PISTE)", disponible: true },
-  { nombre: "Nueva Zelanda", fuente: "legislation.govt.nz", disponible: true },
-  { nombre: "Chile", fuente: "sin API en vivo", disponible: false },
-  { nombre: "Alemania", fuente: "sin API en vivo", disponible: false },
+const REGIONES = [
+  { id: "UE", nombre: "Union Europea", paises: ["Espana", "Francia", "Alemania", "Italia", "Belgica", "Portugal", "Suecia"] },
+  { id: "AL", nombre: "America Latina", paises: ["Chile", "Argentina", "Brasil", "Mexico", "Colombia", "Peru", "Uruguay"] },
+  { id: "CW", nombre: "Commonwealth", paises: ["Reino Unido", "Canada", "Australia", "Nueva Zelanda"] },
+  { id: "NA", nombre: "Norteamerica", paises: ["Estados Unidos", "Canada"] },
 ];
 
 const EJES_SUGERIDOS = [
@@ -23,27 +18,73 @@ const EJES_SUGERIDOS = [
   "Transparencia y publicidad",
 ];
 
-const state = { jurisdiccionesSeleccionadas: new Set(), ejesSeleccionados: new Set(), resultados: [] };
+const TEMAS_SUGERIDOS = [
+  "Proteccion de datos personales",
+  "Inteligencia artificial y regulacion algoritmica",
+  "Medio ambiente y cambio climatico",
+  "Transparencia y acceso a la informacion",
+  "Ninez y adolescencia",
+  "Ciberseguridad",
+  "Libertad de expresion en linea",
+  "Regulacion de plataformas digitales",
+];
+
+const state = { paisesSeleccionados: new Set(), ejesSeleccionados: new Set(), resultados: [] };
+
+function obtenerRecientes() {
+  try { return JSON.parse(localStorage.getItem("legiscompare_recientes") || "[]"); } catch (e) { return []; }
+}
+
+function guardarReciente(q) {
+  try {
+    let recientes = obtenerRecientes().filter((r) => r.toLowerCase() !== q.toLowerCase());
+    recientes.unshift(q);
+    localStorage.setItem("legiscompare_recientes", JSON.stringify(recientes.slice(0, 5)));
+  } catch (e) {}
+}
+
+function mostrarAutocomplete() {
+  const input = document.getElementById("consulta");
+  const list = document.getElementById("autocompleteList");
+  const valor = input.value.trim().toLowerCase();
+  const recientes = obtenerRecientes();
+  let candidatos = valor
+    ? [...recientes, ...TEMAS_SUGERIDOS].filter((t) => t.toLowerCase().includes(valor))
+    : [...recientes, ...TEMAS_SUGERIDOS];
+  candidatos = [...new Set(candidatos)].slice(0, 6);
+  if (!candidatos.length) { list.hidden = true; list.innerHTML = ""; return; }
+  list.innerHTML = candidatos.map((c) => {
+    const esReciente = recientes.includes(c);
+    return "<button type='button' data-valor='" + c.replace(/'/g, "&#39;") + "'>" + c + "<span class='ac-tag'>" + (esReciente ? "reciente" : "sugerido") + "</span></button>";
+  }).join("");
+  list.hidden = false;
+  list.querySelectorAll("button").forEach((btn) => {
+    btn.addEventListener("mousedown", (e) => {
+      e.preventDefault();
+      input.value = btn.getAttribute("data-valor");
+      list.hidden = true;
+      ejecutarBusqueda();
+    });
+  });
+}
 
 function renderJurisdicciones() {
   const box = document.getElementById("jurisdicciones");
   box.innerHTML = "";
-  JURISDICCIONES.forEach((j) => {
-    const label = document.createElement("label");
-    label.className = "eje" + (j.disponible ? "" : " deshabilitado");
-    label.innerHTML = "<input type='checkbox' " + (j.disponible ? "" : "disabled") + "><span class='eje-title'>" + j.nombre + "</span><span class='eje-text'>" + j.fuente + "</span>";
-    const input = label.querySelector("input");
-    if (j.disponible) {
-      input.checked = true;
-      state.jurisdiccionesSeleccionadas.add(j.nombre);
-      label.classList.add("selected");
-      input.addEventListener("change", (e) => {
-        if (e.target.checked) { state.jurisdiccionesSeleccionadas.add(j.nombre); label.classList.add("selected"); }
-        else { state.jurisdiccionesSeleccionadas.delete(j.nombre); label.classList.remove("selected"); }
+  REGIONES.forEach((r) => {
+    r.paises.forEach((pais) => {
+      if (box.querySelector("[data-pais='" + pais + "']")) return;
+      const label = document.createElement("label");
+      label.className = "eje";
+      label.setAttribute("data-pais", pais);
+      label.innerHTML = "<input type='checkbox'><span class='eje-title'>" + pais + "</span>";
+      label.querySelector("input").addEventListener("change", (e) => {
+        if (e.target.checked) { state.paisesSeleccionados.add(pais); label.classList.add("selected"); }
+        else { state.paisesSeleccionados.delete(pais); label.classList.remove("selected"); }
         actualizarResumenFiltros();
       });
-    }
-    box.appendChild(label);
+      box.appendChild(label);
+    });
   });
 }
 
@@ -65,10 +106,9 @@ function renderEjes() {
 
 function actualizarResumenFiltros() {
   const toggle = document.getElementById("toggleFiltros");
-  const totalDisponibles = JURISDICCIONES.filter((j) => j.disponible).length;
-  const nJur = state.jurisdiccionesSeleccionadas.size;
+  const nPaises = state.paisesSeleccionados.size;
   const nEjes = state.ejesSeleccionados.size;
-  const jurTexto = nJur === totalDisponibles ? "todas las jurisdicciones" : nJur + " jurisdiccion(es)";
+  const jurTexto = nPaises ? nPaises + " pais(es)" : "todos los paises";
   const ejesTexto = nEjes ? nEjes + " eje(s)" : "sin ejes";
   const abierto = !document.getElementById("filtrosPanel").hidden;
   toggle.innerHTML = "Filtros: " + jurTexto + ", " + ejesTexto + " " + (abierto ? "&#9652;" : "&#9662;");
@@ -82,46 +122,48 @@ async function ejecutarBusqueda() {
   const err = document.getElementById("errApi");
   const abrirBtn = document.getElementById("abrirDossier");
   if (!consulta) { estado.textContent = "Escribe una consulta primero."; return; }
-  if (!state.jurisdiccionesSeleccionadas.size) { estado.textContent = "Selecciona al menos una jurisdiccion en Filtros."; return; }
 
+  guardarReciente(consulta);
+  document.getElementById("autocompleteList").hidden = true;
   btn.disabled = true; btn.innerHTML = "<span class='spinner'></span>Buscando...";
-  estado.textContent = "Consultando APIs en vivo...";
+  estado.textContent = "Buscando en la web con Gemini...";
   estado.className = "status";
   out.innerHTML = ""; err.innerHTML = ""; abrirBtn.style.display = "none";
 
   const fecha = new Date().toLocaleString("es-CL", { dateStyle: "short", timeStyle: "short" });
   try {
-    const res = await window.IJARBusquedaExterna.ejecutarBusquedaExterna(consulta);
-    const filtrados = (res.resultados || []).filter((r) => state.jurisdiccionesSeleccionadas.has(r.pais));
-    state.resultados = filtrados;
+    const paisesArray = Array.from(state.paisesSeleccionados);
+    const res = await window.IJARBusquedaExterna.ejecutarBusquedaExterna(consulta, paisesArray);
+    state.resultados = res.resultados || [];
 
     try {
       sessionStorage.setItem("legiscompare_brief", JSON.stringify({
         consulta,
-        jurisdicciones: Array.from(state.jurisdiccionesSeleccionadas),
+        jurisdicciones: paisesArray,
         ejes: Array.from(state.ejesSeleccionados),
-        resultados: filtrados,
+        resultados: state.resultados,
         fechaConsulta: fecha,
       }));
     } catch (e) {}
 
-    if (!filtrados.length) {
-      out.innerHTML = "<div class='empty'>Sin resultados en las jurisdicciones seleccionadas. Prueba con terminos mas generales.</div>";
-      estado.textContent = "Sin resultados en vivo.";
+    if (!state.resultados.length) {
+      out.innerHTML = "<div class='empty'>Sin resultados. Prueba con terminos mas generales.</div>";
+      estado.textContent = "Sin resultados.";
     } else {
-      filtrados.forEach((r) => {
+      state.resultados.forEach((r) => {
         const d = document.createElement("div");
         d.className = "item api";
-        d.innerHTML = "<strong>" + r.pais + "</strong><span class='tag api'>API en vivo</span><br><a href='" + r.url + "' target='_blank' rel='noopener'>" + r.titulo + "</a><span class='meta'>" + (r.fecha ? "Fecha: " + r.fecha + " - " : "") + "consultado " + fecha + "</span>";
+        const enlace = r.url ? "<a href='" + r.url + "' target='_blank' rel='noopener'>" + r.titulo + "</a>" : r.titulo;
+        d.innerHTML = "<strong>" + r.pais + "</strong><span class='tag api'>Gemini + busqueda web</span><br>" + enlace + (r.resumen ? "<br><span class='meta'>" + r.resumen + "</span>" : "") + "<span class='meta'>" + (r.fecha ? "Fecha: " + r.fecha + " - " : "") + "consultado " + fecha + "</span>";
         out.appendChild(d);
       });
-      estado.textContent = filtrados.length + " resultado(s) en vivo encontrados.";
+      estado.textContent = state.resultados.length + " resultado(s) encontrados.";
       estado.className = "status ok";
       abrirBtn.style.display = "inline-flex";
     }
     if (res.errores && res.errores.length) err.innerHTML = res.errores.join("<br>");
   } catch (e) {
-    err.innerHTML = "Error al consultar fuentes oficiales: " + e.message;
+    err.innerHTML = "Error al buscar: " + e.message;
     estado.textContent = "Error en la busqueda.";
   }
   btn.disabled = false; btn.textContent = "Buscar";
@@ -139,8 +181,14 @@ function init() {
 
   document.getElementById("btnBuscarApi").addEventListener("click", ejecutarBusqueda);
   document.getElementById("abrirDossier").addEventListener("click", abrirDossier);
-  document.getElementById("consulta").addEventListener("keydown", (e) => {
-    if (e.key === "Enter") ejecutarBusqueda();
+  const inputConsulta = document.getElementById("consulta");
+  inputConsulta.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") { document.getElementById("autocompleteList").hidden = true; ejecutarBusqueda(); }
+  });
+  inputConsulta.addEventListener("input", mostrarAutocomplete);
+  inputConsulta.addEventListener("focus", mostrarAutocomplete);
+  document.addEventListener("click", (e) => {
+    if (!e.target.closest(".search-bar-wrap")) document.getElementById("autocompleteList").hidden = true;
   });
   document.getElementById("toggleFiltros").addEventListener("click", () => {
     const panel = document.getElementById("filtrosPanel");

@@ -26,36 +26,29 @@ netlify/functions/buscar.js  proxy serverless (evita CORS, protege API keys)
 netlify.toml            configuracion de build/deploy de Netlify
 ```
 
-## Cobertura de busqueda en vivo por pais
+## Como funciona la busqueda
 
-| Pais / bloque | Fuente | Requiere API key | Notas |
-|---|---|---|---|
-| Espana | BOE (datos abiertos) | No | REST/JSON directo |
-| Brasil | LexML (SRU) | No | XML, estandar SRU |
-| Reino Unido | legislation.gov.uk | No | feed Atom via URL, sin token |
-| Estados Unidos | Congress.gov API | Si | requiere `CONGRESS_API_KEY` |
-| Union Europea | EUR-Lex / CELLAR (SPARQL) | No | endpoint publico SPARQL |
-| Francia | Legifrance (API PISTE) | Si | requiere `LEGIFRANCE_CLIENT_ID` y `LEGIFRANCE_CLIENT_SECRET` (registro gratis en piste.gouv.fr) |
-| Nueva Zelanda | legislation.govt.nz | Si | requiere `NZ_LEGISLATION_API_KEY` (se solicita por correo a contact@pco.govt.nz) |
-| Chile | sin fuente en vivo | - | sin API publica de busqueda |
-| Alemania | sin fuente en vivo | - | sin API publica de busqueda |
-| Australia, Canada, Argentina | sin fuente en vivo | - | sin API publica de busqueda confiable identificada |
+Adaptado de `portal-legislativo/pages/ForeignLegislation.tsx` (BCN Chile,
+Escritorio ATP): en vez de mantener un conector distinto por cada pais, el
+sistema hace una sola llamada a Gemini con la herramienta de Google Search
+(grounding). Gemini busca en la web real y devuelve resultados
+estructurados (pais, titulo, url, fecha, resumen) de cualquier jurisdiccion,
+no solo las que tienen una API publica propia. Esto cubre Chile, Alemania,
+y en general cualquier pais, sin necesidad de integrar APIs una por una.
 
-Pendiente: FAOLEX/NATLEX y tratados via UN Data no exponen API REST
-publica moderna; requeriria descarga periodica de datasets o un crawler
-autorizado. No implementado.
+Los filtros de "jurisdicciones" y "ejes juridicos" en la interfaz son
+opcionales: si se seleccionan, se pasan como contexto al prompt para
+acotar la busqueda; si no, busca en un ambito global.
 
 ## Como desplegar en Netlify
 
 1. Sube este repositorio a GitHub.
 2. En Netlify: Add new site > Import an existing project, conecta el repo.
 3. Build settings: sin build command, publish directory = `site`.
-4. En Site settings > Environment variables agrega:
-   - `CONGRESS_API_KEY` (gratis en https://api.congress.gov/sign-up/)
-   - `GEMINI_API_KEY` (para el borrador de sintesis comparada por eje,
-     gratis en https://aistudio.google.com/apikey; sin esto el informe
-     funciona igual pero sin esa seccion)
-5. Deploy. La busqueda en vivo funciona via `/.netlify/functions/buscar`.
+4. En Site settings > Environment variables agrega `GEMINI_API_KEY`
+   (gratis en https://aistudio.google.com/apikey, marcar "Contains secret
+   values"). Se usa tanto para la busqueda como para el borrador de sintesis.
+5. Deploy. La busqueda funciona via `/.netlify/functions/buscar`.
 
 ## Desarrollo local
 

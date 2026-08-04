@@ -98,3 +98,10 @@ textarea.hallazgos{width:100%;min-height:140px;padding:12px;border-radius:12px;b
 .filtros-label{color:#dbeafe;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin:0 0 8px}
 .filtros-panel .eje{background:rgba(255,255,255,.92)}
 main .status{display:block;text-align:center;margin-top:4px}
+.search-bar-wrap{position:relative;max-width:640px;margin:22px auto 10px}
+.search-bar-wrap .search-bar{margin:0}
+.autocomplete-list{position:absolute;top:calc(100% + 6px);left:0;right:0;background:#fff;border-radius:14px;box-shadow:0 10px 26px rgba(0,0,0,.18);overflow:hidden;text-align:left;z-index:20}
+.autocomplete-list button{display:block;width:100%;text-align:left;background:none;border:none;border-bottom:1px solid var(--line);padding:10px 16px;font-size:14px;color:var(--ink);cursor:pointer;font-family:inherit}
+.autocomplete-list button:last-child{border-bottom:none}
+.autocomplete-list button:hover{background:#f4f7fb}
+.autocomplete-list button .ac-tag{float:right;font-size:10px;color:var(--muted);text-transform:uppercase}

@@ -13,13 +13,16 @@
     <h1>Derecho comparado en vivo</h1>
     <p>Sistema de consulta y analisis de legislacion comparada a partir de fuentes oficiales, para apoyar la elaboracion de informes de asesoria tecnica parlamentaria.</p>
 
-    <div class="search-bar">
-      <input type="text" id="consulta" placeholder="Ej: proteccion de datos personales">
-      <button class="btn primary" id="btnBuscarApi">Buscar</button>
+    <div class="search-bar-wrap">
+      <div class="search-bar">
+        <input type="text" id="consulta" placeholder="Ej: proteccion de datos personales" autocomplete="off">
+        <button class="btn primary" id="btnBuscarApi">Buscar</button>
+      </div>
+      <div class="autocomplete-list" id="autocompleteList" hidden></div>
     </div>
     <button class="btn ghost" id="toggleFiltros" type="button">Filtros: todas las jurisdicciones, sin ejes &#9662;</button>
 
-    <div class="filtros-panel" id="filtrosPanel" hidden>
+    <div class="filtros-panel" id="filtrosPanel">
       <div class="filtros-col">
         <p class="filtros-label">Jurisdicciones</p>
         <div class="ejes" id="jurisdicciones"></div>

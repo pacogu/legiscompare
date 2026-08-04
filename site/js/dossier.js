@@ -93,13 +93,29 @@ function render(data) {
   document.getElementById("contenido").innerHTML = html;
   document.getElementById("hallazgos").addEventListener("input", guardarHallazgos);
 
+  cargarSintesis(data);
+}
+
+function renderErrorSintesis(mensaje, data) {
+  const box = document.getElementById("sintesisBox");
+  const esCuota = /429|quota/i.test(mensaje);
+  let texto = "No se pudo generar el borrador con IA: " + mensaje;
+  if (esCuota) {
+    texto = "Se agoto la cuota gratuita de Gemini por ahora. Espera unos minutos (la cuota gratuita se resetea periodicamente) o revisa tu plan en https://ai.google.dev/gemini-api/docs/rate-limits.";
+  }
+  box.innerHTML = "<div class='err'>" + texto + "</div><button class='btn' id='btnReintentarSintesis' style='margin-top:8px'>Reintentar</button>";
+  document.getElementById("btnReintentarSintesis").addEventListener("click", () => cargarSintesis(data));
+}
+
+function cargarSintesis(data) {
+  const box = document.getElementById("sintesisBox");
+  box.innerHTML = "<div class='empty'>Generando borrador con IA...</div>";
   pedirSintesisIA(data).then((out) => {
-    const box = document.getElementById("sintesisBox");
     if (out.error) {
-      box.innerHTML = "<div class='err'>No se pudo generar el borrador con IA: " + out.error + "</div>";
+      renderErrorSintesis(out.error, data);
       return;
     }
-    box.innerHTML = "<div class='disclaimer'>Borrador generado por IA a partir solo de los titulos y metadatos encontrados. Requiere validacion de un abogado antes de usarse; puede omitir matices del texto legal completo.</div><div style=\"white-space:pre-wrap;font-size:14px;line-height:1.5;background:#fbfdff;border:1px solid var(--line);border-radius:12px;padding:14px\">" + (out.borrador || "Sin contenido generado.") + "</div>";
+    box.innerHTML = "<div class='disclaimer'>Borrador generado por IA a partir de las fuentes encontradas (incluye texto legal real cuando esta disponible). Requiere validacion de un abogado antes de usarse.</div><div style=\"white-space:pre-wrap;font-size:14px;line-height:1.5;background:#fbfdff;border:1px solid var(--line);border-radius:12px;padding:14px\">" + (out.borrador || "Sin contenido generado.") + "</div>";
   });
 }
 
