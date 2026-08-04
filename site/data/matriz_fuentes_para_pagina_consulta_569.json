@@ -1,0 +1,1120 @@
+[
+  {
+    "tema": "Datos personales",
+    "jurisdiccion": "Alemania",
+    "fuentes_visibles": "Bundesdatenschutzgesetz (BDSG)",
+    "estado_cobertura": "cobertura normativa vigente",
+    "cantidad_instrumentos": 1,
+    "cantidad_vigentes": 1,
+    "cantidad_no_ley_o_softlaw": 0,
+    "detalle": [
+      {
+        "instrumento_normativo": "Bundesdatenschutzgesetz (BDSG)",
+        "tipo_instrumento": "ley",
+        "estado_normativo": "vigente",
+        "url_oficial": "https://www.gesetze-im-internet.de/bdsg_2018/",
+        "fuente_url": "Gesetze im Internet",
+        "observacion_trazabilidad": "Norma federal de protección de datos."
+      }
+    ]
+  },
+  {
+    "tema": "Datos personales",
+    "jurisdiccion": "Argentina",
+    "fuentes_visibles": "Ley N° 25.326 de Protección de los Datos Personales; Decreto 1558/2001, reglamentario de la Ley N° 25.326",
+    "estado_cobertura": "cobertura normativa vigente",
+    "cantidad_instrumentos": 2,
+    "cantidad_vigentes": 2,
+    "cantidad_no_ley_o_softlaw": 0,
+    "detalle": [
+      {
+        "instrumento_normativo": "Ley N° 25.326 de Protección de los Datos Personales",
+        "tipo_instrumento": "ley",
+        "estado_normativo": "vigente",
+        "url_oficial": "https://servicios.infoleg.gob.ar/infolegInternet/anexos/60000-64999/64790/norma.htm",
+        "fuente_url": "InfoLEG",
+        "observacion_trazabilidad": "Norma argentina de protección de datos."
+      },
+      {
+        "instrumento_normativo": "Decreto 1558/2001, reglamentario de la Ley N° 25.326",
+        "tipo_instrumento": "decreto reglamentario",
+        "estado_normativo": "vigente",
+        "url_oficial": "https://servicios.infoleg.gob.ar/infolegInternet/anexos/70000-74999/70368/norma.htm",
+        "fuente_url": "InfoLEG",
+        "observacion_trazabilidad": "Reglamento de la Ley N° 25.326."
+      }
+    ]
+  },
+  {
+    "tema": "Datos personales",
+    "jurisdiccion": "Australia",
+    "fuentes_visibles": "Privacy Act 1988",
+    "estado_cobertura": "cobertura normativa vigente",
+    "cantidad_instrumentos": 1,
+    "cantidad_vigentes": 1,
+    "cantidad_no_ley_o_softlaw": 0,
+    "detalle": [
+      {
+        "instrumento_normativo": "Privacy Act 1988",
+        "tipo_instrumento": "ley",
+        "estado_normativo": "vigente",
+        "url_oficial": "https://www.legislation.gov.au/C2004A03712/latest/text",
+        "fuente_url": "Federal Register of Legislation",
+        "observacion_trazabilidad": "Norma australiana de privacidad."
+      }
+    ]
+  },
+  {
+    "tema": "Datos personales",
+    "jurisdiccion": "Brasil",
+    "fuentes_visibles": "Lei Nº 13.709/2018, Lei Geral de Proteção de Dados Pessoais",
+    "estado_cobertura": "cobertura normativa vigente",
+    "cantidad_instrumentos": 1,
+    "cantidad_vigentes": 1,
+    "cantidad_no_ley_o_softlaw": 0,
+    "detalle": [
+      {
+        "instrumento_normativo": "Lei Nº 13.709/2018, Lei Geral de Proteção de Dados Pessoais",
+        "tipo_instrumento": "ley",
+        "estado_normativo": "vigente",
+        "url_oficial": "https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm",
+        "fuente_url": "Planalto",
+        "observacion_trazabilidad": "LGPD."
+      }
+    ]
+  },
+  {
+    "tema": "Datos personales",
+    "jurisdiccion": "Canadá",
+    "fuentes_visibles": "Personal Information Protection and Electronic Documents Act (PIPEDA); Privacy Act",
+    "estado_cobertura": "cobertura normativa vigente",
+    "cantidad_instrumentos": 2,
+    "cantidad_vigentes": 2,
+    "cantidad_no_ley_o_softlaw": 0,
+    "detalle": [
+      {
+        "instrumento_normativo": "Personal Information Protection and Electronic Documents Act (PIPEDA)",
+        "tipo_instrumento": "ley",
+        "estado_normativo": "vigente",
+        "url_oficial": "https://laws-lois.justice.gc.ca/eng/acts/P-8.6/",
+        "fuente_url": "Justice Laws",
+        "observacion_trazabilidad": "Norma federal de protección de datos en sector privado."
+      },
+      {
+        "instrumento_normativo": "Privacy Act",
+        "tipo_instrumento": "ley",
+        "estado_normativo": "vigente",
+        "url_oficial": "https://laws-lois.justice.gc.ca/eng/acts/P-21/",
+        "fuente_url": "Justice Laws",
+        "observacion_trazabilidad": "Privacidad en sector público federal."
+      }
+    ]
+  },
+  {
+    "tema": "Datos personales",
+    "jurisdiccion": "Chile",
+    "fuentes_visibles": "Ley N° 19.628 sobre protección de la vida privada; Ley N° 21.719",
+    "estado_cobertura": "cobertura normativa vigente",
+    "cantidad_instrumentos": 2,
+    "cantidad_vigentes": 2,
+    "cantidad_no_ley_o_softlaw": 0,
+    "detalle": [
+      {
+        "instrumento_normativo": "Ley N° 19.628 sobre protección de la vida privada",
+        "tipo_instrumento": "ley",
+        "estado_normativo": "vigente",
+        "url_oficial": "https://www.bcn.cl/leychile/navegar?idNorma=141599",
+        "fuente_url": "LeyChile",
+        "observacion_trazabilidad": "Norma base chilena."
+      },
+      {
+        "instrumento_normativo": "Ley N° 21.719",
+        "tipo_instrumento": "ley",
+        "estado_normativo": "vigente",
+        "url_oficial": "https://www.bcn.cl/leychile/navegar?idNorma=1209272",
+        "fuente_url": "LeyChile",
+        "observacion_trazabilidad": "Reforma institucional de datos personales."
+      }
+    ]
+  },
+  {
+    "tema": "Datos personales",
+    "jurisdiccion": "España",
+    "fuentes_visibles": "Ley Orgánica 3/2018 de Protección de Datos Personales y garantía de derechos digitales",
+    "estado_cobertura": "cobertura normativa vigente",
+    "cantidad_instrumentos": 1,
+    "cantidad_vigentes": 1,
+    "cantidad_no_ley_o_softlaw": 0,
+    "detalle": [
+      {
+        "instrumento_normativo": "Ley Orgánica 3/2018 de Protección de Datos Personales y garantía de derechos digitales",
+        "tipo_instrumento": "ley orgánica",
+        "estado_normativo": "vigente",
+        "url_oficial": "https://www.boe.es/eli/es/lo/2018/12/05/3/con",
+        "fuente_url": "BOE",
+        "observacion_trazabilidad": "LOPDGDD."
+      }
+    ]
+  },
+  {
+    "tema": "Datos personales",
+    "jurisdiccion": "Estados Unidos",
+    "fuentes_visibles": "Privacy Act of 1974",
+    "estado_cobertura": "cobertura normativa vigente",
+    "cantidad_instrumentos": 1,
+    "cantidad_vigentes": 1,
+    "cantidad_no_ley_o_softlaw": 0,
+    "detalle": [
+      {
+        "instrumento_normativo": "Privacy Act of 1974",
+        "tipo_instrumento": "ley",
+        "estado_normativo": "vigente",
+        "url_oficial": "https://www.justice.gov/opcl/privacy-act-1974",
+        "fuente_url": "U.S. Department of Justice",
+        "observacion_trazabilidad": "Norma federal de privacidad en registros públicos."
+      }
+    ]
+  },
+  {
+    "tema": "Datos personales",
+    "jurisdiccion": "Francia",
+    "fuentes_visibles": "Loi n° 78-17 du 6 janvier 1978 relative à l'informatique, aux fichiers et aux libertés",
+    "estado_cobertura": "cobertura normativa vigente",
+    "cantidad_instrumentos": 1,
+    "cantidad_vigentes": 1,
+    "cantidad_no_ley_o_softlaw": 0,
+    "detalle": [
+      {
+        "instrumento_normativo": "Loi n° 78-17 du 6 janvier 1978 relative à l'informatique, aux fichiers et aux libertés",
+        "tipo_instrumento": "ley",
+        "estado_normativo": "vigente",
+        "url_oficial": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000006068624",
+        "fuente_url": "Légifrance",
+        "observacion_trazabilidad": "Norma francesa de datos personales."
+      }
+    ]
+  },
+  {
+    "tema": "Datos personales",
+    "jurisdiccion": "México",
+    "fuentes_visibles": "Ley Federal de Protección de Datos Personales en Posesión de los Particulares",
+    "estado_cobertura": "cobertura normativa vigente",
+    "cantidad_instrumentos": 1,
+    "cantidad_vigentes": 1,
+    "cantidad_no_ley_o_softlaw": 0,
+    "detalle": [
+      {
+        "instrumento_normativo": "Ley Federal de Protección de Datos Personales en Posesión de los Particulares",
+        "tipo_instrumento": "ley",
+        "estado_normativo": "vigente",
+        "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFPDPPP.pdf",
+        "fuente_url": "Cámara de Diputados",
+        "observacion_trazabilidad": "Sector privado."
+      }
+    ]
+  },
+  {
+    "tema": "Datos personales",
+    "jurisdiccion": "Reino Unido",
+    "fuentes_visibles": "Data Protection Act 2018; UK GDPR",
+    "estado_cobertura": "cobertura normativa vigente",
+    "cantidad_instrumentos": 2,
+    "cantidad_vigentes": 2,
+    "cantidad_no_ley_o_softlaw": 0,
+    "detalle": [
+      {
+        "instrumento_normativo": "Data Protection Act 2018",
+        "tipo_instrumento": "ley",
+        "estado_normativo": "vigente",
+        "url_oficial": "https://www.legislation.gov.uk/ukpga/2018/12/contents",
+        "fuente_url": "legislation.gov.uk",
+        "observacion_trazabilidad": "Norma británica de protección de datos."
+      },
+      {
+        "instrumento_normativo": "UK GDPR",
+        "tipo_instrumento": "reglamento retenido / marco normativo",
+        "estado_normativo": "vigente",
+        "url_oficial": "https://www.legislation.gov.uk/eur/2016/679/contents",
+        "fuente_url": "legislation.gov.uk",
+        "observacion_trazabilidad": "Marco UK GDPR."
+      }
+    ]
+  },
+  {
+    "tema": "Datos personales",
+    "jurisdiccion": "Unión Europea",
+    "fuentes_visibles": "Reglamento (UE) 2016/679, RGPD",
+    "estado_cobertura": "cobertura normativa vigente",
+    "cantidad_instrumentos": 2,
+    "cantidad_vigentes": 1,
+    "cantidad_no_ley_o_softlaw": 1,
+    "detalle": [
+      {
+        "instrumento_normativo": "Reglamento (UE) 2016/679, RGPD",
+        "tipo_instrumento": "reglamento",
+        "estado_normativo": "vigente",
+        "url_oficial": "https://eur-lex.europa.eu/eli/reg/2016/679/oj/spa",
+        "fuente_url": "EUR-Lex",
+        "observacion_trazabilidad": "Reglamento General de Protección de Datos."
+      },
+      {
+        "instrumento_normativo": "EDPB Guidelines 9/2022",
+        "tipo_instrumento": "guía institucional",
+        "estado_normativo": "soft law / guía",
+        "url_oficial": "https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-92022-personal-data-breach-notification-under_en",
+        "fuente_url": "EDPB",
+        "observacion_trazabilidad": "Guía institucional asociada."
+      }
+    ]
+  },
+  {
+    "tema": "Medio ambiente",
+    "jurisdiccion": "Brasil",
+    "fuentes_visibles": "Lei Nº 6.938/1981, Política Nacional do Meio Ambiente",
+    "estado_cobertura": "cobertura normativa vigente",
+    "cantidad_instrumentos": 1,
+    "cantidad_vigentes": 1,
+    "cantidad_no_ley_o_softlaw": 0,
+    "detalle": [
+      {
+        "instrumento_normativo": "Lei Nº 6.938/1981, Política Nacional do Meio Ambiente",
+        "tipo_instrumento": "ley",
+        "estado_normativo": "vigente",
+        "url_oficial": "https://www.planalto.gov.br/ccivil_03/leis/l6938compilada.htm",
+        "fuente_url": "Planalto",
+        "observacion_trazabilidad": "Norma marco ambiental brasileña."
+      }
+    ]
+  },
+  {
+    "tema": "Medio ambiente",
+    "jurisdiccion": "Canadá",
+    "fuentes_visibles": "Canadian Environmental Protection Act, 1999",
+    "estado_cobertura": "cobertura normativa vigente",
+    "cantidad_instrumentos": 1,
+    "cantidad_vigentes": 1,
+    "cantidad_no_ley_o_softlaw": 0,
+    "detalle": [
+      {
+        "instrumento_normativo": "Canadian Environmental Protection Act, 1999",
+        "tipo_instrumento": "ley",
+        "estado_normativo": "vigente",
+        "url_oficial": "https://laws-lois.justice.gc.ca/eng/acts/c-15.31/",
+        "fuente_url": "Justice Laws",
+        "observacion_trazabilidad": "Norma federal ambiental principal."
+      }
+    ]
+  },
+  {
+    "tema": "Medio ambiente",
+    "jurisdiccion": "Chile",
+    "fuentes_visibles": "Ley N° 19.300 sobre Bases Generales del Medio Ambiente",
+    "estado_cobertura": "cobertura normativa vigente",
+    "cantidad_instrumentos": 1,
+    "cantidad_vigentes": 1,
+    "cantidad_no_ley_o_softlaw": 0,
+    "detalle": [
+      {
+        "instrumento_normativo": "Ley N° 19.300 sobre Bases Generales del Medio Ambiente",
+        "tipo_instrumento": "ley",
+        "estado_normativo": "vigente",
+        "url_oficial": "https://nuevo.leychile.cl/navegar?idNorma=30667",
+        "fuente_url": "LeyChile",
+        "observacion_trazabilidad": "Reemplaza pendiente de 565D por norma ambiental marco."
+      }
+    ]
+  },
+  {
+    "tema": "Medio ambiente",
+    "jurisdiccion": "España",
+    "fuentes_visibles": "Ley 7/2021, de cambio climático y transición energética",
+    "estado_cobertura": "cobertura normativa vigente",
+    "cantidad_instrumentos": 1,
+    "cantidad_vigentes": 1,
+    "cantidad_no_ley_o_softlaw": 0,
+    "detalle": [
+      {
+        "instrumento_normativo": "Ley 7/2021, de cambio climático y transición energética",
+        "tipo_instrumento": "ley",
+        "estado_normativo": "vigente",
+        "url_oficial": "https://www.boe.es/eli/es/l/2021/05/20/7/con",
+        "fuente_url": "BOE",
+        "observacion_trazabilidad": "Normaliza entrada previa de 565D."
+      }
+    ]
+  },
+  {
+    "tema": "Medio ambiente",
+    "jurisdiccion": "Francia",
+    "fuentes_visibles": "Code de l'environnement",
+    "estado_cobertura": "cobertura normativa vigente",
+    "cantidad_instrumentos": 1,
+    "cantidad_vigentes": 1,
+    "cantidad_no_ley_o_softlaw": 0,
+    "detalle": [
+      {
+        "instrumento_normativo": "Code de l'environnement",
+        "tipo_instrumento": "código",
+        "estado_normativo": "vigente",
+        "url_oficial": "https://www.legifrance.gouv.fr/codes/texte_lc/LEGITEXT000006074220",
+        "fuente_url": "Légifrance",
+        "observacion_trazabilidad": "Código ambiental francés."
+      }
+    ]
+  },
+  {
+    "tema": "Medio ambiente",
+    "jurisdiccion": "Unión Europea",
+    "fuentes_visibles": "Reglamento (UE) 2021/1119, Ley Europea del Clima; Directiva 2011/92/UE sobre evaluación de impacto ambiental",
+    "estado_cobertura": "cobertura normativa vigente",
+    "cantidad_instrumentos": 2,
+    "cantidad_vigentes": 2,
+    "cantidad_no_ley_o_softlaw": 0,
+    "detalle": [
+      {
+        "instrumento_normativo": "Reglamento (UE) 2021/1119, Ley Europea del Clima",
+        "tipo_instrumento": "reglamento",
+        "estado_normativo": "vigente",
+        "url_oficial": "https://eur-lex.europa.eu/eli/reg/2021/1119/oj/spa",
+        "fuente_url": "EUR-Lex",
+        "observacion_trazabilidad": "Marco climático europeo."
+      },
+      {
+        "instrumento_normativo": "Directiva 2011/92/UE sobre evaluación de impacto ambiental",
+        "tipo_instrumento": "directiva",
+        "estado_normativo": "vigente",
+        "url_oficial": "https://eur-lex.europa.eu/eli/dir/2011/92/oj/spa",
+        "fuente_url": "EUR-Lex",
+        "observacion_trazabilidad": "Instrumento europeo de evaluación ambiental."
+      }
+    ]
+  },
+  {
+    "tema": "Niñez y adolescencia",
+    "jurisdiccion": "Brasil",
+    "fuentes_visibles": "Lei Nº 8.069/1990, Estatuto da Criança e do Adolescente",
+    "estado_cobertura": "cobertura normativa vigente",
+    "cantidad_instrumentos": 1,
+    "cantidad_vigentes": 1,
+    "cantidad_no_ley_o_softlaw": 0,
+    "detalle": [
+      {
+        "instrumento_normativo": "Lei Nº 8.069/1990, Estatuto da Criança e do Adolescente",
+        "tipo_instrumento": "ley",
+        "estado_normativo": "vigente",
+        "url_oficial": "https://www.planalto.gov.br/ccivil_03/leis/l8069.htm",
+        "fuente_url": "Planalto",
+        "observacion_trazabilidad": "ECA."
+      }
+    ]
+  },
+  {
+    "tema": "Niñez y adolescencia",
+    "jurisdiccion": "Chile",
+    "fuentes_visibles": "Ley N° 21.430 sobre garantías y protección integral de los derechos de la niñez y adolescencia",
+    "estado_cobertura": "cobertura normativa vigente",
+    "cantidad_instrumentos": 1,
+    "cantidad_vigentes": 1,
+    "cantidad_no_ley_o_softlaw": 0,
+    "detalle": [
+      {
+        "instrumento_normativo": "Ley N° 21.430 sobre garantías y protección integral de los derechos de la niñez y adolescencia",
+        "tipo_instrumento": "ley",
+        "estado_normativo": "vigente",
+        "url_oficial": "https://www.bcn.cl/leychile/navegar?idNorma=1173643",
+        "fuente_url": "LeyChile",
+        "observacion_trazabilidad": "Norma chilena de garantías de niñez."
+      }
+    ]
+  },
+  {
+    "tema": "Niñez y adolescencia",
+    "jurisdiccion": "España",
+    "fuentes_visibles": "Ley Orgánica 8/2021, de protección integral a la infancia y la adolescencia frente a la violencia",
+    "estado_cobertura": "cobertura normativa vigente",
+    "cantidad_instrumentos": 1,
+    "cantidad_vigentes": 1,
+    "cantidad_no_ley_o_softlaw": 0,
+    "detalle": [
+      {
+        "instrumento_normativo": "Ley Orgánica 8/2021, de protección integral a la infancia y la adolescencia frente a la violencia",
+        "tipo_instrumento": "ley orgánica",
+        "estado_normativo": "vigente",
+        "url_oficial": "https://www.boe.es/eli/es/lo/2021/06/04/8/con",
+        "fuente_url": "BOE",
+        "observacion_trazabilidad": "LOPIVI."
+      }
+    ]
+  },
+  {
+    "tema": "Niñez y adolescencia",
+    "jurisdiccion": "México",
+    "fuentes_visibles": "Ley General de los Derechos de Niñas, Niños y Adolescentes",
+    "estado_cobertura": "cobertura normativa vigente",
+    "cantidad_instrumentos": 1,
+    "cantidad_vigentes": 1,
+    "cantidad_no_ley_o_softlaw": 0,
+    "detalle": [
+      {
+        "instrumento_normativo": "Ley General de los Derechos de Niñas, Niños y Adolescentes",
+        "tipo_instrumento": "ley",
+        "estado_normativo": "vigente",
+        "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGDNNA.pdf",
+        "fuente_url": "Cámara de Diputados",
+        "observacion_trazabilidad": "Ley general mexicana de derechos de NNA."
+      }
+    ]
+  },
+  {
+    "tema": "Niñez y adolescencia",
+    "jurisdiccion": "Unión Europea",
+    "fuentes_visibles": "Reglamento (UE) 2022/2065, Digital Services Act",
+    "estado_cobertura": "cobertura normativa vigente",
+    "cantidad_instrumentos": 1,
+    "cantidad_vigentes": 1,
+    "cantidad_no_ley_o_softlaw": 0,
+    "detalle": [
+      {
+        "instrumento_normativo": "Reglamento (UE) 2022/2065, Digital Services Act",
+        "tipo_instrumento": "reglamento",
+        "estado_normativo": "vigente",
+        "url_oficial": "https://eur-lex.europa.eu/eli/reg/2022/2065/oj/spa",
+        "fuente_url": "EUR-Lex",
+        "observacion_trazabilidad": "Incluye obligaciones de protección de menores en entorno digital."
+      }
+    ]
+  },
+  {
+    "tema": "Tecnología e inteligencia artificial",
+    "jurisdiccion": "Alemania",
+    "fuentes_visibles": "Reglamento (UE) 2024/1689, AI Act; Bundesdatenschutzgesetz (BDSG)",
+    "estado_cobertura": "cobertura normativa vigente",
+    "cantidad_instrumentos": 2,
+    "cantidad_vigentes": 2,
+    "cantidad_no_ley_o_softlaw": 0,
+    "detalle": [
+      {
+        "instrumento_normativo": "Reglamento (UE) 2024/1689, AI Act",
+        "tipo_instrumento": "reglamento",
+        "estado_normativo": "vigente",
+        "url_oficial": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj/spa",
+        "fuente_url": "EUR-Lex",
+        "observacion_trazabilidad": "Aplicable como derecho de la Unión Europea."
+      },
+      {
+        "instrumento_normativo": "Bundesdatenschutzgesetz (BDSG)",
+        "tipo_instrumento": "ley",
+        "estado_normativo": "vigente",
+        "url_oficial": "https://www.gesetze-im-internet.de/bdsg_2018/",
+        "fuente_url": "Gesetze im Internet",
+        "observacion_trazabilidad": "Marco asociado de datos personales relevante para IA."
+      }
+    ]
+  },
+  {
+    "tema": "Tecnología e inteligencia artificial",
+    "jurisdiccion": "Argentina",
+    "fuentes_visibles": "Ley N° 25.326 de Protección de los Datos Personales",
+    "estado_cobertura": "cobertura mixta con pendiente controlado",
+    "cantidad_instrumentos": 2,
+    "cantidad_vigentes": 1,
+    "cantidad_no_ley_o_softlaw": 1,
+    "detalle": [
+      {
+        "instrumento_normativo": "Ley N° 25.326 de Protección de los Datos Personales",
+        "tipo_instrumento": "ley",
+        "estado_normativo": "vigente",
+        "url_oficial": "https://servicios.infoleg.gob.ar/infolegInternet/anexos/60000-64999/64790/norma.htm",
+        "fuente_url": "InfoLEG",
+        "observacion_trazabilidad": "No sustituye una ley general de IA; se registra como marco asociado."
+      },
+      {
+        "instrumento_normativo": "Ley general de inteligencia artificial",
+        "tipo_instrumento": "ley",
+        "estado_normativo": "pendiente controlado / sin ley general vigente identificada",
+        "url_oficial": "pendiente_verificacion",
+        "fuente_url": "pendiente",
+        "observacion_trazabilidad": "Cierre 569: se acepta como pendiente controlado. No se identifica ley general vigente de IA; mantener verificación periódica."
+      }
+    ]
+  },
+  {
+    "tema": "Tecnología e inteligencia artificial",
+    "jurisdiccion": "Australia",
+    "fuentes_visibles": "Privacy Act 1988",
+    "estado_cobertura": "cobertura normativa vigente",
+    "cantidad_instrumentos": 2,
+    "cantidad_vigentes": 1,
+    "cantidad_no_ley_o_softlaw": 1,
+    "detalle": [
+      {
+        "instrumento_normativo": "Voluntary AI Safety Standard",
+        "tipo_instrumento": "soft law / estándar",
+        "estado_normativo": "soft law",
+        "url_oficial": "https://www.industry.gov.au/publications/voluntary-ai-safety-standard",
+        "fuente_url": "Department of Industry, Science and Resources",
+        "observacion_trazabilidad": "Estándar voluntario; no ley general de IA."
+      },
+      {
+        "instrumento_normativo": "Privacy Act 1988",
+        "tipo_instrumento": "ley",
+        "estado_normativo": "vigente",
+        "url_oficial": "https://www.legislation.gov.au/C2004A03712/latest/text",
+        "fuente_url": "Federal Register of Legislation",
+        "observacion_trazabilidad": "Marco asociado de datos personales relevante para IA."
+      }
+    ]
+  },
+  {
+    "tema": "Tecnología e inteligencia artificial",
+    "jurisdiccion": "Brasil",
+    "fuentes_visibles": "Lei Nº 13.709/2018, Lei Geral de Proteção de Dados Pessoais",
+    "estado_cobertura": "cobertura normativa vigente",
+    "cantidad_instrumentos": 2,
+    "cantidad_vigentes": 1,
+    "cantidad_no_ley_o_softlaw": 1,
+    "detalle": [
+      {
+        "instrumento_normativo": "Projeto de Lei Nº 2.338/2023 sobre uso de inteligência artificial",
+        "tipo_instrumento": "proyecto de ley",
+        "estado_normativo": "en tramitación",
+        "url_oficial": "https://www25.senado.leg.br/web/atividade/materias/-/materia/157233",
+        "fuente_url": "Senado Federal",
+        "observacion_trazabilidad": "Proyecto principal sobre IA; no registrar como ley vigente."
+      },
+      {
+        "instrumento_normativo": "Lei Nº 13.709/2018, Lei Geral de Proteção de Dados Pessoais",
+        "tipo_instrumento": "ley",
+        "estado_normativo": "vigente",
+        "url_oficial": "https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm",
+        "fuente_url": "Planalto",
+        "observacion_trazabilidad": "Marco asociado de datos personales relevante para IA."
+      }
+    ]
+  },
+  {
+    "tema": "Tecnología e inteligencia artificial",
+    "jurisdiccion": "Canadá",
+    "fuentes_visibles": "Directive on Automated Decision-Making",
+    "estado_cobertura": "cobertura normativa vigente",
+    "cantidad_instrumentos": 2,
+    "cantidad_vigentes": 1,
+    "cantidad_no_ley_o_softlaw": 1,
+    "detalle": [
+      {
+        "instrumento_normativo": "Directive on Automated Decision-Making",
+        "tipo_instrumento": "directiva administrativa",
+        "estado_normativo": "vigente",
+        "url_oficial": "https://publications.gc.ca/collections/collection_2021/sct-tbs/BT48-31-2021-eng.pdf",
+        "fuente_url": "Government of Canada Publications",
+        "observacion_trazabilidad": "Sustituye tratamiento de AIDA como si fuera ley vigente."
+      },
+      {
+        "instrumento_normativo": "Artificial Intelligence and Data Act (AIDA)",
+        "tipo_instrumento": "proyecto de ley",
+        "estado_normativo": "no vigente / antecedente legislativo",
+        "url_oficial": "https://www.parl.ca/legisinfo/en/bill/44-1/c-27",
+        "fuente_url": "Parliament of Canada - LEGISinfo",
+        "observacion_trazabilidad": "Bill C-27 contenía AIDA, pero la ficha oficial muestra que report stage, third reading y Senado no fueron alcanzados."
+      }
+    ]
+  },
+  {
+    "tema": "Tecnología e inteligencia artificial",
+    "jurisdiccion": "Chile",
+    "fuentes_visibles": "Ley N° 21.719; Ley N° 21.096",
+    "estado_cobertura": "cobertura normativa vigente",
+    "cantidad_instrumentos": 5,
+    "cantidad_vigentes": 2,
+    "cantidad_no_ley_o_softlaw": 2,
+    "detalle": [
+      {
+        "instrumento_normativo": "Ley N° 21.719",
+        "tipo_instrumento": "ley",
+        "estado_normativo": "vigente",
+        "url_oficial": "https://www.bcn.cl/leychile/navegar?idNorma=1209272",
+        "fuente_url": "LeyChile",
+        "observacion_trazabilidad": "Marco de datos personales relevante para IA."
+      },
+      {
+        "instrumento_normativo": "Política Nacional de Inteligencia Artificial",
+        "tipo_instrumento": "política pública",
+        "estado_normativo": "soft law / política pública vigente",
+        "url_oficial": "https://www.minciencia.gob.cl/areas/inteligencia-artificial/politica-nacional-de-inteligencia-artificial/",
+        "fuente_url": "MinCiencia",
+        "observacion_trazabilidad": "URL oficial completada desde MinCiencia. Política publicada en 2021 y mantenida como política vigente."
+      },
+      {
+        "instrumento_normativo": "Proyecto de ley que regula sistemas de inteligencia artificial, boletines 15869-19 y 16821-19",
+        "tipo_instrumento": "proyecto de ley",
+        "estado_normativo": "en tramitación / segundo trámite constitucional",
+        "url_oficial": "https://www.senado.cl/comunicaciones/noticias/proyecto-que-regula-sistemas-de-inteligencia-artificial-sera-estudiado-por",
+        "fuente_url": "Senado de Chile",
+        "observacion_trazabilidad": "URL oficial del Senado. Se precisan boletines 15869-19 y 16821-19."
+      },
+      {
+        "instrumento_normativo": "Resolución Exenta N° 372 CPLT sobre transparencia algorítmica",
+        "tipo_instrumento": "resolución administrativa",
+        "estado_normativo": "vigente / recomendación institucional",
+        "url_oficial": "https://www.bcn.cl/leychile/navegar?idNorma=1206232",
+        "fuente_url": "LeyChile",
+        "observacion_trazabilidad": "Recomendación institucional, no ley general de IA."
+      },
+      {
+        "instrumento_normativo": "Ley N° 21.096",
+        "tipo_instrumento": "reforma constitucional",
+        "estado_normativo": "vigente",
+        "url_oficial": "https://www.bcn.cl/leychile/navegar?idNorma=1119730",
+        "fuente_url": "LeyChile",
+        "observacion_trazabilidad": "Base constitucional de privacidad y protección de datos."
+      }
+    ]
+  },
+  {
+    "tema": "Tecnología e inteligencia artificial",
+    "jurisdiccion": "Corea del Sur",
+    "fuentes_visibles": "Basic Act on the Development of Artificial Intelligence and Establishment of a Foundation for Trustworthiness",
+    "estado_cobertura": "cobertura normativa vigente",
+    "cantidad_instrumentos": 1,
+    "cantidad_vigentes": 1,
+    "cantidad_no_ley_o_softlaw": 0,
+    "detalle": [
+      {
+        "instrumento_normativo": "Basic Act on the Development of Artificial Intelligence and Establishment of a Foundation for Trustworthiness",
+        "tipo_instrumento": "ley",
+        "estado_normativo": "vigente",
+        "url_oficial": "https://www.law.go.kr/법령/인공지능발전과신뢰기반조성등에관한기본법",
+        "fuente_url": "law.go.kr",
+        "observacion_trazabilidad": "Reemplaza pendiente. Ley coreana de IA publicada en law.go.kr; entrada en vigor en enero de 2026 según MSIT."
+      }
+    ]
+  },
+  {
+    "tema": "Tecnología e inteligencia artificial",
+    "jurisdiccion": "España",
+    "fuentes_visibles": "Reglamento (UE) 2024/1689, AI Act; Real Decreto 817/2023, entorno controlado de pruebas de IA",
+    "estado_cobertura": "cobertura normativa vigente",
+    "cantidad_instrumentos": 2,
+    "cantidad_vigentes": 2,
+    "cantidad_no_ley_o_softlaw": 0,
+    "detalle": [
+      {
+        "instrumento_normativo": "Reglamento (UE) 2024/1689, AI Act",
+        "tipo_instrumento": "reglamento",
+        "estado_normativo": "vigente",
+        "url_oficial": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj/spa",
+        "fuente_url": "EUR-Lex",
+        "observacion_trazabilidad": "Aplicable como derecho de la Unión Europea."
+      },
+      {
+        "instrumento_normativo": "Real Decreto 817/2023, entorno controlado de pruebas de IA",
+        "tipo_instrumento": "real decreto",
+        "estado_normativo": "vigente",
+        "url_oficial": "https://www.boe.es/eli/es/rd/2023/11/08/817",
+        "fuente_url": "BOE",
+        "observacion_trazabilidad": "Sandbox regulatorio español de IA."
+      }
+    ]
+  },
+  {
+    "tema": "Tecnología e inteligencia artificial",
+    "jurisdiccion": "Estados Unidos",
+    "fuentes_visibles": "Privacy Act of 1974",
+    "estado_cobertura": "cobertura normativa vigente",
+    "cantidad_instrumentos": 2,
+    "cantidad_vigentes": 1,
+    "cantidad_no_ley_o_softlaw": 0,
+    "detalle": [
+      {
+        "instrumento_normativo": "Executive Order 14179, Removing Barriers to American Leadership in Artificial Intelligence",
+        "tipo_instrumento": "orden ejecutiva",
+        "estado_normativo": "vigente / acto presidencial",
+        "url_oficial": "https://www.federalregister.gov/documents/2025/01/31/2025-02172/removing-barriers-to-american-leadership-in-artificial-intelligence",
+        "fuente_url": "Federal Register",
+        "observacion_trazabilidad": "No equivale a ley federal general de IA."
+      },
+      {
+        "instrumento_normativo": "Privacy Act of 1974",
+        "tipo_instrumento": "ley",
+        "estado_normativo": "vigente",
+        "url_oficial": "https://www.justice.gov/opcl/privacy-act-1974",
+        "fuente_url": "U.S. Department of Justice",
+        "observacion_trazabilidad": "Marco asociado de datos personales."
+      }
+    ]
+  },
+  {
+    "tema": "Tecnología e inteligencia artificial",
+    "jurisdiccion": "Francia",
+    "fuentes_visibles": "Reglamento (UE) 2024/1689, AI Act; Loi n° 78-17 du 6 janvier 1978 relative à l'informatique, aux fichiers et aux libertés",
+    "estado_cobertura": "cobertura normativa vigente",
+    "cantidad_instrumentos": 2,
+    "cantidad_vigentes": 2,
+    "cantidad_no_ley_o_softlaw": 0,
+    "detalle": [
+      {
+        "instrumento_normativo": "Reglamento (UE) 2024/1689, AI Act",
+        "tipo_instrumento": "reglamento",
+        "estado_normativo": "vigente",
+        "url_oficial": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj/fra",
+        "fuente_url": "EUR-Lex",
+        "observacion_trazabilidad": "Aplicable como derecho de la Unión Europea."
+      },
+      {
+        "instrumento_normativo": "Loi n° 78-17 du 6 janvier 1978 relative à l'informatique, aux fichiers et aux libertés",
+        "tipo_instrumento": "ley",
+        "estado_normativo": "vigente",
+        "url_oficial": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000006068624",
+        "fuente_url": "Légifrance",
+        "observacion_trazabilidad": "Marco asociado de datos personales relevante para IA."
+      }
+    ]
+  },
+  {
+    "tema": "Tecnología e inteligencia artificial",
+    "jurisdiccion": "Italia",
+    "fuentes_visibles": "Reglamento (UE) 2024/1689, AI Act",
+    "estado_cobertura": "cobertura normativa vigente",
+    "cantidad_instrumentos": 2,
+    "cantidad_vigentes": 1,
+    "cantidad_no_ley_o_softlaw": 1,
+    "detalle": [
+      {
+        "instrumento_normativo": "Reglamento (UE) 2024/1689, AI Act",
+        "tipo_instrumento": "reglamento",
+        "estado_normativo": "vigente",
+        "url_oficial": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj/ita",
+        "fuente_url": "EUR-Lex",
+        "observacion_trazabilidad": "Aplicable como derecho de la Unión Europea."
+      },
+      {
+        "instrumento_normativo": "Disegno di legge S.1146-B, Disposizioni e deleghe al Governo in materia di intelligenza artificiale",
+        "tipo_instrumento": "proyecto de ley",
+        "estado_normativo": "en tramitación",
+        "url_oficial": "https://www.senato.it/leggi-e-documenti/disegni-di-legge/scheda-ddl?did=58262",
+        "fuente_url": "Senato della Repubblica",
+        "observacion_trazabilidad": "URL oficial de ficha del proyecto S.1146."
+      }
+    ]
+  },
+  {
+    "tema": "Tecnología e inteligencia artificial",
+    "jurisdiccion": "México",
+    "fuentes_visibles": "Ley Federal de Protección de Datos Personales en Posesión de los Particulares",
+    "estado_cobertura": "cobertura mixta con pendiente controlado",
+    "cantidad_instrumentos": 2,
+    "cantidad_vigentes": 1,
+    "cantidad_no_ley_o_softlaw": 1,
+    "detalle": [
+      {
+        "instrumento_normativo": "Ley Federal de Protección de Datos Personales en Posesión de los Particulares",
+        "tipo_instrumento": "ley",
+        "estado_normativo": "vigente",
+        "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFPDPPP.pdf",
+        "fuente_url": "Cámara de Diputados",
+        "observacion_trazabilidad": "Marco asociado; no equivale a ley general de IA."
+      },
+      {
+        "instrumento_normativo": "Ley general de inteligencia artificial",
+        "tipo_instrumento": "ley",
+        "estado_normativo": "pendiente controlado / sin ley general vigente identificada",
+        "url_oficial": "pendiente_verificacion",
+        "fuente_url": "pendiente",
+        "observacion_trazabilidad": "Cierre 569: se acepta como pendiente controlado. No se identifica ley general vigente de IA; mantener verificación periódica."
+      }
+    ]
+  },
+  {
+    "tema": "Tecnología e inteligencia artificial",
+    "jurisdiccion": "Nueva Zelanda",
+    "fuentes_visibles": "New Zealand's Strategy for Artificial Intelligence; Responsible Artificial Intelligence guidance for businesses",
+    "estado_cobertura": "cobertura no legislativa",
+    "cantidad_instrumentos": 1,
+    "cantidad_vigentes": 0,
+    "cantidad_no_ley_o_softlaw": 1,
+    "detalle": [
+      {
+        "instrumento_normativo": "New Zealand's Strategy for Artificial Intelligence; Responsible Artificial Intelligence guidance for businesses",
+        "tipo_instrumento": "política pública / guía",
+        "estado_normativo": "soft law / estrategia oficial",
+        "url_oficial": "https://www.mbie.govt.nz/about/news/artificial-intelligence-strategy-and-business-guidance-now-available",
+        "fuente_url": "MBIE",
+        "observacion_trazabilidad": "No se registra ley general de IA. Se reemplaza pendiente por estrategia y guía oficial de IA."
+      }
+    ]
+  },
+  {
+    "tema": "Tecnología e inteligencia artificial",
+    "jurisdiccion": "Reino Unido",
+    "fuentes_visibles": "Data Protection Act 2018",
+    "estado_cobertura": "cobertura normativa vigente",
+    "cantidad_instrumentos": 2,
+    "cantidad_vigentes": 1,
+    "cantidad_no_ley_o_softlaw": 1,
+    "detalle": [
+      {
+        "instrumento_normativo": "Data Protection Act 2018",
+        "tipo_instrumento": "ley",
+        "estado_normativo": "vigente",
+        "url_oficial": "https://www.legislation.gov.uk/ukpga/2018/12/contents",
+        "fuente_url": "legislation.gov.uk",
+        "observacion_trazabilidad": "Marco asociado de datos personales relevante para IA."
+      },
+      {
+        "instrumento_normativo": "AI regulation: a pro-innovation approach",
+        "tipo_instrumento": "política pública / white paper",
+        "estado_normativo": "soft law / política pública",
+        "url_oficial": "https://www.gov.uk/government/publications/ai-regulation-a-pro-innovation-approach",
+        "fuente_url": "GOV.UK",
+        "observacion_trazabilidad": "Enfoque regulatorio no equivalente a ley general de IA."
+      }
+    ]
+  },
+  {
+    "tema": "Tecnología e inteligencia artificial",
+    "jurisdiccion": "Unión Europea",
+    "fuentes_visibles": "Reglamento (UE) 2024/1689, AI Act",
+    "estado_cobertura": "cobertura normativa vigente",
+    "cantidad_instrumentos": 1,
+    "cantidad_vigentes": 1,
+    "cantidad_no_ley_o_softlaw": 0,
+    "detalle": [
+      {
+        "instrumento_normativo": "Reglamento (UE) 2024/1689, AI Act",
+        "tipo_instrumento": "reglamento",
+        "estado_normativo": "vigente",
+        "url_oficial": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj/spa",
+        "fuente_url": "EUR-Lex",
+        "observacion_trazabilidad": "Reglamento europeo de inteligencia artificial."
+      }
+    ]
+  },
+  {
+    "tema": "Transparencia",
+    "jurisdiccion": "Alemania",
+    "fuentes_visibles": "Informationsfreiheitsgesetz (IFG)",
+    "estado_cobertura": "cobertura normativa vigente",
+    "cantidad_instrumentos": 1,
+    "cantidad_vigentes": 1,
+    "cantidad_no_ley_o_softlaw": 0,
+    "detalle": [
+      {
+        "instrumento_normativo": "Informationsfreiheitsgesetz (IFG)",
+        "tipo_instrumento": "ley",
+        "estado_normativo": "vigente",
+        "url_oficial": "https://www.gesetze-im-internet.de/ifg/",
+        "fuente_url": "Gesetze im Internet",
+        "observacion_trazabilidad": "Ley federal de libertad de información."
+      }
+    ]
+  },
+  {
+    "tema": "Transparencia",
+    "jurisdiccion": "Argentina",
+    "fuentes_visibles": "Ley N° 27.275 de Derecho de Acceso a la Información Pública",
+    "estado_cobertura": "cobertura normativa vigente",
+    "cantidad_instrumentos": 1,
+    "cantidad_vigentes": 1,
+    "cantidad_no_ley_o_softlaw": 0,
+    "detalle": [
+      {
+        "instrumento_normativo": "Ley N° 27.275 de Derecho de Acceso a la Información Pública",
+        "tipo_instrumento": "ley",
+        "estado_normativo": "vigente",
+        "url_oficial": "https://servicios.infoleg.gob.ar/infolegInternet/anexos/265000-269999/265949/norma.htm",
+        "fuente_url": "InfoLEG",
+        "observacion_trazabilidad": "Ley argentina de acceso a información pública."
+      }
+    ]
+  },
+  {
+    "tema": "Transparencia",
+    "jurisdiccion": "Australia",
+    "fuentes_visibles": "Freedom of Information Act 1982",
+    "estado_cobertura": "cobertura normativa vigente",
+    "cantidad_instrumentos": 1,
+    "cantidad_vigentes": 1,
+    "cantidad_no_ley_o_softlaw": 0,
+    "detalle": [
+      {
+        "instrumento_normativo": "Freedom of Information Act 1982",
+        "tipo_instrumento": "ley",
+        "estado_normativo": "vigente",
+        "url_oficial": "https://www.legislation.gov.au/C2004A02562/latest/text",
+        "fuente_url": "Federal Register of Legislation",
+        "observacion_trazabilidad": "Ley australiana de libertad de información."
+      }
+    ]
+  },
+  {
+    "tema": "Transparencia",
+    "jurisdiccion": "Brasil",
+    "fuentes_visibles": "Lei Nº 12.527/2011, Lei de Acesso à Informação",
+    "estado_cobertura": "cobertura normativa vigente",
+    "cantidad_instrumentos": 1,
+    "cantidad_vigentes": 1,
+    "cantidad_no_ley_o_softlaw": 0,
+    "detalle": [
+      {
+        "instrumento_normativo": "Lei Nº 12.527/2011, Lei de Acesso à Informação",
+        "tipo_instrumento": "ley",
+        "estado_normativo": "vigente",
+        "url_oficial": "https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2011/lei/l12527.htm",
+        "fuente_url": "Planalto",
+        "observacion_trazabilidad": "Ley brasileña de acceso a la información."
+      }
+    ]
+  },
+  {
+    "tema": "Transparencia",
+    "jurisdiccion": "Canadá",
+    "fuentes_visibles": "Access to Information Act",
+    "estado_cobertura": "cobertura normativa vigente",
+    "cantidad_instrumentos": 1,
+    "cantidad_vigentes": 1,
+    "cantidad_no_ley_o_softlaw": 0,
+    "detalle": [
+      {
+        "instrumento_normativo": "Access to Information Act",
+        "tipo_instrumento": "ley",
+        "estado_normativo": "vigente",
+        "url_oficial": "https://laws-lois.justice.gc.ca/eng/acts/A-1/",
+        "fuente_url": "Justice Laws",
+        "observacion_trazabilidad": "Ley canadiense de acceso a información."
+      }
+    ]
+  },
+  {
+    "tema": "Transparencia",
+    "jurisdiccion": "Chile",
+    "fuentes_visibles": "Ley N° 20.285 sobre acceso a la información pública",
+    "estado_cobertura": "cobertura normativa vigente",
+    "cantidad_instrumentos": 1,
+    "cantidad_vigentes": 1,
+    "cantidad_no_ley_o_softlaw": 0,
+    "detalle": [
+      {
+        "instrumento_normativo": "Ley N° 20.285 sobre acceso a la información pública",
+        "tipo_instrumento": "ley",
+        "estado_normativo": "vigente",
+        "url_oficial": "https://www.bcn.cl/leychile/navegar?idNorma=276363",
+        "fuente_url": "LeyChile",
+        "observacion_trazabilidad": "Ley chilena de transparencia."
+      }
+    ]
+  },
+  {
+    "tema": "Transparencia",
+    "jurisdiccion": "España",
+    "fuentes_visibles": "Ley 19/2013 de transparencia, acceso a la información pública y buen gobierno",
+    "estado_cobertura": "cobertura normativa vigente",
+    "cantidad_instrumentos": 1,
+    "cantidad_vigentes": 1,
+    "cantidad_no_ley_o_softlaw": 0,
+    "detalle": [
+      {
+        "instrumento_normativo": "Ley 19/2013 de transparencia, acceso a la información pública y buen gobierno",
+        "tipo_instrumento": "ley",
+        "estado_normativo": "vigente",
+        "url_oficial": "https://www.boe.es/eli/es/l/2013/12/09/19/con",
+        "fuente_url": "BOE",
+        "observacion_trazabilidad": "Ley española de transparencia."
+      }
+    ]
+  },
+  {
+    "tema": "Transparencia",
+    "jurisdiccion": "Estados Unidos",
+    "fuentes_visibles": "Freedom of Information Act, 5 U.S.C. § 552",
+    "estado_cobertura": "cobertura normativa vigente",
+    "cantidad_instrumentos": 1,
+    "cantidad_vigentes": 1,
+    "cantidad_no_ley_o_softlaw": 0,
+    "detalle": [
+      {
+        "instrumento_normativo": "Freedom of Information Act, 5 U.S.C. § 552",
+        "tipo_instrumento": "ley",
+        "estado_normativo": "vigente",
+        "url_oficial": "https://www.foia.gov/foia-statute.html",
+        "fuente_url": "FOIA.gov",
+        "observacion_trazabilidad": "Ley federal estadounidense de acceso a información."
+      }
+    ]
+  },
+  {
+    "tema": "Transparencia",
+    "jurisdiccion": "Francia",
+    "fuentes_visibles": "Code des relations entre le public et l'administration, Livre III",
+    "estado_cobertura": "cobertura normativa vigente",
+    "cantidad_instrumentos": 1,
+    "cantidad_vigentes": 1,
+    "cantidad_no_ley_o_softlaw": 0,
+    "detalle": [
+      {
+        "instrumento_normativo": "Code des relations entre le public et l'administration, Livre III",
+        "tipo_instrumento": "código",
+        "estado_normativo": "vigente",
+        "url_oficial": "https://www.legifrance.gouv.fr/codes/id/LEGISCTA000031367685/",
+        "fuente_url": "Légifrance",
+        "observacion_trazabilidad": "Acceso a documentos administrativos e información pública."
+      }
+    ]
+  },
+  {
+    "tema": "Transparencia",
+    "jurisdiccion": "México",
+    "fuentes_visibles": "Ley General de Transparencia y Acceso a la Información Pública",
+    "estado_cobertura": "cobertura normativa vigente",
+    "cantidad_instrumentos": 1,
+    "cantidad_vigentes": 1,
+    "cantidad_no_ley_o_softlaw": 0,
+    "detalle": [
+      {
+        "instrumento_normativo": "Ley General de Transparencia y Acceso a la Información Pública",
+        "tipo_instrumento": "ley",
+        "estado_normativo": "vigente",
+        "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGTAIP.pdf",
+        "fuente_url": "Cámara de Diputados",
+        "observacion_trazabilidad": "Ley general mexicana de transparencia."
+      }
+    ]
+  },
+  {
+    "tema": "Transparencia",
+    "jurisdiccion": "Reino Unido",
+    "fuentes_visibles": "Freedom of Information Act 2000",
+    "estado_cobertura": "cobertura normativa vigente",
+    "cantidad_instrumentos": 1,
+    "cantidad_vigentes": 1,
+    "cantidad_no_ley_o_softlaw": 0,
+    "detalle": [
+      {
+        "instrumento_normativo": "Freedom of Information Act 2000",
+        "tipo_instrumento": "ley",
+        "estado_normativo": "vigente",
+        "url_oficial": "https://www.legislation.gov.uk/ukpga/2000/36/contents",
+        "fuente_url": "legislation.gov.uk",
+        "observacion_trazabilidad": "Ley británica de libertad de información."
+      }
+    ]
+  },
+  {
+    "tema": "Transparencia",
+    "jurisdiccion": "Unión Europea",
+    "fuentes_visibles": "Reglamento (UE) 2022/2065, Digital Services Act",
+    "estado_cobertura": "cobertura normativa vigente",
+    "cantidad_instrumentos": 1,
+    "cantidad_vigentes": 1,
+    "cantidad_no_ley_o_softlaw": 0,
+    "detalle": [
+      {
+        "instrumento_normativo": "Reglamento (UE) 2022/2065, Digital Services Act",
+        "tipo_instrumento": "reglamento",
+        "estado_normativo": "vigente",
+        "url_oficial": "https://eur-lex.europa.eu/eli/reg/2022/2065/oj/spa",
+        "fuente_url": "EUR-Lex",
+        "observacion_trazabilidad": "Transparencia de servicios digitales y plataformas."
+      }
+    ]
+  }
+]

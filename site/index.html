@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LegisCompare - Consulta de derecho comparado</title>
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<header class="hero">
+  <div class="hero-inner">
+    <div class="brand"><span class="brand-mark">LC</span><span class="brand-name">LegisCompare</span></div>
+    <div class="eyebrow">Derecho comparado, 100% en vivo</div>
+    <h1>Consulta de derecho comparado</h1>
+    <p>Escribe tu consulta y se busca en tiempo real en las fuentes oficiales de cada pais. No hay datos precargados: cada resultado viene directo de la API oficial en el momento de la busqueda.</p>
+  </div>
+</header>
+
+<main>
+  <div class="grid">
+    <section>
+      <article class="card">
+        <div class="section-title t-blue"><span class="num">1</span><h2>Consulta</h2></div>
+        <div class="card-body">
+          <textarea id="consulta" placeholder="Ej: proteccion de datos personales"></textarea>
+          <div class="row">
+            <button class="btn primary" id="btnBuscarApi">Buscar en fuentes oficiales</button>
+            <span class="status" id="estadoConsulta">Escribe una consulta y busca en las APIs oficiales.</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="section-title t-green"><span class="num">2</span><h2>Cobertura por pais</h2></div>
+        <div class="card-body">
+          <p class="note">Resultados en vivo, sin catalogo de respaldo. Si un pais no tiene API publica de busqueda, se muestra explicitamente.</p>
+          <div id="cobertura"></div>
+        </div>
+      </article>
+    </section>
+
+    <aside>
+      <article class="card">
+        <div class="section-title t-cyan"><span class="num">3</span><h2>Resultados en vivo</h2></div>
+        <div class="card-body">
+          <div id="resultadosApi" class="fuentes-list"><div class="empty">Sin busqueda ejecutada.</div></div>
+          <div id="errApi" class="err"></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="section-title t-blue"><span class="num">4</span><h2>Dossier</h2></div>
+        <div class="card-body">
+          <button class="btn primary" id="abrirDossier" style="width:100%">Abrir dossier con estos resultados</button>
+        </div>
+      </article>
+    </aside>
+  </div>
+</main>
+
+<script src="js/busqueda_api.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

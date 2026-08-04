@@ -1,0 +1,2128 @@
+[
+  {
+    "id": "medio_ambiente",
+    "etiqueta": "Medio ambiente",
+    "fuente_catalogo": "catalogo_visible_563C_agrupado_564D",
+    "regla_uso": "Catálogo derivado de Bases Curadas 562D y unidades jurídicas normalizadas 562F. La franja derecha agrupa contenidos disponibles por país o sistema.",
+    "palabras_clave": [
+      "medio ambiente",
+      "ambiental",
+      "agua",
+      "transicion energetica",
+      "transición energética",
+      "cambio climatico",
+      "cambio climático"
+    ],
+    "ejes": [
+      "Ámbito material",
+      "Autoridades competentes",
+      "Instrumentos de gestión",
+      "Participación y acceso a información",
+      "Estándares ambientales",
+      "Fiscalización y sanciones"
+    ],
+    "jurisdicciones": [
+      {
+        "nombre": "Chile",
+        "rol": "Disponible para consulta: existen fuentes curadas y unidades consolidadas del portal.",
+        "disponibilidad": "alta",
+        "estado_visible": "Disponible para consulta",
+        "nivel_confianza": "alto",
+        "fuente_curada_sustantiva": "1",
+        "metadata_disponible": "1",
+        "unidad_portal_consolidada": "1",
+        "fuentes": [
+          {
+            "titulo": "<a class='fuente-link' href='https://nuevo.leychile.cl/navegar?idNorma=30667' target='_blank' rel='noopener noreferrer'>Ley N&#176; 19.300 sobre Bases Generales del Medio Ambiente <span class='estado-instrumento'>(vigente)</span></a>",
+            "titulo_texto": "Ley N° 19.300 sobre Bases Generales del Medio Ambiente (vigente)",
+            "tipo": "Normativa y fuentes",
+            "estado_cobertura": "cobertura normativa vigente",
+            "cantidad_instrumentos": 1,
+            "cantidad_vigentes": 1,
+            "cantidad_no_ley_o_softlaw": 0,
+            "fuente": "569_Cierre_Matriz_Maestra_Fuentes_Normativas_hipervinculada",
+            "detalle": [
+              {
+                "instrumento_normativo": "Ley N° 19.300 sobre Bases Generales del Medio Ambiente",
+                "tipo_instrumento": "ley",
+                "estado_normativo": "vigente",
+                "estado_corto": "vigente",
+                "url_oficial": "https://nuevo.leychile.cl/navegar?idNorma=30667",
+                "fuente_url": "LeyChile",
+                "observacion_trazabilidad": "Reemplaza pendiente de 565D por norma ambiental marco."
+              }
+            ],
+            "mostrar_como_html": true
+          }
+        ]
+      },
+      {
+        "nombre": "Brasil",
+        "rol": "Fuente curada disponible: existen fuentes o metadata curadas, pero no unidad consolidada del portal asociada en este catálogo visible.",
+        "disponibilidad": "media",
+        "estado_visible": "Fuente curada disponible",
+        "nivel_confianza": "medio_alto",
+        "fuente_curada_sustantiva": "1",
+        "metadata_disponible": "1",
+        "unidad_portal_consolidada": "0",
+        "fuentes": [
+          {
+            "titulo": "<a class='fuente-link' href='https://www.planalto.gov.br/ccivil_03/leis/l6938compilada.htm' target='_blank' rel='noopener noreferrer'>Lei N&#186; 6.938/1981, Pol&#237;tica Nacional do Meio Ambiente <span class='estado-instrumento'>(vigente)</span></a>",
+            "titulo_texto": "Lei Nº 6.938/1981, Política Nacional do Meio Ambiente (vigente)",
+            "tipo": "Normativa y fuentes",
+            "estado_cobertura": "cobertura normativa vigente",
+            "cantidad_instrumentos": 1,
+            "cantidad_vigentes": 1,
+            "cantidad_no_ley_o_softlaw": 0,
+            "fuente": "569_Cierre_Matriz_Maestra_Fuentes_Normativas_hipervinculada",
+            "detalle": [
+              {
+                "instrumento_normativo": "Lei Nº 6.938/1981, Política Nacional do Meio Ambiente",
+                "tipo_instrumento": "ley",
+                "estado_normativo": "vigente",
+                "estado_corto": "vigente",
+                "url_oficial": "https://www.planalto.gov.br/ccivil_03/leis/l6938compilada.htm",
+                "fuente_url": "Planalto",
+                "observacion_trazabilidad": "Norma marco ambiental brasileña."
+              }
+            ],
+            "mostrar_como_html": true
+          }
+        ]
+      },
+      {
+        "nombre": "Canadá",
+        "rol": "Fuente curada disponible: existen fuentes o metadata curadas, pero no unidad consolidada del portal asociada en este catálogo visible.",
+        "disponibilidad": "media",
+        "estado_visible": "Fuente curada disponible",
+        "nivel_confianza": "medio_alto",
+        "fuente_curada_sustantiva": "1",
+        "metadata_disponible": "1",
+        "unidad_portal_consolidada": "0",
+        "fuentes": [
+          {
+            "titulo": "<a class='fuente-link' href='https://laws-lois.justice.gc.ca/eng/acts/c-15.31/' target='_blank' rel='noopener noreferrer'>Canadian Environmental Protection Act, 1999 <span class='estado-instrumento'>(vigente)</span></a>",
+            "titulo_texto": "Canadian Environmental Protection Act, 1999 (vigente)",
+            "tipo": "Normativa y fuentes",
+            "estado_cobertura": "cobertura normativa vigente",
+            "cantidad_instrumentos": 1,
+            "cantidad_vigentes": 1,
+            "cantidad_no_ley_o_softlaw": 0,
+            "fuente": "569_Cierre_Matriz_Maestra_Fuentes_Normativas_hipervinculada",
+            "detalle": [
+              {
+                "instrumento_normativo": "Canadian Environmental Protection Act, 1999",
+                "tipo_instrumento": "ley",
+                "estado_normativo": "vigente",
+                "estado_corto": "vigente",
+                "url_oficial": "https://laws-lois.justice.gc.ca/eng/acts/c-15.31/",
+                "fuente_url": "Justice Laws",
+                "observacion_trazabilidad": "Norma federal ambiental principal."
+              }
+            ],
+            "mostrar_como_html": true
+          }
+        ]
+      },
+      {
+        "nombre": "España",
+        "rol": "Fuente curada disponible: existen fuentes o metadata curadas, pero no unidad consolidada del portal asociada en este catálogo visible.",
+        "disponibilidad": "media",
+        "estado_visible": "Fuente curada disponible",
+        "nivel_confianza": "medio_alto",
+        "fuente_curada_sustantiva": "1",
+        "metadata_disponible": "1",
+        "unidad_portal_consolidada": "0",
+        "fuentes": [
+          {
+            "titulo": "<a class='fuente-link' href='https://www.boe.es/eli/es/l/2021/05/20/7/con' target='_blank' rel='noopener noreferrer'>Ley 7/2021, de cambio clim&#225;tico y transici&#243;n energ&#233;tica <span class='estado-instrumento'>(vigente)</span></a>",
+            "titulo_texto": "Ley 7/2021, de cambio climático y transición energética (vigente)",
+            "tipo": "Normativa y fuentes",
+            "estado_cobertura": "cobertura normativa vigente",
+            "cantidad_instrumentos": 1,
+            "cantidad_vigentes": 1,
+            "cantidad_no_ley_o_softlaw": 0,
+            "fuente": "569_Cierre_Matriz_Maestra_Fuentes_Normativas_hipervinculada",
+            "detalle": [
+              {
+                "instrumento_normativo": "Ley 7/2021, de cambio climático y transición energética",
+                "tipo_instrumento": "ley",
+                "estado_normativo": "vigente",
+                "estado_corto": "vigente",
+                "url_oficial": "https://www.boe.es/eli/es/l/2021/05/20/7/con",
+                "fuente_url": "BOE",
+                "observacion_trazabilidad": "Normaliza entrada previa de 565D."
+              }
+            ],
+            "mostrar_como_html": true
+          }
+        ]
+      },
+      {
+        "nombre": "Francia",
+        "rol": "Fuente curada disponible: existen fuentes o metadata curadas, pero no unidad consolidada del portal asociada en este catálogo visible.",
+        "disponibilidad": "media",
+        "estado_visible": "Fuente curada disponible",
+        "nivel_confianza": "medio_alto",
+        "fuente_curada_sustantiva": "1",
+        "metadata_disponible": "1",
+        "unidad_portal_consolidada": "0",
+        "fuentes": [
+          {
+            "titulo": "<a class='fuente-link' href='https://www.legifrance.gouv.fr/codes/texte_lc/LEGITEXT000006074220' target='_blank' rel='noopener noreferrer'>Code de l&#39;environnement <span class='estado-instrumento'>(vigente)</span></a>",
+            "titulo_texto": "Code de l'environnement (vigente)",
+            "tipo": "Normativa y fuentes",
+            "estado_cobertura": "cobertura normativa vigente",
+            "cantidad_instrumentos": 1,
+            "cantidad_vigentes": 1,
+            "cantidad_no_ley_o_softlaw": 0,
+            "fuente": "569_Cierre_Matriz_Maestra_Fuentes_Normativas_hipervinculada",
+            "detalle": [
+              {
+                "instrumento_normativo": "Code de l'environnement",
+                "tipo_instrumento": "código",
+                "estado_normativo": "vigente",
+                "estado_corto": "vigente",
+                "url_oficial": "https://www.legifrance.gouv.fr/codes/texte_lc/LEGITEXT000006074220",
+                "fuente_url": "Légifrance",
+                "observacion_trazabilidad": "Código ambiental francés."
+              }
+            ],
+            "mostrar_como_html": true
+          }
+        ]
+      },
+      {
+        "nombre": "Unión Europea",
+        "rol": "Fuente curada disponible: existen fuentes o metadata curadas, pero no unidad consolidada del portal asociada en este catálogo visible.",
+        "disponibilidad": "media",
+        "estado_visible": "Fuente curada disponible",
+        "nivel_confianza": "medio_alto",
+        "fuente_curada_sustantiva": "1",
+        "metadata_disponible": "1",
+        "unidad_portal_consolidada": "0",
+        "fuentes": [
+          {
+            "titulo": "<a class='fuente-link' href='https://eur-lex.europa.eu/eli/reg/2021/1119/oj/spa' target='_blank' rel='noopener noreferrer'>Reglamento (UE) 2021/1119, Ley Europea del Clima <span class='estado-instrumento'>(vigente)</span></a><br><a class='fuente-link' href='https://eur-lex.europa.eu/eli/dir/2011/92/oj/spa' target='_blank' rel='noopener noreferrer'>Directiva 2011/92/UE sobre evaluaci&#243;n de impacto ambiental <span class='estado-instrumento'>(vigente)</span></a>",
+            "titulo_texto": "Reglamento (UE) 2021/1119, Ley Europea del Clima (vigente); Directiva 2011/92/UE sobre evaluación de impacto ambiental (vigente)",
+            "tipo": "Normativa y fuentes",
+            "estado_cobertura": "cobertura normativa vigente",
+            "cantidad_instrumentos": 2,
+            "cantidad_vigentes": 2,
+            "cantidad_no_ley_o_softlaw": 0,
+            "fuente": "569_Cierre_Matriz_Maestra_Fuentes_Normativas_hipervinculada",
+            "detalle": [
+              {
+                "instrumento_normativo": "Reglamento (UE) 2021/1119, Ley Europea del Clima",
+                "tipo_instrumento": "reglamento",
+                "estado_normativo": "vigente",
+                "estado_corto": "vigente",
+                "url_oficial": "https://eur-lex.europa.eu/eli/reg/2021/1119/oj/spa",
+                "fuente_url": "EUR-Lex",
+                "observacion_trazabilidad": "Marco climático europeo."
+              },
+              {
+                "instrumento_normativo": "Directiva 2011/92/UE sobre evaluación de impacto ambiental",
+                "tipo_instrumento": "directiva",
+                "estado_normativo": "vigente",
+                "estado_corto": "vigente",
+                "url_oficial": "https://eur-lex.europa.eu/eli/dir/2011/92/oj/spa",
+                "fuente_url": "EUR-Lex",
+                "observacion_trazabilidad": "Instrumento europeo de evaluación ambiental."
+              }
+            ],
+            "mostrar_como_html": true
+          }
+        ]
+      }
+    ],
+    "jurisdicciones_internas": [
+      {
+        "nombre": "Grupo 2",
+        "rol": "Disponible con base consolidada: existe unidad jurídica del portal, sin fuente curada asociada en este catálogo visible.",
+        "disponibilidad": "media_alta",
+        "estado_visible": "Disponible con base consolidada",
+        "nivel_confianza": "medio_alto",
+        "fuente_curada_sustantiva": "0",
+        "metadata_disponible": "0",
+        "unidad_portal_consolidada": "2",
+        "fuentes": [
+          {
+            "titulo": "Contenidos disponibles: Unidad jurídica consolidada del portal",
+            "tipo": "grupo_contenidos_por_pais",
+            "estado": "Disponible con base consolidada",
+            "confianza": "medio_alto",
+            "cantidad": 1,
+            "items": [
+              "Unidad jurídica consolidada del portal"
+            ],
+            "detalle": "Unidad jurídica consolidada del portal",
+            "fuente_curada": "0",
+            "metadata": "0",
+            "portal_consolidado": "2"
+          }
+        ]
+      },
+      {
+        "nombre": "Grupo 3",
+        "rol": "Disponible con base consolidada: existe unidad jurídica del portal, sin fuente curada asociada en este catálogo visible.",
+        "disponibilidad": "media_alta",
+        "estado_visible": "Disponible con base consolidada",
+        "nivel_confianza": "medio_alto",
+        "fuente_curada_sustantiva": "0",
+        "metadata_disponible": "0",
+        "unidad_portal_consolidada": "1",
+        "fuentes": [
+          {
+            "titulo": "Contenidos disponibles: Unidad jurídica consolidada del portal",
+            "tipo": "grupo_contenidos_por_pais",
+            "estado": "Disponible con base consolidada",
+            "confianza": "medio_alto",
+            "cantidad": 1,
+            "items": [
+              "Unidad jurídica consolidada del portal"
+            ],
+            "detalle": "Unidad jurídica consolidada del portal",
+            "fuente_curada": "0",
+            "metadata": "0",
+            "portal_consolidado": "1"
+          }
+        ]
+      },
+      {
+        "nombre": "Núcleo",
+        "rol": "Disponible con base consolidada: existe unidad jurídica del portal, sin fuente curada asociada en este catálogo visible.",
+        "disponibilidad": "media_alta",
+        "estado_visible": "Disponible con base consolidada",
+        "nivel_confianza": "medio_alto",
+        "fuente_curada_sustantiva": "0",
+        "metadata_disponible": "0",
+        "unidad_portal_consolidada": "4",
+        "fuentes": [
+          {
+            "titulo": "Contenidos disponibles: Unidad jurídica consolidada del portal",
+            "tipo": "grupo_contenidos_por_pais",
+            "estado": "Disponible con base consolidada",
+            "confianza": "medio_alto",
+            "cantidad": 1,
+            "items": [
+              "Unidad jurídica consolidada del portal"
+            ],
+            "detalle": "Unidad jurídica consolidada del portal",
+            "fuente_curada": "0",
+            "metadata": "0",
+            "portal_consolidado": "4"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "tecnologia_ia",
+    "etiqueta": "Tecnología e inteligencia artificial",
+    "fuente_catalogo": "catalogo_visible_563C_agrupado_564D",
+    "regla_uso": "Catálogo derivado de Bases Curadas 562D y unidades jurídicas normalizadas 562F. La franja derecha agrupa contenidos disponibles por país o sistema.",
+    "palabras_clave": [
+      "tecnologia ia",
+      "tecnología ia",
+      "inteligencia artificial",
+      "ia",
+      "ai",
+      "algoritmos",
+      "algoritmo",
+      "sistemas automatizados",
+      "decisiones automatizadas",
+      "regulacion algoritmica",
+      "regulación algorítmica",
+      "tecnologias de control",
+      "tecnologías de control"
+    ],
+    "ejes": [
+      "Ámbito de aplicación",
+      "Clasificación de riesgos",
+      "Sujetos obligados",
+      "Transparencia y explicabilidad",
+      "Supervisión y autoridad competente",
+      "Derechos de las personas afectadas",
+      "Responsabilidad y sanciones"
+    ],
+    "jurisdicciones": [
+      {
+        "nombre": "Alemania",
+        "rol": "Disponible para consulta: existen fuentes curadas y unidades consolidadas del portal.",
+        "disponibilidad": "alta",
+        "estado_visible": "Disponible para consulta",
+        "nivel_confianza": "alto",
+        "fuente_curada_sustantiva": "2",
+        "metadata_disponible": "2",
+        "unidad_portal_consolidada": "4",
+        "fuentes": [
+          {
+            "titulo": "<a class='fuente-link' href='https://eur-lex.europa.eu/eli/reg/2024/1689/oj/spa' target='_blank' rel='noopener noreferrer'>Reglamento (UE) 2024/1689, AI Act <span class='estado-instrumento'>(vigente)</span></a><br><a class='fuente-link' href='https://www.gesetze-im-internet.de/bdsg_2018/' target='_blank' rel='noopener noreferrer'>Bundesdatenschutzgesetz (BDSG) <span class='estado-instrumento'>(vigente)</span></a>",
+            "titulo_texto": "Reglamento (UE) 2024/1689, AI Act (vigente); Bundesdatenschutzgesetz (BDSG) (vigente)",
+            "tipo": "Normativa y fuentes",
+            "estado_cobertura": "cobertura normativa vigente",
+            "cantidad_instrumentos": 2,
+            "cantidad_vigentes": 2,
+            "cantidad_no_ley_o_softlaw": 0,
+            "fuente": "569_Cierre_Matriz_Maestra_Fuentes_Normativas_hipervinculada",
+            "detalle": [
+              {
+                "instrumento_normativo": "Reglamento (UE) 2024/1689, AI Act",
+                "tipo_instrumento": "reglamento",
+                "estado_normativo": "vigente",
+                "estado_corto": "vigente",
+                "url_oficial": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj/spa",
+                "fuente_url": "EUR-Lex",
+                "observacion_trazabilidad": "Aplicable como derecho de la Unión Europea."
+              },
+              {
+                "instrumento_normativo": "Bundesdatenschutzgesetz (BDSG)",
+                "tipo_instrumento": "ley",
+                "estado_normativo": "vigente",
+                "estado_corto": "vigente",
+                "url_oficial": "https://www.gesetze-im-internet.de/bdsg_2018/",
+                "fuente_url": "Gesetze im Internet",
+                "observacion_trazabilidad": "Marco asociado de datos personales relevante para IA."
+              }
+            ],
+            "mostrar_como_html": true
+          }
+        ]
+      },
+      {
+        "nombre": "Argentina",
+        "rol": "Disponible para consulta: existen fuentes curadas y unidades consolidadas del portal.",
+        "disponibilidad": "alta",
+        "estado_visible": "Disponible para consulta",
+        "nivel_confianza": "alto",
+        "fuente_curada_sustantiva": "2",
+        "metadata_disponible": "2",
+        "unidad_portal_consolidada": "5",
+        "fuentes": [
+          {
+            "titulo": "<a class='fuente-link' href='https://servicios.infoleg.gob.ar/infolegInternet/anexos/60000-64999/64790/norma.htm' target='_blank' rel='noopener noreferrer'>Ley N&#176; 25.326 de Protecci&#243;n de los Datos Personales <span class='estado-instrumento'>(vigente)</span></a><br><span class='fuente-link fuente-pendiente'>Ley general de inteligencia artificial <span class='estado-instrumento'>(pendiente controlado)</span></span>",
+            "titulo_texto": "Ley N° 25.326 de Protección de los Datos Personales (vigente); Ley general de inteligencia artificial (pendiente controlado)",
+            "tipo": "Normativa y fuentes",
+            "estado_cobertura": "cobertura mixta con pendiente controlado",
+            "cantidad_instrumentos": 2,
+            "cantidad_vigentes": 1,
+            "cantidad_no_ley_o_softlaw": 1,
+            "fuente": "569_Cierre_Matriz_Maestra_Fuentes_Normativas_hipervinculada",
+            "detalle": [
+              {
+                "instrumento_normativo": "Ley N° 25.326 de Protección de los Datos Personales",
+                "tipo_instrumento": "ley",
+                "estado_normativo": "vigente",
+                "estado_corto": "vigente",
+                "url_oficial": "https://servicios.infoleg.gob.ar/infolegInternet/anexos/60000-64999/64790/norma.htm",
+                "fuente_url": "InfoLEG",
+                "observacion_trazabilidad": "No sustituye una ley general de IA; se registra como marco asociado."
+              },
+              {
+                "instrumento_normativo": "Ley general de inteligencia artificial",
+                "tipo_instrumento": "ley",
+                "estado_normativo": "pendiente controlado / sin ley general vigente identificada",
+                "estado_corto": "pendiente controlado",
+                "url_oficial": "pendiente_verificacion",
+                "fuente_url": "pendiente",
+                "observacion_trazabilidad": "Cierre 569: se acepta como pendiente controlado. No se identifica ley general vigente de IA; mantener verificación periódica."
+              }
+            ],
+            "mostrar_como_html": true
+          }
+        ]
+      },
+      {
+        "nombre": "Australia",
+        "rol": "Disponible para consulta: existen fuentes curadas y unidades consolidadas del portal.",
+        "disponibilidad": "alta",
+        "estado_visible": "Disponible para consulta",
+        "nivel_confianza": "alto",
+        "fuente_curada_sustantiva": "5",
+        "metadata_disponible": "5",
+        "unidad_portal_consolidada": "10",
+        "fuentes": [
+          {
+            "titulo": "<a class='fuente-link' href='https://www.industry.gov.au/publications/voluntary-ai-safety-standard' target='_blank' rel='noopener noreferrer'>Voluntary AI Safety Standard <span class='estado-instrumento'>(soft law)</span></a><br><a class='fuente-link' href='https://www.legislation.gov.au/C2004A03712/latest/text' target='_blank' rel='noopener noreferrer'>Privacy Act 1988 <span class='estado-instrumento'>(vigente)</span></a>",
+            "titulo_texto": "Voluntary AI Safety Standard (soft law); Privacy Act 1988 (vigente)",
+            "tipo": "Normativa y fuentes",
+            "estado_cobertura": "cobertura normativa vigente",
+            "cantidad_instrumentos": 2,
+            "cantidad_vigentes": 1,
+            "cantidad_no_ley_o_softlaw": 1,
+            "fuente": "569_Cierre_Matriz_Maestra_Fuentes_Normativas_hipervinculada",
+            "detalle": [
+              {
+                "instrumento_normativo": "Voluntary AI Safety Standard",
+                "tipo_instrumento": "soft law / estándar",
+                "estado_normativo": "soft law",
+                "estado_corto": "soft law",
+                "url_oficial": "https://www.industry.gov.au/publications/voluntary-ai-safety-standard",
+                "fuente_url": "Department of Industry, Science and Resources",
+                "observacion_trazabilidad": "Estándar voluntario; no ley general de IA."
+              },
+              {
+                "instrumento_normativo": "Privacy Act 1988",
+                "tipo_instrumento": "ley",
+                "estado_normativo": "vigente",
+                "estado_corto": "vigente",
+                "url_oficial": "https://www.legislation.gov.au/C2004A03712/latest/text",
+                "fuente_url": "Federal Register of Legislation",
+                "observacion_trazabilidad": "Marco asociado de datos personales relevante para IA."
+              }
+            ],
+            "mostrar_como_html": true
+          }
+        ]
+      },
+      {
+        "nombre": "Brasil",
+        "rol": "Disponible para consulta: existen fuentes curadas y unidades consolidadas del portal.",
+        "disponibilidad": "alta",
+        "estado_visible": "Disponible para consulta",
+        "nivel_confianza": "alto",
+        "fuente_curada_sustantiva": "9",
+        "metadata_disponible": "9",
+        "unidad_portal_consolidada": "5",
+        "fuentes": [
+          {
+            "titulo": "<a class='fuente-link' href='https://www25.senado.leg.br/web/atividade/materias/-/materia/157233' target='_blank' rel='noopener noreferrer'>Projeto de Lei N&#186; 2.338/2023 sobre uso de intelig&#234;ncia artificial <span class='estado-instrumento'>(en tramitaci&#243;n)</span></a><br><a class='fuente-link' href='https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm' target='_blank' rel='noopener noreferrer'>Lei N&#186; 13.709/2018, Lei Geral de Prote&#231;&#227;o de Dados Pessoais <span class='estado-instrumento'>(vigente)</span></a>",
+            "titulo_texto": "Projeto de Lei Nº 2.338/2023 sobre uso de inteligência artificial (en tramitación); Lei Nº 13.709/2018, Lei Geral de Proteção de Dados Pessoais (vigente)",
+            "tipo": "Normativa y fuentes",
+            "estado_cobertura": "cobertura normativa vigente",
+            "cantidad_instrumentos": 2,
+            "cantidad_vigentes": 1,
+            "cantidad_no_ley_o_softlaw": 1,
+            "fuente": "569_Cierre_Matriz_Maestra_Fuentes_Normativas_hipervinculada",
+            "detalle": [
+              {
+                "instrumento_normativo": "Projeto de Lei Nº 2.338/2023 sobre uso de inteligência artificial",
+                "tipo_instrumento": "proyecto de ley",
+                "estado_normativo": "en tramitación",
+                "estado_corto": "en tramitación",
+                "url_oficial": "https://www25.senado.leg.br/web/atividade/materias/-/materia/157233",
+                "fuente_url": "Senado Federal",
+                "observacion_trazabilidad": "Proyecto principal sobre IA; no registrar como ley vigente."
+              },
+              {
+                "instrumento_normativo": "Lei Nº 13.709/2018, Lei Geral de Proteção de Dados Pessoais",
+                "tipo_instrumento": "ley",
+                "estado_normativo": "vigente",
+                "estado_corto": "vigente",
+                "url_oficial": "https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm",
+                "fuente_url": "Planalto",
+                "observacion_trazabilidad": "Marco asociado de datos personales relevante para IA."
+              }
+            ],
+            "mostrar_como_html": true
+          }
+        ]
+      },
+      {
+        "nombre": "Canadá",
+        "rol": "Disponible para consulta: existen fuentes curadas y unidades consolidadas del portal.",
+        "disponibilidad": "alta",
+        "estado_visible": "Disponible para consulta",
+        "nivel_confianza": "alto",
+        "fuente_curada_sustantiva": "13",
+        "metadata_disponible": "13",
+        "unidad_portal_consolidada": "3",
+        "fuentes": [
+          {
+            "titulo": "<a class='fuente-link' href='https://publications.gc.ca/collections/collection_2021/sct-tbs/BT48-31-2021-eng.pdf' target='_blank' rel='noopener noreferrer'>Directive on Automated Decision-Making <span class='estado-instrumento'>(vigente)</span></a><br><a class='fuente-link' href='https://www.parl.ca/legisinfo/en/bill/44-1/c-27' target='_blank' rel='noopener noreferrer'>Artificial Intelligence and Data Act (AIDA) <span class='estado-instrumento'>(antecedente no vigente)</span></a>",
+            "titulo_texto": "Directive on Automated Decision-Making (vigente); Artificial Intelligence and Data Act (AIDA) (antecedente no vigente)",
+            "tipo": "Normativa y fuentes",
+            "estado_cobertura": "cobertura normativa vigente",
+            "cantidad_instrumentos": 2,
+            "cantidad_vigentes": 1,
+            "cantidad_no_ley_o_softlaw": 1,
+            "fuente": "569_Cierre_Matriz_Maestra_Fuentes_Normativas_hipervinculada",
+            "detalle": [
+              {
+                "instrumento_normativo": "Directive on Automated Decision-Making",
+                "tipo_instrumento": "directiva administrativa",
+                "estado_normativo": "vigente",
+                "estado_corto": "vigente",
+                "url_oficial": "https://publications.gc.ca/collections/collection_2021/sct-tbs/BT48-31-2021-eng.pdf",
+                "fuente_url": "Government of Canada Publications",
+                "observacion_trazabilidad": "Sustituye tratamiento de AIDA como si fuera ley vigente."
+              },
+              {
+                "instrumento_normativo": "Artificial Intelligence and Data Act (AIDA)",
+                "tipo_instrumento": "proyecto de ley",
+                "estado_normativo": "no vigente / antecedente legislativo",
+                "estado_corto": "antecedente no vigente",
+                "url_oficial": "https://www.parl.ca/legisinfo/en/bill/44-1/c-27",
+                "fuente_url": "Parliament of Canada - LEGISinfo",
+                "observacion_trazabilidad": "Bill C-27 contenía AIDA, pero la ficha oficial muestra que report stage, third reading y Senado no fueron alcanzados."
+              }
+            ],
+            "mostrar_como_html": true
+          }
+        ]
+      },
+      {
+        "nombre": "Chile",
+        "rol": "Disponible para consulta: existen fuentes curadas y unidades consolidadas del portal.",
+        "disponibilidad": "alta",
+        "estado_visible": "Disponible para consulta",
+        "nivel_confianza": "alto",
+        "fuente_curada_sustantiva": "35",
+        "metadata_disponible": "18",
+        "unidad_portal_consolidada": "13",
+        "fuentes": [
+          {
+            "titulo": "<a class='fuente-link' href='https://www.bcn.cl/leychile/navegar?idNorma=1209272' target='_blank' rel='noopener noreferrer'>Ley N&#176; 21.719 <span class='estado-instrumento'>(vigente)</span></a><br><a class='fuente-link' href='https://www.minciencia.gob.cl/areas/inteligencia-artificial/politica-nacional-de-inteligencia-artificial/' target='_blank' rel='noopener noreferrer'>Pol&#237;tica Nacional de Inteligencia Artificial <span class='estado-instrumento'>(soft law)</span></a><br><a class='fuente-link' href='https://www.senado.cl/comunicaciones/noticias/proyecto-que-regula-sistemas-de-inteligencia-artificial-sera-estudiado-por' target='_blank' rel='noopener noreferrer'>Proyecto de ley que regula sistemas de inteligencia artificial, boletines 15869-19 y 16821-19 <span class='estado-instrumento'>(en tramitaci&#243;n)</span></a><br><a class='fuente-link' href='https://www.bcn.cl/leychile/navegar?idNorma=1206232' target='_blank' rel='noopener noreferrer'>Resoluci&#243;n Exenta N&#176; 372 CPLT sobre transparencia algor&#237;tmica <span class='estado-instrumento'>(recomendaci&#243;n institucional)</span></a><br><a class='fuente-link' href='https://www.bcn.cl/leychile/navegar?idNorma=1119730' target='_blank' rel='noopener noreferrer'>Ley N&#176; 21.096 <span class='estado-instrumento'>(vigente)</span></a>",
+            "titulo_texto": "Ley N° 21.719 (vigente); Política Nacional de Inteligencia Artificial (soft law); Proyecto de ley que regula sistemas de inteligencia artificial, boletines 15869-19 y 16821-19 (en tramitación); Resolución Exenta N° 372 CPLT sobre transparencia algorítmica (recomendación institucional); Ley N° 21.096 (vigente)",
+            "tipo": "Normativa y fuentes",
+            "estado_cobertura": "cobertura normativa vigente",
+            "cantidad_instrumentos": 5,
+            "cantidad_vigentes": 2,
+            "cantidad_no_ley_o_softlaw": 2,
+            "fuente": "569_Cierre_Matriz_Maestra_Fuentes_Normativas_hipervinculada",
+            "detalle": [
+              {
+                "instrumento_normativo": "Ley N° 21.719",
+                "tipo_instrumento": "ley",
+                "estado_normativo": "vigente",
+                "estado_corto": "vigente",
+                "url_oficial": "https://www.bcn.cl/leychile/navegar?idNorma=1209272",
+                "fuente_url": "LeyChile",
+                "observacion_trazabilidad": "Marco de datos personales relevante para IA."
+              },
+              {
+                "instrumento_normativo": "Política Nacional de Inteligencia Artificial",
+                "tipo_instrumento": "política pública",
+                "estado_normativo": "soft law / política pública vigente",
+                "estado_corto": "soft law",
+                "url_oficial": "https://www.minciencia.gob.cl/areas/inteligencia-artificial/politica-nacional-de-inteligencia-artificial/",
+                "fuente_url": "MinCiencia",
+                "observacion_trazabilidad": "URL oficial completada desde MinCiencia. Política publicada en 2021 y mantenida como política vigente."
+              },
+              {
+                "instrumento_normativo": "Proyecto de ley que regula sistemas de inteligencia artificial, boletines 15869-19 y 16821-19",
+                "tipo_instrumento": "proyecto de ley",
+                "estado_normativo": "en tramitación / segundo trámite constitucional",
+                "estado_corto": "en tramitación",
+                "url_oficial": "https://www.senado.cl/comunicaciones/noticias/proyecto-que-regula-sistemas-de-inteligencia-artificial-sera-estudiado-por",
+                "fuente_url": "Senado de Chile",
+                "observacion_trazabilidad": "URL oficial del Senado. Se precisan boletines 15869-19 y 16821-19."
+              },
+              {
+                "instrumento_normativo": "Resolución Exenta N° 372 CPLT sobre transparencia algorítmica",
+                "tipo_instrumento": "resolución administrativa",
+                "estado_normativo": "vigente / recomendación institucional",
+                "estado_corto": "recomendación institucional",
+                "url_oficial": "https://www.bcn.cl/leychile/navegar?idNorma=1206232",
+                "fuente_url": "LeyChile",
+                "observacion_trazabilidad": "Recomendación institucional, no ley general de IA."
+              },
+              {
+                "instrumento_normativo": "Ley N° 21.096",
+                "tipo_instrumento": "reforma constitucional",
+                "estado_normativo": "vigente",
+                "estado_corto": "vigente",
+                "url_oficial": "https://www.bcn.cl/leychile/navegar?idNorma=1119730",
+                "fuente_url": "LeyChile",
+                "observacion_trazabilidad": "Base constitucional de privacidad y protección de datos."
+              }
+            ],
+            "mostrar_como_html": true
+          }
+        ]
+      },
+      {
+        "nombre": "España",
+        "rol": "Disponible para consulta: existen fuentes curadas y unidades consolidadas del portal.",
+        "disponibilidad": "alta",
+        "estado_visible": "Disponible para consulta",
+        "nivel_confianza": "alto",
+        "fuente_curada_sustantiva": "13",
+        "metadata_disponible": "13",
+        "unidad_portal_consolidada": "3",
+        "fuentes": [
+          {
+            "titulo": "<a class='fuente-link' href='https://eur-lex.europa.eu/eli/reg/2024/1689/oj/spa' target='_blank' rel='noopener noreferrer'>Reglamento (UE) 2024/1689, AI Act <span class='estado-instrumento'>(vigente)</span></a><br><a class='fuente-link' href='https://www.boe.es/eli/es/rd/2023/11/08/817' target='_blank' rel='noopener noreferrer'>Real Decreto 817/2023, entorno controlado de pruebas de IA <span class='estado-instrumento'>(vigente)</span></a>",
+            "titulo_texto": "Reglamento (UE) 2024/1689, AI Act (vigente); Real Decreto 817/2023, entorno controlado de pruebas de IA (vigente)",
+            "tipo": "Normativa y fuentes",
+            "estado_cobertura": "cobertura normativa vigente",
+            "cantidad_instrumentos": 2,
+            "cantidad_vigentes": 2,
+            "cantidad_no_ley_o_softlaw": 0,
+            "fuente": "569_Cierre_Matriz_Maestra_Fuentes_Normativas_hipervinculada",
+            "detalle": [
+              {
+                "instrumento_normativo": "Reglamento (UE) 2024/1689, AI Act",
+                "tipo_instrumento": "reglamento",
+                "estado_normativo": "vigente",
+                "estado_corto": "vigente",
+                "url_oficial": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj/spa",
+                "fuente_url": "EUR-Lex",
+                "observacion_trazabilidad": "Aplicable como derecho de la Unión Europea."
+              },
+              {
+                "instrumento_normativo": "Real Decreto 817/2023, entorno controlado de pruebas de IA",
+                "tipo_instrumento": "real decreto",
+                "estado_normativo": "vigente",
+                "estado_corto": "vigente",
+                "url_oficial": "https://www.boe.es/eli/es/rd/2023/11/08/817",
+                "fuente_url": "BOE",
+                "observacion_trazabilidad": "Sandbox regulatorio español de IA."
+              }
+            ],
+            "mostrar_como_html": true
+          }
+        ]
+      },
+      {
+        "nombre": "Francia",
+        "rol": "Disponible para consulta: existen fuentes curadas y unidades consolidadas del portal.",
+        "disponibilidad": "alta",
+        "estado_visible": "Disponible para consulta",
+        "nivel_confianza": "alto",
+        "fuente_curada_sustantiva": "5",
+        "metadata_disponible": "5",
+        "unidad_portal_consolidada": "4",
+        "fuentes": [
+          {
+            "titulo": "<a class='fuente-link' href='https://eur-lex.europa.eu/eli/reg/2024/1689/oj/fra' target='_blank' rel='noopener noreferrer'>Reglamento (UE) 2024/1689, AI Act <span class='estado-instrumento'>(vigente)</span></a><br><a class='fuente-link' href='https://www.legifrance.gouv.fr/loda/id/LEGITEXT000006068624' target='_blank' rel='noopener noreferrer'>Loi n&#176; 78-17 du 6 janvier 1978 relative &#224; l&#39;informatique, aux fichiers et aux libert&#233;s <span class='estado-instrumento'>(vigente)</span></a>",
+            "titulo_texto": "Reglamento (UE) 2024/1689, AI Act (vigente); Loi n° 78-17 du 6 janvier 1978 relative à l'informatique, aux fichiers et aux libertés (vigente)",
+            "tipo": "Normativa y fuentes",
+            "estado_cobertura": "cobertura normativa vigente",
+            "cantidad_instrumentos": 2,
+            "cantidad_vigentes": 2,
+            "cantidad_no_ley_o_softlaw": 0,
+            "fuente": "569_Cierre_Matriz_Maestra_Fuentes_Normativas_hipervinculada",
+            "detalle": [
+              {
+                "instrumento_normativo": "Reglamento (UE) 2024/1689, AI Act",
+                "tipo_instrumento": "reglamento",
+                "estado_normativo": "vigente",
+                "estado_corto": "vigente",
+                "url_oficial": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj/fra",
+                "fuente_url": "EUR-Lex",
+                "observacion_trazabilidad": "Aplicable como derecho de la Unión Europea."
+              },
+              {
+                "instrumento_normativo": "Loi n° 78-17 du 6 janvier 1978 relative à l'informatique, aux fichiers et aux libertés",
+                "tipo_instrumento": "ley",
+                "estado_normativo": "vigente",
+                "estado_corto": "vigente",
+                "url_oficial": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000006068624",
+                "fuente_url": "Légifrance",
+                "observacion_trazabilidad": "Marco asociado de datos personales relevante para IA."
+              }
+            ],
+            "mostrar_como_html": true
+          }
+        ]
+      },
+      {
+        "nombre": "México",
+        "rol": "Disponible para consulta: existen fuentes curadas y unidades consolidadas del portal.",
+        "disponibilidad": "alta",
+        "estado_visible": "Disponible para consulta",
+        "nivel_confianza": "alto",
+        "fuente_curada_sustantiva": "4",
+        "metadata_disponible": "4",
+        "unidad_portal_consolidada": "4",
+        "fuentes": [
+          {
+            "titulo": "<a class='fuente-link' href='https://www.diputados.gob.mx/LeyesBiblio/pdf/LFPDPPP.pdf' target='_blank' rel='noopener noreferrer'>Ley Federal de Protecci&#243;n de Datos Personales en Posesi&#243;n de los Particulares <span class='estado-instrumento'>(vigente)</span></a><br><span class='fuente-link fuente-pendiente'>Ley general de inteligencia artificial <span class='estado-instrumento'>(pendiente controlado)</span></span>",
+            "titulo_texto": "Ley Federal de Protección de Datos Personales en Posesión de los Particulares (vigente); Ley general de inteligencia artificial (pendiente controlado)",
+            "tipo": "Normativa y fuentes",
+            "estado_cobertura": "cobertura mixta con pendiente controlado",
+            "cantidad_instrumentos": 2,
+            "cantidad_vigentes": 1,
+            "cantidad_no_ley_o_softlaw": 1,
+            "fuente": "569_Cierre_Matriz_Maestra_Fuentes_Normativas_hipervinculada",
+            "detalle": [
+              {
+                "instrumento_normativo": "Ley Federal de Protección de Datos Personales en Posesión de los Particulares",
+                "tipo_instrumento": "ley",
+                "estado_normativo": "vigente",
+                "estado_corto": "vigente",
+                "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFPDPPP.pdf",
+                "fuente_url": "Cámara de Diputados",
+                "observacion_trazabilidad": "Marco asociado; no equivale a ley general de IA."
+              },
+              {
+                "instrumento_normativo": "Ley general de inteligencia artificial",
+                "tipo_instrumento": "ley",
+                "estado_normativo": "pendiente controlado / sin ley general vigente identificada",
+                "estado_corto": "pendiente controlado",
+                "url_oficial": "pendiente_verificacion",
+                "fuente_url": "pendiente",
+                "observacion_trazabilidad": "Cierre 569: se acepta como pendiente controlado. No se identifica ley general vigente de IA; mantener verificación periódica."
+              }
+            ],
+            "mostrar_como_html": true
+          }
+        ]
+      },
+      {
+        "nombre": "Reino Unido",
+        "rol": "Disponible para consulta: existen fuentes curadas y unidades consolidadas del portal.",
+        "disponibilidad": "alta",
+        "estado_visible": "Disponible para consulta",
+        "nivel_confianza": "alto",
+        "fuente_curada_sustantiva": "10",
+        "metadata_disponible": "10",
+        "unidad_portal_consolidada": "3",
+        "fuentes": [
+          {
+            "titulo": "<a class='fuente-link' href='https://www.legislation.gov.uk/ukpga/2018/12/contents' target='_blank' rel='noopener noreferrer'>Data Protection Act 2018 <span class='estado-instrumento'>(vigente)</span></a><br><a class='fuente-link' href='https://www.gov.uk/government/publications/ai-regulation-a-pro-innovation-approach' target='_blank' rel='noopener noreferrer'>AI regulation: a pro-innovation approach <span class='estado-instrumento'>(soft law)</span></a>",
+            "titulo_texto": "Data Protection Act 2018 (vigente); AI regulation: a pro-innovation approach (soft law)",
+            "tipo": "Normativa y fuentes",
+            "estado_cobertura": "cobertura normativa vigente",
+            "cantidad_instrumentos": 2,
+            "cantidad_vigentes": 1,
+            "cantidad_no_ley_o_softlaw": 1,
+            "fuente": "569_Cierre_Matriz_Maestra_Fuentes_Normativas_hipervinculada",
+            "detalle": [
+              {
+                "instrumento_normativo": "Data Protection Act 2018",
+                "tipo_instrumento": "ley",
+                "estado_normativo": "vigente",
+                "estado_corto": "vigente",
+                "url_oficial": "https://www.legislation.gov.uk/ukpga/2018/12/contents",
+                "fuente_url": "legislation.gov.uk",
+                "observacion_trazabilidad": "Marco asociado de datos personales relevante para IA."
+              },
+              {
+                "instrumento_normativo": "AI regulation: a pro-innovation approach",
+                "tipo_instrumento": "política pública / white paper",
+                "estado_normativo": "soft law / política pública",
+                "estado_corto": "soft law",
+                "url_oficial": "https://www.gov.uk/government/publications/ai-regulation-a-pro-innovation-approach",
+                "fuente_url": "GOV.UK",
+                "observacion_trazabilidad": "Enfoque regulatorio no equivalente a ley general de IA."
+              }
+            ],
+            "mostrar_como_html": true
+          }
+        ]
+      },
+      {
+        "nombre": "Unión Europea",
+        "rol": "Disponible para consulta: existen fuentes curadas y unidades consolidadas del portal.",
+        "disponibilidad": "alta",
+        "estado_visible": "Disponible para consulta",
+        "nivel_confianza": "alto",
+        "fuente_curada_sustantiva": "22",
+        "metadata_disponible": "22",
+        "unidad_portal_consolidada": "4",
+        "fuentes": [
+          {
+            "titulo": "<a class='fuente-link' href='https://eur-lex.europa.eu/eli/reg/2024/1689/oj/spa' target='_blank' rel='noopener noreferrer'>Reglamento (UE) 2024/1689, AI Act <span class='estado-instrumento'>(vigente)</span></a>",
+            "titulo_texto": "Reglamento (UE) 2024/1689, AI Act (vigente)",
+            "tipo": "Normativa y fuentes",
+            "estado_cobertura": "cobertura normativa vigente",
+            "cantidad_instrumentos": 1,
+            "cantidad_vigentes": 1,
+            "cantidad_no_ley_o_softlaw": 0,
+            "fuente": "569_Cierre_Matriz_Maestra_Fuentes_Normativas_hipervinculada",
+            "detalle": [
+              {
+                "instrumento_normativo": "Reglamento (UE) 2024/1689, AI Act",
+                "tipo_instrumento": "reglamento",
+                "estado_normativo": "vigente",
+                "estado_corto": "vigente",
+                "url_oficial": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj/spa",
+                "fuente_url": "EUR-Lex",
+                "observacion_trazabilidad": "Reglamento europeo de inteligencia artificial."
+              }
+            ],
+            "mostrar_como_html": true
+          }
+        ]
+      },
+      {
+        "nombre": "Corea del Sur",
+        "rol": "Disponible con base consolidada: existe unidad jurídica del portal, sin fuente curada asociada en este catálogo visible.",
+        "disponibilidad": "media_alta",
+        "estado_visible": "Disponible con base consolidada",
+        "nivel_confianza": "medio_alto",
+        "fuente_curada_sustantiva": "0",
+        "metadata_disponible": "0",
+        "unidad_portal_consolidada": "4",
+        "fuentes": [
+          {
+            "titulo": "<a class='fuente-link' href='https://www.law.go.kr/법령/인공지능발전과신뢰기반조성등에관한기본법' target='_blank' rel='noopener noreferrer'>Basic Act on the Development of Artificial Intelligence and Establishment of a Foundation for Trustworthiness <span class='estado-instrumento'>(vigente)</span></a>",
+            "titulo_texto": "Basic Act on the Development of Artificial Intelligence and Establishment of a Foundation for Trustworthiness (vigente)",
+            "tipo": "Normativa y fuentes",
+            "estado_cobertura": "cobertura normativa vigente",
+            "cantidad_instrumentos": 1,
+            "cantidad_vigentes": 1,
+            "cantidad_no_ley_o_softlaw": 0,
+            "fuente": "569_Cierre_Matriz_Maestra_Fuentes_Normativas_hipervinculada",
+            "detalle": [
+              {
+                "instrumento_normativo": "Basic Act on the Development of Artificial Intelligence and Establishment of a Foundation for Trustworthiness",
+                "tipo_instrumento": "ley",
+                "estado_normativo": "vigente",
+                "estado_corto": "vigente",
+                "url_oficial": "https://www.law.go.kr/법령/인공지능발전과신뢰기반조성등에관한기본법",
+                "fuente_url": "law.go.kr",
+                "observacion_trazabilidad": "Reemplaza pendiente. Ley coreana de IA publicada en law.go.kr; entrada en vigor en enero de 2026 según MSIT."
+              }
+            ],
+            "mostrar_como_html": true
+          }
+        ]
+      },
+      {
+        "nombre": "Nueva Zelanda",
+        "rol": "Disponible con base consolidada: existe unidad jurídica del portal, sin fuente curada asociada en este catálogo visible.",
+        "disponibilidad": "media_alta",
+        "estado_visible": "Disponible con base consolidada",
+        "nivel_confianza": "medio_alto",
+        "fuente_curada_sustantiva": "0",
+        "metadata_disponible": "0",
+        "unidad_portal_consolidada": "9",
+        "fuentes": [
+          {
+            "titulo": "<a class='fuente-link' href='https://www.mbie.govt.nz/about/news/artificial-intelligence-strategy-and-business-guidance-now-available' target='_blank' rel='noopener noreferrer'>New Zealand&#39;s Strategy for Artificial Intelligence; Responsible Artificial Intelligence guidance for businesses <span class='estado-instrumento'>(soft law)</span></a>",
+            "titulo_texto": "New Zealand's Strategy for Artificial Intelligence; Responsible Artificial Intelligence guidance for businesses (soft law)",
+            "tipo": "Normativa y fuentes",
+            "estado_cobertura": "cobertura no legislativa",
+            "cantidad_instrumentos": 1,
+            "cantidad_vigentes": 0,
+            "cantidad_no_ley_o_softlaw": 1,
+            "fuente": "569_Cierre_Matriz_Maestra_Fuentes_Normativas_hipervinculada",
+            "detalle": [
+              {
+                "instrumento_normativo": "New Zealand's Strategy for Artificial Intelligence; Responsible Artificial Intelligence guidance for businesses",
+                "tipo_instrumento": "política pública / guía",
+                "estado_normativo": "soft law / estrategia oficial",
+                "estado_corto": "soft law",
+                "url_oficial": "https://www.mbie.govt.nz/about/news/artificial-intelligence-strategy-and-business-guidance-now-available",
+                "fuente_url": "MBIE",
+                "observacion_trazabilidad": "No se registra ley general de IA. Se reemplaza pendiente por estrategia y guía oficial de IA."
+              }
+            ],
+            "mostrar_como_html": true
+          }
+        ]
+      },
+      {
+        "nombre": "Estados Unidos",
+        "rol": "Fuente curada disponible: existen fuentes o metadata curadas, pero no unidad consolidada del portal asociada en este catálogo visible.",
+        "disponibilidad": "media",
+        "estado_visible": "Fuente curada disponible",
+        "nivel_confianza": "medio_alto",
+        "fuente_curada_sustantiva": "9",
+        "metadata_disponible": "9",
+        "unidad_portal_consolidada": "0",
+        "fuentes": [
+          {
+            "titulo": "<a class='fuente-link' href='https://www.federalregister.gov/documents/2025/01/31/2025-02172/removing-barriers-to-american-leadership-in-artificial-intelligence' target='_blank' rel='noopener noreferrer'>Executive Order 14179, Removing Barriers to American Leadership in Artificial Intelligence <span class='estado-instrumento'>(acto presidencial)</span></a><br><a class='fuente-link' href='https://www.justice.gov/opcl/privacy-act-1974' target='_blank' rel='noopener noreferrer'>Privacy Act of 1974 <span class='estado-instrumento'>(vigente)</span></a>",
+            "titulo_texto": "Executive Order 14179, Removing Barriers to American Leadership in Artificial Intelligence (acto presidencial); Privacy Act of 1974 (vigente)",
+            "tipo": "Normativa y fuentes",
+            "estado_cobertura": "cobertura normativa vigente",
+            "cantidad_instrumentos": 2,
+            "cantidad_vigentes": 1,
+            "cantidad_no_ley_o_softlaw": 0,
+            "fuente": "569_Cierre_Matriz_Maestra_Fuentes_Normativas_hipervinculada",
+            "detalle": [
+              {
+                "instrumento_normativo": "Executive Order 14179, Removing Barriers to American Leadership in Artificial Intelligence",
+                "tipo_instrumento": "orden ejecutiva",
+                "estado_normativo": "vigente / acto presidencial",
+                "estado_corto": "acto presidencial",
+                "url_oficial": "https://www.federalregister.gov/documents/2025/01/31/2025-02172/removing-barriers-to-american-leadership-in-artificial-intelligence",
+                "fuente_url": "Federal Register",
+                "observacion_trazabilidad": "No equivale a ley federal general de IA."
+              },
+              {
+                "instrumento_normativo": "Privacy Act of 1974",
+                "tipo_instrumento": "ley",
+                "estado_normativo": "vigente",
+                "estado_corto": "vigente",
+                "url_oficial": "https://www.justice.gov/opcl/privacy-act-1974",
+                "fuente_url": "U.S. Department of Justice",
+                "observacion_trazabilidad": "Marco asociado de datos personales."
+              }
+            ],
+            "mostrar_como_html": true
+          }
+        ]
+      },
+      {
+        "nombre": "Italia",
+        "rol": "Fuente curada disponible: existen fuentes o metadata curadas, pero no unidad consolidada del portal asociada en este catálogo visible.",
+        "disponibilidad": "media",
+        "estado_visible": "Fuente curada disponible",
+        "nivel_confianza": "medio_alto",
+        "fuente_curada_sustantiva": "1",
+        "metadata_disponible": "1",
+        "unidad_portal_consolidada": "0",
+        "fuentes": [
+          {
+            "titulo": "<a class='fuente-link' href='https://eur-lex.europa.eu/eli/reg/2024/1689/oj/ita' target='_blank' rel='noopener noreferrer'>Reglamento (UE) 2024/1689, AI Act <span class='estado-instrumento'>(vigente)</span></a><br><a class='fuente-link' href='https://www.senato.it/leggi-e-documenti/disegni-di-legge/scheda-ddl?did=58262' target='_blank' rel='noopener noreferrer'>Disegno di legge S.1146-B, Disposizioni e deleghe al Governo in materia di intelligenza artificiale <span class='estado-instrumento'>(en tramitaci&#243;n)</span></a>",
+            "titulo_texto": "Reglamento (UE) 2024/1689, AI Act (vigente); Disegno di legge S.1146-B, Disposizioni e deleghe al Governo in materia di intelligenza artificiale (en tramitación)",
+            "tipo": "Normativa y fuentes",
+            "estado_cobertura": "cobertura normativa vigente",
+            "cantidad_instrumentos": 2,
+            "cantidad_vigentes": 1,
+            "cantidad_no_ley_o_softlaw": 1,
+            "fuente": "569_Cierre_Matriz_Maestra_Fuentes_Normativas_hipervinculada",
+            "detalle": [
+              {
+                "instrumento_normativo": "Reglamento (UE) 2024/1689, AI Act",
+                "tipo_instrumento": "reglamento",
+                "estado_normativo": "vigente",
+                "estado_corto": "vigente",
+                "url_oficial": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj/ita",
+                "fuente_url": "EUR-Lex",
+                "observacion_trazabilidad": "Aplicable como derecho de la Unión Europea."
+              },
+              {
+                "instrumento_normativo": "Disegno di legge S.1146-B, Disposizioni e deleghe al Governo in materia di intelligenza artificiale",
+                "tipo_instrumento": "proyecto de ley",
+                "estado_normativo": "en tramitación",
+                "estado_corto": "en tramitación",
+                "url_oficial": "https://www.senato.it/leggi-e-documenti/disegni-di-legge/scheda-ddl?did=58262",
+                "fuente_url": "Senato della Repubblica",
+                "observacion_trazabilidad": "URL oficial de ficha del proyecto S.1146."
+              }
+            ],
+            "mostrar_como_html": true
+          }
+        ]
+      }
+    ],
+    "jurisdicciones_internas": [
+      {
+        "nombre": "Grupo 2",
+        "rol": "Disponible con base consolidada: existe unidad jurídica del portal, sin fuente curada asociada en este catálogo visible.",
+        "disponibilidad": "media_alta",
+        "estado_visible": "Disponible con base consolidada",
+        "nivel_confianza": "medio_alto",
+        "fuente_curada_sustantiva": "0",
+        "metadata_disponible": "0",
+        "unidad_portal_consolidada": "3",
+        "fuentes": [
+          {
+            "titulo": "Contenidos disponibles: Unidad jurídica consolidada del portal",
+            "tipo": "grupo_contenidos_por_pais",
+            "estado": "Disponible con base consolidada",
+            "confianza": "medio_alto",
+            "cantidad": 1,
+            "items": [
+              "Unidad jurídica consolidada del portal"
+            ],
+            "detalle": "Unidad jurídica consolidada del portal",
+            "fuente_curada": "0",
+            "metadata": "0",
+            "portal_consolidado": "3"
+          }
+        ]
+      },
+      {
+        "nombre": "Grupo 3",
+        "rol": "Disponible con base consolidada: existe unidad jurídica del portal, sin fuente curada asociada en este catálogo visible.",
+        "disponibilidad": "media_alta",
+        "estado_visible": "Disponible con base consolidada",
+        "nivel_confianza": "medio_alto",
+        "fuente_curada_sustantiva": "0",
+        "metadata_disponible": "0",
+        "unidad_portal_consolidada": "3",
+        "fuentes": [
+          {
+            "titulo": "Contenidos disponibles: Unidad jurídica consolidada del portal",
+            "tipo": "grupo_contenidos_por_pais",
+            "estado": "Disponible con base consolidada",
+            "confianza": "medio_alto",
+            "cantidad": 1,
+            "items": [
+              "Unidad jurídica consolidada del portal"
+            ],
+            "detalle": "Unidad jurídica consolidada del portal",
+            "fuente_curada": "0",
+            "metadata": "0",
+            "portal_consolidado": "3"
+          }
+        ]
+      },
+      {
+        "nombre": "Núcleo",
+        "rol": "Disponible con base consolidada: existe unidad jurídica del portal, sin fuente curada asociada en este catálogo visible.",
+        "disponibilidad": "media_alta",
+        "estado_visible": "Disponible con base consolidada",
+        "nivel_confianza": "medio_alto",
+        "fuente_curada_sustantiva": "0",
+        "metadata_disponible": "0",
+        "unidad_portal_consolidada": "6",
+        "fuentes": [
+          {
+            "titulo": "Contenidos disponibles: Unidad jurídica consolidada del portal",
+            "tipo": "grupo_contenidos_por_pais",
+            "estado": "Disponible con base consolidada",
+            "confianza": "medio_alto",
+            "cantidad": 1,
+            "items": [
+              "Unidad jurídica consolidada del portal"
+            ],
+            "detalle": "Unidad jurídica consolidada del portal",
+            "fuente_curada": "0",
+            "metadata": "0",
+            "portal_consolidado": "6"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "datos_personales",
+    "etiqueta": "Datos personales",
+    "fuente_catalogo": "catalogo_visible_563C_agrupado_564D",
+    "regla_uso": "Catálogo derivado de Bases Curadas 562D y unidades jurídicas normalizadas 562F. La franja derecha agrupa contenidos disponibles por país o sistema.",
+    "palabras_clave": [
+      "datos personales",
+      "proteccion de datos",
+      "protección de datos",
+      "privacidad",
+      "gdpr",
+      "rgpd"
+    ],
+    "ejes": [
+      "Ámbito de aplicación",
+      "Principios de tratamiento",
+      "Bases de licitud",
+      "Derechos de las personas titulares",
+      "Autoridad de control",
+      "Transferencias internacionales",
+      "Infracciones y sanciones"
+    ],
+    "jurisdicciones": [
+      {
+        "nombre": "Alemania",
+        "rol": "Fuente curada disponible: existen fuentes o metadata curadas, pero no unidad consolidada del portal asociada en este catálogo visible.",
+        "disponibilidad": "media",
+        "estado_visible": "Fuente curada disponible",
+        "nivel_confianza": "medio_alto",
+        "fuente_curada_sustantiva": "1",
+        "metadata_disponible": "1",
+        "unidad_portal_consolidada": "0",
+        "fuentes": [
+          {
+            "titulo": "<a class='fuente-link' href='https://www.gesetze-im-internet.de/bdsg_2018/' target='_blank' rel='noopener noreferrer'>Bundesdatenschutzgesetz (BDSG) <span class='estado-instrumento'>(vigente)</span></a>",
+            "titulo_texto": "Bundesdatenschutzgesetz (BDSG) (vigente)",
+            "tipo": "Normativa y fuentes",
+            "estado_cobertura": "cobertura normativa vigente",
+            "cantidad_instrumentos": 1,
+            "cantidad_vigentes": 1,
+            "cantidad_no_ley_o_softlaw": 0,
+            "fuente": "569_Cierre_Matriz_Maestra_Fuentes_Normativas_hipervinculada",
+            "detalle": [
+              {
+                "instrumento_normativo": "Bundesdatenschutzgesetz (BDSG)",
+                "tipo_instrumento": "ley",
+                "estado_normativo": "vigente",
+                "estado_corto": "vigente",
+                "url_oficial": "https://www.gesetze-im-internet.de/bdsg_2018/",
+                "fuente_url": "Gesetze im Internet",
+                "observacion_trazabilidad": "Norma federal de protección de datos."
+              }
+            ],
+            "mostrar_como_html": true
+          }
+        ]
+      },
+      {
+        "nombre": "Argentina",
+        "rol": "Fuente curada disponible: existen fuentes o metadata curadas, pero no unidad consolidada del portal asociada en este catálogo visible.",
+        "disponibilidad": "media",
+        "estado_visible": "Fuente curada disponible",
+        "nivel_confianza": "medio_alto",
+        "fuente_curada_sustantiva": "1",
+        "metadata_disponible": "1",
+        "unidad_portal_consolidada": "0",
+        "fuentes": [
+          {
+            "titulo": "<a class='fuente-link' href='https://servicios.infoleg.gob.ar/infolegInternet/anexos/60000-64999/64790/norma.htm' target='_blank' rel='noopener noreferrer'>Ley N&#176; 25.326 de Protecci&#243;n de los Datos Personales <span class='estado-instrumento'>(vigente)</span></a><br><a class='fuente-link' href='https://servicios.infoleg.gob.ar/infolegInternet/anexos/70000-74999/70368/norma.htm' target='_blank' rel='noopener noreferrer'>Decreto 1558/2001, reglamentario de la Ley N&#176; 25.326 <span class='estado-instrumento'>(vigente)</span></a>",
+            "titulo_texto": "Ley N° 25.326 de Protección de los Datos Personales (vigente); Decreto 1558/2001, reglamentario de la Ley N° 25.326 (vigente)",
+            "tipo": "Normativa y fuentes",
+            "estado_cobertura": "cobertura normativa vigente",
+            "cantidad_instrumentos": 2,
+            "cantidad_vigentes": 2,
+            "cantidad_no_ley_o_softlaw": 0,
+            "fuente": "569_Cierre_Matriz_Maestra_Fuentes_Normativas_hipervinculada",
+            "detalle": [
+              {
+                "instrumento_normativo": "Ley N° 25.326 de Protección de los Datos Personales",
+                "tipo_instrumento": "ley",
+                "estado_normativo": "vigente",
+                "estado_corto": "vigente",
+                "url_oficial": "https://servicios.infoleg.gob.ar/infolegInternet/anexos/60000-64999/64790/norma.htm",
+                "fuente_url": "InfoLEG",
+                "observacion_trazabilidad": "Norma argentina de protección de datos."
+              },
+              {
+                "instrumento_normativo": "Decreto 1558/2001, reglamentario de la Ley N° 25.326",
+                "tipo_instrumento": "decreto reglamentario",
+                "estado_normativo": "vigente",
+                "estado_corto": "vigente",
+                "url_oficial": "https://servicios.infoleg.gob.ar/infolegInternet/anexos/70000-74999/70368/norma.htm",
+                "fuente_url": "InfoLEG",
+                "observacion_trazabilidad": "Reglamento de la Ley N° 25.326."
+              }
+            ],
+            "mostrar_como_html": true
+          }
+        ]
+      },
+      {
+        "nombre": "Australia",
+        "rol": "Fuente curada disponible: existen fuentes o metadata curadas, pero no unidad consolidada del portal asociada en este catálogo visible.",
+        "disponibilidad": "media",
+        "estado_visible": "Fuente curada disponible",
+        "nivel_confianza": "medio_alto",
+        "fuente_curada_sustantiva": "4",
+        "metadata_disponible": "4",
+        "unidad_portal_consolidada": "0",
+        "fuentes": [
+          {
+            "titulo": "<a class='fuente-link' href='https://www.legislation.gov.au/C2004A03712/latest/text' target='_blank' rel='noopener noreferrer'>Privacy Act 1988 <span class='estado-instrumento'>(vigente)</span></a>",
+            "titulo_texto": "Privacy Act 1988 (vigente)",
+            "tipo": "Normativa y fuentes",
+            "estado_cobertura": "cobertura normativa vigente",
+            "cantidad_instrumentos": 1,
+            "cantidad_vigentes": 1,
+            "cantidad_no_ley_o_softlaw": 0,
+            "fuente": "569_Cierre_Matriz_Maestra_Fuentes_Normativas_hipervinculada",
+            "detalle": [
+              {
+                "instrumento_normativo": "Privacy Act 1988",
+                "tipo_instrumento": "ley",
+                "estado_normativo": "vigente",
+                "estado_corto": "vigente",
+                "url_oficial": "https://www.legislation.gov.au/C2004A03712/latest/text",
+                "fuente_url": "Federal Register of Legislation",
+                "observacion_trazabilidad": "Norma australiana de privacidad."
+              }
+            ],
+            "mostrar_como_html": true
+          }
+        ]
+      },
+      {
+        "nombre": "Brasil",
+        "rol": "Fuente curada disponible: existen fuentes o metadata curadas, pero no unidad consolidada del portal asociada en este catálogo visible.",
+        "disponibilidad": "media",
+        "estado_visible": "Fuente curada disponible",
+        "nivel_confianza": "medio_alto",
+        "fuente_curada_sustantiva": "5",
+        "metadata_disponible": "5",
+        "unidad_portal_consolidada": "0",
+        "fuentes": [
+          {
+            "titulo": "<a class='fuente-link' href='https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm' target='_blank' rel='noopener noreferrer'>Lei N&#186; 13.709/2018, Lei Geral de Prote&#231;&#227;o de Dados Pessoais <span class='estado-instrumento'>(vigente)</span></a>",
+            "titulo_texto": "Lei Nº 13.709/2018, Lei Geral de Proteção de Dados Pessoais (vigente)",
+            "tipo": "Normativa y fuentes",
+            "estado_cobertura": "cobertura normativa vigente",
+            "cantidad_instrumentos": 1,
+            "cantidad_vigentes": 1,
+            "cantidad_no_ley_o_softlaw": 0,
+            "fuente": "569_Cierre_Matriz_Maestra_Fuentes_Normativas_hipervinculada",
+            "detalle": [
+              {
+                "instrumento_normativo": "Lei Nº 13.709/2018, Lei Geral de Proteção de Dados Pessoais",
+                "tipo_instrumento": "ley",
+                "estado_normativo": "vigente",
+                "estado_corto": "vigente",
+                "url_oficial": "https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm",
+                "fuente_url": "Planalto",
+                "observacion_trazabilidad": "LGPD."
+              }
+            ],
+            "mostrar_como_html": true
+          }
+        ]
+      },
+      {
+        "nombre": "Canadá",
+        "rol": "Fuente curada disponible: existen fuentes o metadata curadas, pero no unidad consolidada del portal asociada en este catálogo visible.",
+        "disponibilidad": "media",
+        "estado_visible": "Fuente curada disponible",
+        "nivel_confianza": "medio_alto",
+        "fuente_curada_sustantiva": "10",
+        "metadata_disponible": "10",
+        "unidad_portal_consolidada": "0",
+        "fuentes": [
+          {
+            "titulo": "<a class='fuente-link' href='https://laws-lois.justice.gc.ca/eng/acts/P-8.6/' target='_blank' rel='noopener noreferrer'>Personal Information Protection and Electronic Documents Act (PIPEDA) <span class='estado-instrumento'>(vigente)</span></a><br><a class='fuente-link' href='https://laws-lois.justice.gc.ca/eng/acts/P-21/' target='_blank' rel='noopener noreferrer'>Privacy Act <span class='estado-instrumento'>(vigente)</span></a>",
+            "titulo_texto": "Personal Information Protection and Electronic Documents Act (PIPEDA) (vigente); Privacy Act (vigente)",
+            "tipo": "Normativa y fuentes",
+            "estado_cobertura": "cobertura normativa vigente",
+            "cantidad_instrumentos": 2,
+            "cantidad_vigentes": 2,
+            "cantidad_no_ley_o_softlaw": 0,
+            "fuente": "569_Cierre_Matriz_Maestra_Fuentes_Normativas_hipervinculada",
+            "detalle": [
+              {
+                "instrumento_normativo": "Personal Information Protection and Electronic Documents Act (PIPEDA)",
+                "tipo_instrumento": "ley",
+                "estado_normativo": "vigente",
+                "estado_corto": "vigente",
+                "url_oficial": "https://laws-lois.justice.gc.ca/eng/acts/P-8.6/",
+                "fuente_url": "Justice Laws",
+                "observacion_trazabilidad": "Norma federal de protección de datos en sector privado."
+              },
+              {
+                "instrumento_normativo": "Privacy Act",
+                "tipo_instrumento": "ley",
+                "estado_normativo": "vigente",
+                "estado_corto": "vigente",
+                "url_oficial": "https://laws-lois.justice.gc.ca/eng/acts/P-21/",
+                "fuente_url": "Justice Laws",
+                "observacion_trazabilidad": "Privacidad en sector público federal."
+              }
+            ],
+            "mostrar_como_html": true
+          }
+        ]
+      },
+      {
+        "nombre": "Chile",
+        "rol": "Fuente curada disponible: existen fuentes o metadata curadas, pero no unidad consolidada del portal asociada en este catálogo visible.",
+        "disponibilidad": "media",
+        "estado_visible": "Fuente curada disponible",
+        "nivel_confianza": "medio_alto",
+        "fuente_curada_sustantiva": "8",
+        "metadata_disponible": "8",
+        "unidad_portal_consolidada": "0",
+        "fuentes": [
+          {
+            "titulo": "<a class='fuente-link' href='https://www.bcn.cl/leychile/navegar?idNorma=141599' target='_blank' rel='noopener noreferrer'>Ley N&#176; 19.628 sobre protecci&#243;n de la vida privada <span class='estado-instrumento'>(vigente)</span></a><br><a class='fuente-link' href='https://www.bcn.cl/leychile/navegar?idNorma=1209272' target='_blank' rel='noopener noreferrer'>Ley N&#176; 21.719 <span class='estado-instrumento'>(vigente)</span></a>",
+            "titulo_texto": "Ley N° 19.628 sobre protección de la vida privada (vigente); Ley N° 21.719 (vigente)",
+            "tipo": "Normativa y fuentes",
+            "estado_cobertura": "cobertura normativa vigente",
+            "cantidad_instrumentos": 2,
+            "cantidad_vigentes": 2,
+            "cantidad_no_ley_o_softlaw": 0,
+            "fuente": "569_Cierre_Matriz_Maestra_Fuentes_Normativas_hipervinculada",
+            "detalle": [
+              {
+                "instrumento_normativo": "Ley N° 19.628 sobre protección de la vida privada",
+                "tipo_instrumento": "ley",
+                "estado_normativo": "vigente",
+                "estado_corto": "vigente",
+                "url_oficial": "https://www.bcn.cl/leychile/navegar?idNorma=141599",
+                "fuente_url": "LeyChile",
+                "observacion_trazabilidad": "Norma base chilena."
+              },
+              {
+                "instrumento_normativo": "Ley N° 21.719",
+                "tipo_instrumento": "ley",
+                "estado_normativo": "vigente",
+                "estado_corto": "vigente",
+                "url_oficial": "https://www.bcn.cl/leychile/navegar?idNorma=1209272",
+                "fuente_url": "LeyChile",
+                "observacion_trazabilidad": "Reforma institucional de datos personales."
+              }
+            ],
+            "mostrar_como_html": true
+          }
+        ]
+      },
+      {
+        "nombre": "España",
+        "rol": "Fuente curada disponible: existen fuentes o metadata curadas, pero no unidad consolidada del portal asociada en este catálogo visible.",
+        "disponibilidad": "media",
+        "estado_visible": "Fuente curada disponible",
+        "nivel_confianza": "medio_alto",
+        "fuente_curada_sustantiva": "9",
+        "metadata_disponible": "9",
+        "unidad_portal_consolidada": "0",
+        "fuentes": [
+          {
+            "titulo": "<a class='fuente-link' href='https://www.boe.es/eli/es/lo/2018/12/05/3/con' target='_blank' rel='noopener noreferrer'>Ley Org&#225;nica 3/2018 de Protecci&#243;n de Datos Personales y garant&#237;a de derechos digitales <span class='estado-instrumento'>(vigente)</span></a>",
+            "titulo_texto": "Ley Orgánica 3/2018 de Protección de Datos Personales y garantía de derechos digitales (vigente)",
+            "tipo": "Normativa y fuentes",
+            "estado_cobertura": "cobertura normativa vigente",
+            "cantidad_instrumentos": 1,
+            "cantidad_vigentes": 1,
+            "cantidad_no_ley_o_softlaw": 0,
+            "fuente": "569_Cierre_Matriz_Maestra_Fuentes_Normativas_hipervinculada",
+            "detalle": [
+              {
+                "instrumento_normativo": "Ley Orgánica 3/2018 de Protección de Datos Personales y garantía de derechos digitales",
+                "tipo_instrumento": "ley orgánica",
+                "estado_normativo": "vigente",
+                "estado_corto": "vigente",
+                "url_oficial": "https://www.boe.es/eli/es/lo/2018/12/05/3/con",
+                "fuente_url": "BOE",
+                "observacion_trazabilidad": "LOPDGDD."
+              }
+            ],
+            "mostrar_como_html": true
+          }
+        ]
+      },
+      {
+        "nombre": "Estados Unidos",
+        "rol": "Fuente curada disponible: existen fuentes o metadata curadas, pero no unidad consolidada del portal asociada en este catálogo visible.",
+        "disponibilidad": "media",
+        "estado_visible": "Fuente curada disponible",
+        "nivel_confianza": "medio_alto",
+        "fuente_curada_sustantiva": "4",
+        "metadata_disponible": "4",
+        "unidad_portal_consolidada": "0",
+        "fuentes": [
+          {
+            "titulo": "<a class='fuente-link' href='https://www.justice.gov/opcl/privacy-act-1974' target='_blank' rel='noopener noreferrer'>Privacy Act of 1974 <span class='estado-instrumento'>(vigente)</span></a>",
+            "titulo_texto": "Privacy Act of 1974 (vigente)",
+            "tipo": "Normativa y fuentes",
+            "estado_cobertura": "cobertura normativa vigente",
+            "cantidad_instrumentos": 1,
+            "cantidad_vigentes": 1,
+            "cantidad_no_ley_o_softlaw": 0,
+            "fuente": "569_Cierre_Matriz_Maestra_Fuentes_Normativas_hipervinculada",
+            "detalle": [
+              {
+                "instrumento_normativo": "Privacy Act of 1974",
+                "tipo_instrumento": "ley",
+                "estado_normativo": "vigente",
+                "estado_corto": "vigente",
+                "url_oficial": "https://www.justice.gov/opcl/privacy-act-1974",
+                "fuente_url": "U.S. Department of Justice",
+                "observacion_trazabilidad": "Norma federal de privacidad en registros públicos."
+              }
+            ],
+            "mostrar_como_html": true
+          }
+        ]
+      },
+      {
+        "nombre": "Francia",
+        "rol": "Fuente curada disponible: existen fuentes o metadata curadas, pero no unidad consolidada del portal asociada en este catálogo visible.",
+        "disponibilidad": "media",
+        "estado_visible": "Fuente curada disponible",
+        "nivel_confianza": "medio_alto",
+        "fuente_curada_sustantiva": "2",
+        "metadata_disponible": "2",
+        "unidad_portal_consolidada": "0",
+        "fuentes": [
+          {
+            "titulo": "<a class='fuente-link' href='https://www.legifrance.gouv.fr/loda/id/LEGITEXT000006068624' target='_blank' rel='noopener noreferrer'>Loi n&#176; 78-17 du 6 janvier 1978 relative &#224; l&#39;informatique, aux fichiers et aux libert&#233;s <span class='estado-instrumento'>(vigente)</span></a>",
+            "titulo_texto": "Loi n° 78-17 du 6 janvier 1978 relative à l'informatique, aux fichiers et aux libertés (vigente)",
+            "tipo": "Normativa y fuentes",
+            "estado_cobertura": "cobertura normativa vigente",
+            "cantidad_instrumentos": 1,
+            "cantidad_vigentes": 1,
+            "cantidad_no_ley_o_softlaw": 0,
+            "fuente": "569_Cierre_Matriz_Maestra_Fuentes_Normativas_hipervinculada",
+            "detalle": [
+              {
+                "instrumento_normativo": "Loi n° 78-17 du 6 janvier 1978 relative à l'informatique, aux fichiers et aux libertés",
+                "tipo_instrumento": "ley",
+                "estado_normativo": "vigente",
+                "estado_corto": "vigente",
+                "url_oficial": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000006068624",
+                "fuente_url": "Légifrance",
+                "observacion_trazabilidad": "Norma francesa de datos personales."
+              }
+            ],
+            "mostrar_como_html": true
+          }
+        ]
+      },
+      {
+        "nombre": "México",
+        "rol": "Fuente curada disponible: existen fuentes o metadata curadas, pero no unidad consolidada del portal asociada en este catálogo visible.",
+        "disponibilidad": "media",
+        "estado_visible": "Fuente curada disponible",
+        "nivel_confianza": "medio_alto",
+        "fuente_curada_sustantiva": "3",
+        "metadata_disponible": "3",
+        "unidad_portal_consolidada": "0",
+        "fuentes": [
+          {
+            "titulo": "<a class='fuente-link' href='https://www.diputados.gob.mx/LeyesBiblio/pdf/LFPDPPP.pdf' target='_blank' rel='noopener noreferrer'>Ley Federal de Protecci&#243;n de Datos Personales en Posesi&#243;n de los Particulares <span class='estado-instrumento'>(vigente)</span></a>",
+            "titulo_texto": "Ley Federal de Protección de Datos Personales en Posesión de los Particulares (vigente)",
+            "tipo": "Normativa y fuentes",
+            "estado_cobertura": "cobertura normativa vigente",
+            "cantidad_instrumentos": 1,
+            "cantidad_vigentes": 1,
+            "cantidad_no_ley_o_softlaw": 0,
+            "fuente": "569_Cierre_Matriz_Maestra_Fuentes_Normativas_hipervinculada",
+            "detalle": [
+              {
+                "instrumento_normativo": "Ley Federal de Protección de Datos Personales en Posesión de los Particulares",
+                "tipo_instrumento": "ley",
+                "estado_normativo": "vigente",
+                "estado_corto": "vigente",
+                "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFPDPPP.pdf",
+                "fuente_url": "Cámara de Diputados",
+                "observacion_trazabilidad": "Sector privado."
+              }
+            ],
+            "mostrar_como_html": true
+          }
+        ]
+      },
+      {
+        "nombre": "Reino Unido",
+        "rol": "Fuente curada disponible: existen fuentes o metadata curadas, pero no unidad consolidada del portal asociada en este catálogo visible.",
+        "disponibilidad": "media",
+        "estado_visible": "Fuente curada disponible",
+        "nivel_confianza": "medio_alto",
+        "fuente_curada_sustantiva": "9",
+        "metadata_disponible": "9",
+        "unidad_portal_consolidada": "0",
+        "fuentes": [
+          {
+            "titulo": "<a class='fuente-link' href='https://www.legislation.gov.uk/ukpga/2018/12/contents' target='_blank' rel='noopener noreferrer'>Data Protection Act 2018 <span class='estado-instrumento'>(vigente)</span></a><br><a class='fuente-link' href='https://www.legislation.gov.uk/eur/2016/679/contents' target='_blank' rel='noopener noreferrer'>UK GDPR <span class='estado-instrumento'>(vigente)</span></a>",
+            "titulo_texto": "Data Protection Act 2018 (vigente); UK GDPR (vigente)",
+            "tipo": "Normativa y fuentes",
+            "estado_cobertura": "cobertura normativa vigente",
+            "cantidad_instrumentos": 2,
+            "cantidad_vigentes": 2,
+            "cantidad_no_ley_o_softlaw": 0,
+            "fuente": "569_Cierre_Matriz_Maestra_Fuentes_Normativas_hipervinculada",
+            "detalle": [
+              {
+                "instrumento_normativo": "Data Protection Act 2018",
+                "tipo_instrumento": "ley",
+                "estado_normativo": "vigente",
+                "estado_corto": "vigente",
+                "url_oficial": "https://www.legislation.gov.uk/ukpga/2018/12/contents",
+                "fuente_url": "legislation.gov.uk",
+                "observacion_trazabilidad": "Norma británica de protección de datos."
+              },
+              {
+                "instrumento_normativo": "UK GDPR",
+                "tipo_instrumento": "reglamento retenido / marco normativo",
+                "estado_normativo": "vigente",
+                "estado_corto": "vigente",
+                "url_oficial": "https://www.legislation.gov.uk/eur/2016/679/contents",
+                "fuente_url": "legislation.gov.uk",
+                "observacion_trazabilidad": "Marco UK GDPR."
+              }
+            ],
+            "mostrar_como_html": true
+          }
+        ]
+      },
+      {
+        "nombre": "Unión Europea",
+        "rol": "Fuente curada disponible: existen fuentes o metadata curadas, pero no unidad consolidada del portal asociada en este catálogo visible.",
+        "disponibilidad": "media",
+        "estado_visible": "Fuente curada disponible",
+        "nivel_confianza": "medio_alto",
+        "fuente_curada_sustantiva": "10",
+        "metadata_disponible": "10",
+        "unidad_portal_consolidada": "0",
+        "fuentes": [
+          {
+            "titulo": "<a class='fuente-link' href='https://eur-lex.europa.eu/eli/reg/2016/679/oj/spa' target='_blank' rel='noopener noreferrer'>Reglamento (UE) 2016/679, RGPD <span class='estado-instrumento'>(vigente)</span></a><br><a class='fuente-link' href='https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-92022-personal-data-breach-notification-under_en' target='_blank' rel='noopener noreferrer'>EDPB Guidelines 9/2022 <span class='estado-instrumento'>(soft law)</span></a>",
+            "titulo_texto": "Reglamento (UE) 2016/679, RGPD (vigente); EDPB Guidelines 9/2022 (soft law)",
+            "tipo": "Normativa y fuentes",
+            "estado_cobertura": "cobertura normativa vigente",
+            "cantidad_instrumentos": 2,
+            "cantidad_vigentes": 1,
+            "cantidad_no_ley_o_softlaw": 1,
+            "fuente": "569_Cierre_Matriz_Maestra_Fuentes_Normativas_hipervinculada",
+            "detalle": [
+              {
+                "instrumento_normativo": "Reglamento (UE) 2016/679, RGPD",
+                "tipo_instrumento": "reglamento",
+                "estado_normativo": "vigente",
+                "estado_corto": "vigente",
+                "url_oficial": "https://eur-lex.europa.eu/eli/reg/2016/679/oj/spa",
+                "fuente_url": "EUR-Lex",
+                "observacion_trazabilidad": "Reglamento General de Protección de Datos."
+              },
+              {
+                "instrumento_normativo": "EDPB Guidelines 9/2022",
+                "tipo_instrumento": "guía institucional",
+                "estado_normativo": "soft law / guía",
+                "estado_corto": "soft law",
+                "url_oficial": "https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-92022-personal-data-breach-notification-under_en",
+                "fuente_url": "EDPB",
+                "observacion_trazabilidad": "Guía institucional asociada."
+              }
+            ],
+            "mostrar_como_html": true
+          }
+        ]
+      }
+    ],
+    "jurisdicciones_internas": []
+  },
+  {
+    "id": "transparencia",
+    "etiqueta": "Transparencia",
+    "fuente_catalogo": "catalogo_visible_563C_agrupado_564D",
+    "regla_uso": "Catálogo derivado de Bases Curadas 562D y unidades jurídicas normalizadas 562F. La franja derecha agrupa contenidos disponibles por país o sistema.",
+    "palabras_clave": [
+      "transparencia",
+      "acceso a la informacion",
+      "acceso a la información",
+      "probidad"
+    ],
+    "ejes": [
+      "Sujetos obligados",
+      "Derecho de acceso",
+      "Transparencia activa",
+      "Excepciones o reservas",
+      "Órgano garante",
+      "Procedimiento de reclamación",
+      "Sanciones"
+    ],
+    "jurisdicciones": [
+      {
+        "nombre": "Alemania",
+        "rol": "Fuente curada disponible: existen fuentes o metadata curadas, pero no unidad consolidada del portal asociada en este catálogo visible.",
+        "disponibilidad": "media",
+        "estado_visible": "Fuente curada disponible",
+        "nivel_confianza": "medio_alto",
+        "fuente_curada_sustantiva": "1",
+        "metadata_disponible": "1",
+        "unidad_portal_consolidada": "0",
+        "fuentes": [
+          {
+            "titulo": "<a class='fuente-link' href='https://www.gesetze-im-internet.de/ifg/' target='_blank' rel='noopener noreferrer'>Informationsfreiheitsgesetz (IFG) <span class='estado-instrumento'>(vigente)</span></a>",
+            "titulo_texto": "Informationsfreiheitsgesetz (IFG) (vigente)",
+            "tipo": "Normativa y fuentes",
+            "estado_cobertura": "cobertura normativa vigente",
+            "cantidad_instrumentos": 1,
+            "cantidad_vigentes": 1,
+            "cantidad_no_ley_o_softlaw": 0,
+            "fuente": "569_Cierre_Matriz_Maestra_Fuentes_Normativas_hipervinculada",
+            "detalle": [
+              {
+                "instrumento_normativo": "Informationsfreiheitsgesetz (IFG)",
+                "tipo_instrumento": "ley",
+                "estado_normativo": "vigente",
+                "estado_corto": "vigente",
+                "url_oficial": "https://www.gesetze-im-internet.de/ifg/",
+                "fuente_url": "Gesetze im Internet",
+                "observacion_trazabilidad": "Ley federal de libertad de información."
+              }
+            ],
+            "mostrar_como_html": true
+          }
+        ]
+      },
+      {
+        "nombre": "Argentina",
+        "rol": "Fuente curada disponible: existen fuentes o metadata curadas, pero no unidad consolidada del portal asociada en este catálogo visible.",
+        "disponibilidad": "media",
+        "estado_visible": "Fuente curada disponible",
+        "nivel_confianza": "medio_alto",
+        "fuente_curada_sustantiva": "1",
+        "metadata_disponible": "1",
+        "unidad_portal_consolidada": "0",
+        "fuentes": [
+          {
+            "titulo": "<a class='fuente-link' href='https://servicios.infoleg.gob.ar/infolegInternet/anexos/265000-269999/265949/norma.htm' target='_blank' rel='noopener noreferrer'>Ley N&#176; 27.275 de Derecho de Acceso a la Informaci&#243;n P&#250;blica <span class='estado-instrumento'>(vigente)</span></a>",
+            "titulo_texto": "Ley N° 27.275 de Derecho de Acceso a la Información Pública (vigente)",
+            "tipo": "Normativa y fuentes",
+            "estado_cobertura": "cobertura normativa vigente",
+            "cantidad_instrumentos": 1,
+            "cantidad_vigentes": 1,
+            "cantidad_no_ley_o_softlaw": 0,
+            "fuente": "569_Cierre_Matriz_Maestra_Fuentes_Normativas_hipervinculada",
+            "detalle": [
+              {
+                "instrumento_normativo": "Ley N° 27.275 de Derecho de Acceso a la Información Pública",
+                "tipo_instrumento": "ley",
+                "estado_normativo": "vigente",
+                "estado_corto": "vigente",
+                "url_oficial": "https://servicios.infoleg.gob.ar/infolegInternet/anexos/265000-269999/265949/norma.htm",
+                "fuente_url": "InfoLEG",
+                "observacion_trazabilidad": "Ley argentina de acceso a información pública."
+              }
+            ],
+            "mostrar_como_html": true
+          }
+        ]
+      },
+      {
+        "nombre": "Australia",
+        "rol": "Fuente curada disponible: existen fuentes o metadata curadas, pero no unidad consolidada del portal asociada en este catálogo visible.",
+        "disponibilidad": "media",
+        "estado_visible": "Fuente curada disponible",
+        "nivel_confianza": "medio_alto",
+        "fuente_curada_sustantiva": "2",
+        "metadata_disponible": "2",
+        "unidad_portal_consolidada": "0",
+        "fuentes": [
+          {
+            "titulo": "<a class='fuente-link' href='https://www.legislation.gov.au/C2004A02562/latest/text' target='_blank' rel='noopener noreferrer'>Freedom of Information Act 1982 <span class='estado-instrumento'>(vigente)</span></a>",
+            "titulo_texto": "Freedom of Information Act 1982 (vigente)",
+            "tipo": "Normativa y fuentes",
+            "estado_cobertura": "cobertura normativa vigente",
+            "cantidad_instrumentos": 1,
+            "cantidad_vigentes": 1,
+            "cantidad_no_ley_o_softlaw": 0,
+            "fuente": "569_Cierre_Matriz_Maestra_Fuentes_Normativas_hipervinculada",
+            "detalle": [
+              {
+                "instrumento_normativo": "Freedom of Information Act 1982",
+                "tipo_instrumento": "ley",
+                "estado_normativo": "vigente",
+                "estado_corto": "vigente",
+                "url_oficial": "https://www.legislation.gov.au/C2004A02562/latest/text",
+                "fuente_url": "Federal Register of Legislation",
+                "observacion_trazabilidad": "Ley australiana de libertad de información."
+              }
+            ],
+            "mostrar_como_html": true
+          }
+        ]
+      },
+      {
+        "nombre": "Brasil",
+        "rol": "Fuente curada disponible: existen fuentes o metadata curadas, pero no unidad consolidada del portal asociada en este catálogo visible.",
+        "disponibilidad": "media",
+        "estado_visible": "Fuente curada disponible",
+        "nivel_confianza": "medio_alto",
+        "fuente_curada_sustantiva": "3",
+        "metadata_disponible": "3",
+        "unidad_portal_consolidada": "0",
+        "fuentes": [
+          {
+            "titulo": "<a class='fuente-link' href='https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2011/lei/l12527.htm' target='_blank' rel='noopener noreferrer'>Lei N&#186; 12.527/2011, Lei de Acesso &#224; Informa&#231;&#227;o <span class='estado-instrumento'>(vigente)</span></a>",
+            "titulo_texto": "Lei Nº 12.527/2011, Lei de Acesso à Informação (vigente)",
+            "tipo": "Normativa y fuentes",
+            "estado_cobertura": "cobertura normativa vigente",
+            "cantidad_instrumentos": 1,
+            "cantidad_vigentes": 1,
+            "cantidad_no_ley_o_softlaw": 0,
+            "fuente": "569_Cierre_Matriz_Maestra_Fuentes_Normativas_hipervinculada",
+            "detalle": [
+              {
+                "instrumento_normativo": "Lei Nº 12.527/2011, Lei de Acesso à Informação",
+                "tipo_instrumento": "ley",
+                "estado_normativo": "vigente",
+                "estado_corto": "vigente",
+                "url_oficial": "https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2011/lei/l12527.htm",
+                "fuente_url": "Planalto",
+                "observacion_trazabilidad": "Ley brasileña de acceso a la información."
+              }
+            ],
+            "mostrar_como_html": true
+          }
+        ]
+      },
+      {
+        "nombre": "Canadá",
+        "rol": "Fuente curada disponible: existen fuentes o metadata curadas, pero no unidad consolidada del portal asociada en este catálogo visible.",
+        "disponibilidad": "media",
+        "estado_visible": "Fuente curada disponible",
+        "nivel_confianza": "medio_alto",
+        "fuente_curada_sustantiva": "3",
+        "metadata_disponible": "3",
+        "unidad_portal_consolidada": "0",
+        "fuentes": [
+          {
+            "titulo": "<a class='fuente-link' href='https://laws-lois.justice.gc.ca/eng/acts/A-1/' target='_blank' rel='noopener noreferrer'>Access to Information Act <span class='estado-instrumento'>(vigente)</span></a>",
+            "titulo_texto": "Access to Information Act (vigente)",
+            "tipo": "Normativa y fuentes",
+            "estado_cobertura": "cobertura normativa vigente",
+            "cantidad_instrumentos": 1,
+            "cantidad_vigentes": 1,
+            "cantidad_no_ley_o_softlaw": 0,
+            "fuente": "569_Cierre_Matriz_Maestra_Fuentes_Normativas_hipervinculada",
+            "detalle": [
+              {
+                "instrumento_normativo": "Access to Information Act",
+                "tipo_instrumento": "ley",
+                "estado_normativo": "vigente",
+                "estado_corto": "vigente",
+                "url_oficial": "https://laws-lois.justice.gc.ca/eng/acts/A-1/",
+                "fuente_url": "Justice Laws",
+                "observacion_trazabilidad": "Ley canadiense de acceso a información."
+              }
+            ],
+            "mostrar_como_html": true
+          }
+        ]
+      },
+      {
+        "nombre": "Chile",
+        "rol": "Fuente curada disponible: existen fuentes o metadata curadas, pero no unidad consolidada del portal asociada en este catálogo visible.",
+        "disponibilidad": "media",
+        "estado_visible": "Fuente curada disponible",
+        "nivel_confianza": "medio_alto",
+        "fuente_curada_sustantiva": "3",
+        "metadata_disponible": "3",
+        "unidad_portal_consolidada": "0",
+        "fuentes": [
+          {
+            "titulo": "<a class='fuente-link' href='https://www.bcn.cl/leychile/navegar?idNorma=276363' target='_blank' rel='noopener noreferrer'>Ley N&#176; 20.285 sobre acceso a la informaci&#243;n p&#250;blica <span class='estado-instrumento'>(vigente)</span></a>",
+            "titulo_texto": "Ley N° 20.285 sobre acceso a la información pública (vigente)",
+            "tipo": "Normativa y fuentes",
+            "estado_cobertura": "cobertura normativa vigente",
+            "cantidad_instrumentos": 1,
+            "cantidad_vigentes": 1,
+            "cantidad_no_ley_o_softlaw": 0,
+            "fuente": "569_Cierre_Matriz_Maestra_Fuentes_Normativas_hipervinculada",
+            "detalle": [
+              {
+                "instrumento_normativo": "Ley N° 20.285 sobre acceso a la información pública",
+                "tipo_instrumento": "ley",
+                "estado_normativo": "vigente",
+                "estado_corto": "vigente",
+                "url_oficial": "https://www.bcn.cl/leychile/navegar?idNorma=276363",
+                "fuente_url": "LeyChile",
+                "observacion_trazabilidad": "Ley chilena de transparencia."
+              }
+            ],
+            "mostrar_como_html": true
+          }
+        ]
+      },
+      {
+        "nombre": "España",
+        "rol": "Fuente curada disponible: existen fuentes o metadata curadas, pero no unidad consolidada del portal asociada en este catálogo visible.",
+        "disponibilidad": "media",
+        "estado_visible": "Fuente curada disponible",
+        "nivel_confianza": "medio_alto",
+        "fuente_curada_sustantiva": "3",
+        "metadata_disponible": "3",
+        "unidad_portal_consolidada": "0",
+        "fuentes": [
+          {
+            "titulo": "<a class='fuente-link' href='https://www.boe.es/eli/es/l/2013/12/09/19/con' target='_blank' rel='noopener noreferrer'>Ley 19/2013 de transparencia, acceso a la informaci&#243;n p&#250;blica y buen gobierno <span class='estado-instrumento'>(vigente)</span></a>",
+            "titulo_texto": "Ley 19/2013 de transparencia, acceso a la información pública y buen gobierno (vigente)",
+            "tipo": "Normativa y fuentes",
+            "estado_cobertura": "cobertura normativa vigente",
+            "cantidad_instrumentos": 1,
+            "cantidad_vigentes": 1,
+            "cantidad_no_ley_o_softlaw": 0,
+            "fuente": "569_Cierre_Matriz_Maestra_Fuentes_Normativas_hipervinculada",
+            "detalle": [
+              {
+                "instrumento_normativo": "Ley 19/2013 de transparencia, acceso a la información pública y buen gobierno",
+                "tipo_instrumento": "ley",
+                "estado_normativo": "vigente",
+                "estado_corto": "vigente",
+                "url_oficial": "https://www.boe.es/eli/es/l/2013/12/09/19/con",
+                "fuente_url": "BOE",
+                "observacion_trazabilidad": "Ley española de transparencia."
+              }
+            ],
+            "mostrar_como_html": true
+          }
+        ]
+      },
+      {
+        "nombre": "Estados Unidos",
+        "rol": "Fuente curada disponible: existen fuentes o metadata curadas, pero no unidad consolidada del portal asociada en este catálogo visible.",
+        "disponibilidad": "media",
+        "estado_visible": "Fuente curada disponible",
+        "nivel_confianza": "medio_alto",
+        "fuente_curada_sustantiva": "2",
+        "metadata_disponible": "2",
+        "unidad_portal_consolidada": "0",
+        "fuentes": [
+          {
+            "titulo": "<a class='fuente-link' href='https://www.foia.gov/foia-statute.html' target='_blank' rel='noopener noreferrer'>Freedom of Information Act, 5 U.S.C. &#167; 552 <span class='estado-instrumento'>(vigente)</span></a>",
+            "titulo_texto": "Freedom of Information Act, 5 U.S.C. § 552 (vigente)",
+            "tipo": "Normativa y fuentes",
+            "estado_cobertura": "cobertura normativa vigente",
+            "cantidad_instrumentos": 1,
+            "cantidad_vigentes": 1,
+            "cantidad_no_ley_o_softlaw": 0,
+            "fuente": "569_Cierre_Matriz_Maestra_Fuentes_Normativas_hipervinculada",
+            "detalle": [
+              {
+                "instrumento_normativo": "Freedom of Information Act, 5 U.S.C. § 552",
+                "tipo_instrumento": "ley",
+                "estado_normativo": "vigente",
+                "estado_corto": "vigente",
+                "url_oficial": "https://www.foia.gov/foia-statute.html",
+                "fuente_url": "FOIA.gov",
+                "observacion_trazabilidad": "Ley federal estadounidense de acceso a información."
+              }
+            ],
+            "mostrar_como_html": true
+          }
+        ]
+      },
+      {
+        "nombre": "Francia",
+        "rol": "Fuente curada disponible: existen fuentes o metadata curadas, pero no unidad consolidada del portal asociada en este catálogo visible.",
+        "disponibilidad": "media",
+        "estado_visible": "Fuente curada disponible",
+        "nivel_confianza": "medio_alto",
+        "fuente_curada_sustantiva": "2",
+        "metadata_disponible": "2",
+        "unidad_portal_consolidada": "0",
+        "fuentes": [
+          {
+            "titulo": "<a class='fuente-link' href='https://www.legifrance.gouv.fr/codes/id/LEGISCTA000031367685/' target='_blank' rel='noopener noreferrer'>Code des relations entre le public et l&#39;administration, Livre III <span class='estado-instrumento'>(vigente)</span></a>",
+            "titulo_texto": "Code des relations entre le public et l'administration, Livre III (vigente)",
+            "tipo": "Normativa y fuentes",
+            "estado_cobertura": "cobertura normativa vigente",
+            "cantidad_instrumentos": 1,
+            "cantidad_vigentes": 1,
+            "cantidad_no_ley_o_softlaw": 0,
+            "fuente": "569_Cierre_Matriz_Maestra_Fuentes_Normativas_hipervinculada",
+            "detalle": [
+              {
+                "instrumento_normativo": "Code des relations entre le public et l'administration, Livre III",
+                "tipo_instrumento": "código",
+                "estado_normativo": "vigente",
+                "estado_corto": "vigente",
+                "url_oficial": "https://www.legifrance.gouv.fr/codes/id/LEGISCTA000031367685/",
+                "fuente_url": "Légifrance",
+                "observacion_trazabilidad": "Acceso a documentos administrativos e información pública."
+              }
+            ],
+            "mostrar_como_html": true
+          }
+        ]
+      },
+      {
+        "nombre": "México",
+        "rol": "Fuente curada disponible: existen fuentes o metadata curadas, pero no unidad consolidada del portal asociada en este catálogo visible.",
+        "disponibilidad": "media",
+        "estado_visible": "Fuente curada disponible",
+        "nivel_confianza": "medio_alto",
+        "fuente_curada_sustantiva": "2",
+        "metadata_disponible": "2",
+        "unidad_portal_consolidada": "0",
+        "fuentes": [
+          {
+            "titulo": "<a class='fuente-link' href='https://www.diputados.gob.mx/LeyesBiblio/pdf/LGTAIP.pdf' target='_blank' rel='noopener noreferrer'>Ley General de Transparencia y Acceso a la Informaci&#243;n P&#250;blica <span class='estado-instrumento'>(vigente)</span></a>",
+            "titulo_texto": "Ley General de Transparencia y Acceso a la Información Pública (vigente)",
+            "tipo": "Normativa y fuentes",
+            "estado_cobertura": "cobertura normativa vigente",
+            "cantidad_instrumentos": 1,
+            "cantidad_vigentes": 1,
+            "cantidad_no_ley_o_softlaw": 0,
+            "fuente": "569_Cierre_Matriz_Maestra_Fuentes_Normativas_hipervinculada",
+            "detalle": [
+              {
+                "instrumento_normativo": "Ley General de Transparencia y Acceso a la Información Pública",
+                "tipo_instrumento": "ley",
+                "estado_normativo": "vigente",
+                "estado_corto": "vigente",
+                "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGTAIP.pdf",
+                "fuente_url": "Cámara de Diputados",
+                "observacion_trazabilidad": "Ley general mexicana de transparencia."
+              }
+            ],
+            "mostrar_como_html": true
+          }
+        ]
+      },
+      {
+        "nombre": "Reino Unido",
+        "rol": "Fuente curada disponible: existen fuentes o metadata curadas, pero no unidad consolidada del portal asociada en este catálogo visible.",
+        "disponibilidad": "media",
+        "estado_visible": "Fuente curada disponible",
+        "nivel_confianza": "medio_alto",
+        "fuente_curada_sustantiva": "3",
+        "metadata_disponible": "3",
+        "unidad_portal_consolidada": "0",
+        "fuentes": [
+          {
+            "titulo": "<a class='fuente-link' href='https://www.legislation.gov.uk/ukpga/2000/36/contents' target='_blank' rel='noopener noreferrer'>Freedom of Information Act 2000 <span class='estado-instrumento'>(vigente)</span></a>",
+            "titulo_texto": "Freedom of Information Act 2000 (vigente)",
+            "tipo": "Normativa y fuentes",
+            "estado_cobertura": "cobertura normativa vigente",
+            "cantidad_instrumentos": 1,
+            "cantidad_vigentes": 1,
+            "cantidad_no_ley_o_softlaw": 0,
+            "fuente": "569_Cierre_Matriz_Maestra_Fuentes_Normativas_hipervinculada",
+            "detalle": [
+              {
+                "instrumento_normativo": "Freedom of Information Act 2000",
+                "tipo_instrumento": "ley",
+                "estado_normativo": "vigente",
+                "estado_corto": "vigente",
+                "url_oficial": "https://www.legislation.gov.uk/ukpga/2000/36/contents",
+                "fuente_url": "legislation.gov.uk",
+                "observacion_trazabilidad": "Ley británica de libertad de información."
+              }
+            ],
+            "mostrar_como_html": true
+          }
+        ]
+      },
+      {
+        "nombre": "Unión Europea",
+        "rol": "Fuente curada disponible: existen fuentes o metadata curadas, pero no unidad consolidada del portal asociada en este catálogo visible.",
+        "disponibilidad": "media",
+        "estado_visible": "Fuente curada disponible",
+        "nivel_confianza": "medio_alto",
+        "fuente_curada_sustantiva": "3",
+        "metadata_disponible": "3",
+        "unidad_portal_consolidada": "0",
+        "fuentes": [
+          {
+            "titulo": "<a class='fuente-link' href='https://eur-lex.europa.eu/eli/reg/2022/2065/oj/spa' target='_blank' rel='noopener noreferrer'>Reglamento (UE) 2022/2065, Digital Services Act <span class='estado-instrumento'>(vigente)</span></a>",
+            "titulo_texto": "Reglamento (UE) 2022/2065, Digital Services Act (vigente)",
+            "tipo": "Normativa y fuentes",
+            "estado_cobertura": "cobertura normativa vigente",
+            "cantidad_instrumentos": 1,
+            "cantidad_vigentes": 1,
+            "cantidad_no_ley_o_softlaw": 0,
+            "fuente": "569_Cierre_Matriz_Maestra_Fuentes_Normativas_hipervinculada",
+            "detalle": [
+              {
+                "instrumento_normativo": "Reglamento (UE) 2022/2065, Digital Services Act",
+                "tipo_instrumento": "reglamento",
+                "estado_normativo": "vigente",
+                "estado_corto": "vigente",
+                "url_oficial": "https://eur-lex.europa.eu/eli/reg/2022/2065/oj/spa",
+                "fuente_url": "EUR-Lex",
+                "observacion_trazabilidad": "Transparencia de servicios digitales y plataformas."
+              }
+            ],
+            "mostrar_como_html": true
+          }
+        ]
+      }
+    ],
+    "jurisdicciones_internas": []
+  },
+  {
+    "id": "ninez_adolescencia",
+    "etiqueta": "Niñez y adolescencia",
+    "fuente_catalogo": "catalogo_visible_563C_agrupado_564D",
+    "regla_uso": "Catálogo derivado de Bases Curadas 562D y unidades jurídicas normalizadas 562F. La franja derecha agrupa contenidos disponibles por país o sistema.",
+    "palabras_clave": [
+      "niñez",
+      "ninez",
+      "adolescencia",
+      "infancia",
+      "nna",
+      "educacion infancia",
+      "educación infancia"
+    ],
+    "ejes": [
+      "Sujetos protegidos",
+      "Principios rectores",
+      "Deberes estatales",
+      "Institucionalidad",
+      "Medidas de protección",
+      "Participación de niños, niñas y adolescentes",
+      "Fiscalización"
+    ],
+    "jurisdicciones": [
+      {
+        "nombre": "Chile",
+        "rol": "Disponible con base consolidada: existe unidad jurídica del portal, sin fuente curada asociada en este catálogo visible.",
+        "disponibilidad": "media_alta",
+        "estado_visible": "Disponible con base consolidada",
+        "nivel_confianza": "medio_alto",
+        "fuente_curada_sustantiva": "0",
+        "metadata_disponible": "0",
+        "unidad_portal_consolidada": "1",
+        "fuentes": [
+          {
+            "titulo": "<a class='fuente-link' href='https://www.bcn.cl/leychile/navegar?idNorma=1173643' target='_blank' rel='noopener noreferrer'>Ley N&#176; 21.430 sobre garant&#237;as y protecci&#243;n integral de los derechos de la ni&#241;ez y adolescencia <span class='estado-instrumento'>(vigente)</span></a>",
+            "titulo_texto": "Ley N° 21.430 sobre garantías y protección integral de los derechos de la niñez y adolescencia (vigente)",
+            "tipo": "Normativa y fuentes",
+            "estado_cobertura": "cobertura normativa vigente",
+            "cantidad_instrumentos": 1,
+            "cantidad_vigentes": 1,
+            "cantidad_no_ley_o_softlaw": 0,
+            "fuente": "569_Cierre_Matriz_Maestra_Fuentes_Normativas_hipervinculada",
+            "detalle": [
+              {
+                "instrumento_normativo": "Ley N° 21.430 sobre garantías y protección integral de los derechos de la niñez y adolescencia",
+                "tipo_instrumento": "ley",
+                "estado_normativo": "vigente",
+                "estado_corto": "vigente",
+                "url_oficial": "https://www.bcn.cl/leychile/navegar?idNorma=1173643",
+                "fuente_url": "LeyChile",
+                "observacion_trazabilidad": "Norma chilena de garantías de niñez."
+              }
+            ],
+            "mostrar_como_html": true
+          }
+        ]
+      }
+    ],
+    "jurisdicciones_internas": [
+      {
+        "nombre": "Grupo 2",
+        "rol": "Disponible con base consolidada: existe unidad jurídica del portal, sin fuente curada asociada en este catálogo visible.",
+        "disponibilidad": "media_alta",
+        "estado_visible": "Disponible con base consolidada",
+        "nivel_confianza": "medio_alto",
+        "fuente_curada_sustantiva": "0",
+        "metadata_disponible": "0",
+        "unidad_portal_consolidada": "1",
+        "fuentes": [
+          {
+            "titulo": "Contenidos disponibles: Unidad jurídica consolidada del portal",
+            "tipo": "grupo_contenidos_por_pais",
+            "estado": "Disponible con base consolidada",
+            "confianza": "medio_alto",
+            "cantidad": 1,
+            "items": [
+              "Unidad jurídica consolidada del portal"
+            ],
+            "detalle": "Unidad jurídica consolidada del portal",
+            "fuente_curada": "0",
+            "metadata": "0",
+            "portal_consolidado": "1"
+          }
+        ]
+      },
+      {
+        "nombre": "Grupo 3",
+        "rol": "Disponible con base consolidada: existe unidad jurídica del portal, sin fuente curada asociada en este catálogo visible.",
+        "disponibilidad": "media_alta",
+        "estado_visible": "Disponible con base consolidada",
+        "nivel_confianza": "medio_alto",
+        "fuente_curada_sustantiva": "0",
+        "metadata_disponible": "0",
+        "unidad_portal_consolidada": "1",
+        "fuentes": [
+          {
+            "titulo": "Contenidos disponibles: Unidad jurídica consolidada del portal",
+            "tipo": "grupo_contenidos_por_pais",
+            "estado": "Disponible con base consolidada",
+            "confianza": "medio_alto",
+            "cantidad": 1,
+            "items": [
+              "Unidad jurídica consolidada del portal"
+            ],
+            "detalle": "Unidad jurídica consolidada del portal",
+            "fuente_curada": "0",
+            "metadata": "0",
+            "portal_consolidado": "1"
+          }
+        ]
+      },
+      {
+        "nombre": "Núcleo",
+        "rol": "Disponible con base consolidada: existe unidad jurídica del portal, sin fuente curada asociada en este catálogo visible.",
+        "disponibilidad": "media_alta",
+        "estado_visible": "Disponible con base consolidada",
+        "nivel_confianza": "medio_alto",
+        "fuente_curada_sustantiva": "0",
+        "metadata_disponible": "0",
+        "unidad_portal_consolidada": "3",
+        "fuentes": [
+          {
+            "titulo": "Contenidos disponibles: Unidad jurídica consolidada del portal",
+            "tipo": "grupo_contenidos_por_pais",
+            "estado": "Disponible con base consolidada",
+            "confianza": "medio_alto",
+            "cantidad": 1,
+            "items": [
+              "Unidad jurídica consolidada del portal"
+            ],
+            "detalle": "Unidad jurídica consolidada del portal",
+            "fuente_curada": "0",
+            "metadata": "0",
+            "portal_consolidado": "3"
+          }
+        ]
+      }
+    ]
+  }
+]
