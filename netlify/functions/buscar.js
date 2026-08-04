@@ -6,15 +6,18 @@
 // clave sin registro; para esos paises el portal usa la matriz curada.
 
 async function buscarBOE(q) {
-  const url = "https://www.boe.es/datosabiertos/api/legislacion-consolidada?query=" + encodeURIComponent(q) + "&limit=5";
+  const palabra = q.replace(/"/g, "").split(/\s+/)[0] || q;
+  const queryObj = { query: { query_string: { query: "titulo:" + palabra } } };
+  const url = "https://www.boe.es/datosabiertos/api/legislacion-consolidada?query=" + encodeURIComponent(JSON.stringify(queryObj)) + "&limit=5";
   const r = await fetch(url, { headers: { Accept: "application/json" } });
   if (!r.ok) throw new Error("BOE " + r.status);
   const data = await r.json();
-  const items = (data && data.data && data.data.legislacion_consolidada) || [];
+  const items = Array.isArray(data && data.data) ? data.data : [];
   return items.slice(0, 5).map((it) => ({
     pais: "Espana",
     titulo: it.titulo || it.identificador || "Norma BOE",
     url: it.url_html_consolidada || it.url_eli || ("https://www.boe.es/buscar/act.php?id=" + it.identificador),
+    fecha: it.fecha_publicacion || it.fecha_disposicion || null,
   }));
 }
 
@@ -24,7 +27,7 @@ async function buscarLexML(q) {
   if (!r.ok) throw new Error("LexML " + r.status);
   const text = await r.text();
   const matches = [...text.matchAll(/<identifier>([^<]+)<\/identifier>/g)].slice(0, 5);
-  return matches.map((m) => ({ pais: "Brasil", titulo: m[1], url: m[1] }));
+  return matches.map((m) => ({ pais: "Brasil", titulo: m[1], url: m[1], fecha: null }));
 }
 
 async function buscarUK(q) {
@@ -33,8 +36,14 @@ async function buscarUK(q) {
   const r = await fetch(url, { headers: { Accept: "application/atom+xml" } });
   if (!r.ok) throw new Error("UK " + r.status);
   const text = await r.text();
-  const entries = [...text.matchAll(/<entry>[\s\S]*?<title[^>]*>([^<]+)<\/title>[\s\S]*?<link[^>]*href="([^"]+)"/g)].slice(0, 5);
-  return entries.map((m) => ({ pais: "Reino Unido", titulo: m[1], url: m[2] }));
+  const entries = [...text.matchAll(/<entry>([\s\S]*?)<\/entry>/g)].slice(0, 5);
+  return entries.map((e) => {
+    const block = e[1];
+    const title = (block.match(/<title[^>]*>([^<]+)<\/title>/) || [])[1] || "Norma UK";
+    const link = (block.match(/<link[^>]*href="([^"]+)"/) || [])[1] || "https://www.legislation.gov.uk/";
+    const updated = (block.match(/<updated>([^<]+)<\/updated>/) || [])[1] || null;
+    return { pais: "Reino Unido", titulo: title, url: link, fecha: updated ? updated.slice(0, 10) : null };
+  });
 }
 
 async function buscarUSCongress(q) {
@@ -49,6 +58,7 @@ async function buscarUSCongress(q) {
     pais: "Estados Unidos",
     titulo: (it.type || "") + " " + (it.number || "") + " - " + (it.title || ""),
     url: it.url || "https://www.congress.gov/",
+    fecha: (it.latestAction && it.latestAction.actionDate) || it.introducedDate || null,
   }));
 }
 
@@ -69,6 +79,7 @@ async function buscarEurLex(q) {
     pais: "Union Europea",
     titulo: b.title ? b.title.value : "Documento EUR-Lex",
     url: b.work ? b.work.value : "https://eur-lex.europa.eu/",
+    fecha: null,
   }));
 }
 

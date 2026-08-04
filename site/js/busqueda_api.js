@@ -8,11 +8,13 @@
    clave sin registro: para esos paises se mantiene la matriz curada. */
 (function () {
   async function buscarBOE(q) {
-    const url = "https://www.boe.es/datosabiertos/api/legislacion-consolidada?query=" + encodeURIComponent(q) + "&limit=5";
+    const palabra = q.replace(/"/g, "").split(/\s+/)[0] || q;
+    const queryObj = { query: { query_string: { query: "titulo:" + palabra } } };
+    const url = "https://www.boe.es/datosabiertos/api/legislacion-consolidada?query=" + encodeURIComponent(JSON.stringify(queryObj)) + "&limit=5";
     const r = await fetch(url, { headers: { Accept: "application/json" } });
     if (!r.ok) throw new Error("BOE " + r.status);
     const data = await r.json();
-    const items = (data && data.data && data.data.legislacion_consolidada) || [];
+    const items = Array.isArray(data && data.data) ? data.data : [];
     return items.slice(0, 5).map((it) => ({
       pais: "Espana",
       titulo: it.titulo || it.identificador || "Norma BOE",

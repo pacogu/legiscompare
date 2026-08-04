@@ -10,9 +10,9 @@
 <header class="hero">
   <div class="hero-inner">
     <div class="brand"><span class="brand-mark">LC</span><span class="brand-name">LegisCompare</span></div>
-    <div class="eyebrow">Derecho comparado, 100% en vivo</div>
+    <div class="eyebrow">Asistencia, no reemplazo del criterio juridico</div>
     <h1>Consulta de derecho comparado</h1>
-    <p>Escribe tu consulta y se busca en tiempo real en las fuentes oficiales de cada pais. No hay datos precargados: cada resultado viene directo de la API oficial en el momento de la busqueda.</p>
+    <p>El sistema busca, organiza y prepara el terreno: matriz, timeline y trazabilidad de fuentes. El informe final y el juicio juridico los redacta el abogado.</p>
   </div>
 </header>
 
@@ -20,28 +20,40 @@
   <div class="grid">
     <section>
       <article class="card">
-        <div class="section-title t-blue"><span class="num">1</span><h2>Consulta</h2></div>
+        <div class="section-title t-blue"><span class="num">1</span><h2>Consulta inicial</h2></div>
         <div class="card-body">
           <textarea id="consulta" placeholder="Ej: proteccion de datos personales"></textarea>
-          <div class="row">
-            <button class="btn primary" id="btnBuscarApi">Buscar en fuentes oficiales</button>
-            <span class="status" id="estadoConsulta">Escribe una consulta y busca en las APIs oficiales.</span>
-          </div>
         </div>
       </article>
 
       <article class="card">
-        <div class="section-title t-green"><span class="num">2</span><h2>Cobertura por pais</h2></div>
+        <div class="section-title t-green"><span class="num">2</span><h2>Jurisdicciones</h2></div>
         <div class="card-body">
-          <p class="note">Resultados en vivo, sin catalogo de respaldo. Si un pais no tiene API publica de busqueda, se muestra explicitamente.</p>
-          <div id="cobertura"></div>
+          <p class="note">Solo se busca en las jurisdicciones seleccionadas. Chile y Alemania no tienen API publica de busqueda en vivo.</p>
+          <div class="ejes" id="jurisdicciones"></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="section-title t-gold"><span class="num">3</span><h2>Ejes juridicos</h2></div>
+        <div class="card-body">
+          <p class="note">Selecciona los ejes que quieres comparar. Se incluyen en el informe analitico como guia para tu lectura, no se auto-completan.</p>
+          <div class="ejes" id="ejes"></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="section-title t-cyan"><span class="num">4</span><h2>Buscar</h2></div>
+        <div class="card-body">
+          <button class="btn primary" id="btnBuscarApi">Buscar en fuentes oficiales</button>
+          <span class="status" id="estadoConsulta" style="display:block;margin-top:8px">Escribe una consulta y selecciona jurisdicciones.</span>
         </div>
       </article>
     </section>
 
     <aside>
       <article class="card">
-        <div class="section-title t-cyan"><span class="num">3</span><h2>Resultados en vivo</h2></div>
+        <div class="section-title t-violet"><span class="num">5</span><h2>Resultados en vivo</h2></div>
         <div class="card-body">
           <div id="resultadosApi" class="fuentes-list"><div class="empty">Sin busqueda ejecutada.</div></div>
           <div id="errApi" class="err"></div>
@@ -49,9 +61,10 @@
       </article>
 
       <article class="card">
-        <div class="section-title t-blue"><span class="num">4</span><h2>Dossier</h2></div>
+        <div class="section-title t-blue"><span class="num">6</span><h2>Informe analitico</h2></div>
         <div class="card-body">
-          <button class="btn primary" id="abrirDossier" style="width:100%">Abrir dossier con estos resultados</button>
+          <p class="note">Organiza los resultados en matriz y timeline, y deja espacio para que redactes hallazgos e implicancias.</p>
+          <button class="btn primary" id="abrirDossier" style="width:100%">Abrir informe analitico</button>
         </div>
       </article>
     </aside>

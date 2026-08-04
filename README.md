@@ -1,7 +1,15 @@
 # LegisCompare - Derecho Comparado
 
-Aplicacion web para consulta y analisis de legislacion comparada (dossier
-analitico) con busqueda en vivo contra APIs publicas de legislacion.
+Aplicacion web que apoya el trabajo de analisis de derecho comparado,
+inspirada en el piloto "Comparative Law++" (BCN Chile, IFLAPARL 2026):
+automatiza la busqueda, organizacion y trazabilidad de fuentes normativas,
+sin reemplazar el criterio juridico. El sistema prepara un informe
+analitico preliminar (matriz, timeline, ejes juridicos); los hallazgos,
+implicancias y el informe final los redacta el abogado.
+
+Flujo: consulta inicial -> seleccion de jurisdicciones y ejes ->
+busqueda en vivo -> matriz comparada -> timeline -> informe analitico
+preliminar (editable, imprimible) -> redaccion humana del informe final.
 
 ## Estructura
 

@@ -76,3 +76,12 @@ textarea{width:100%;min-height:110px;resize:vertical;padding:14px;border-radius:
 .matriz-table td.pais-col{font-weight:700;background:#fbfdff;white-space:nowrap}
 .sugerencias{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
 .sugerencias button{font-size:12px;padding:5px 10px}
+.eje.deshabilitado{opacity:.5;cursor:not-allowed}
+.timeline-item{border-left:3px solid var(--cyan);padding:6px 0 6px 12px;margin-bottom:8px}
+.timeline-item .fecha{font-weight:700;color:var(--cyan);font-size:12px;display:block}
+textarea.hallazgos{width:100%;min-height:140px;padding:12px;border-radius:12px;border:1px solid var(--line);font-family:inherit;font-size:14px}
+.axis-chip{display:inline-block;background:#fff7e8;color:#7a4b00;border:1px solid #f0dcae;border-radius:999px;padding:3px 10px;font-size:12px;margin:0 6px 6px 0}
+@media print{
+  .hero,.top-actions,.btn,#btnImprimir{display:none !important}
+  .card{box-shadow:none;border:1px solid #ccc}
+}

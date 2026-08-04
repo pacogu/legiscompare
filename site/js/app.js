@@ -1,29 +1,63 @@
-// LegisCompare - flujo de consulta 100% en vivo, sin datos precargados.
-// Cada resultado viene de la API oficial del pais correspondiente en el
-// momento de la busqueda. No hay catalogo curado ni fallback estatico.
+// LegisCompare - flujo alineado a "Comparative Law++" (IFLAPARL 2026):
+// 1) Consulta inicial  2) Jurisdicciones y ejes  3) Organizacion comparativa (matriz)
+// 4) Timeline  5) Informe analitico preliminar (el abogado redacta el informe final).
+// Sin catalogo curado: cada fuente viene en vivo de la API oficial.
 
-const PAISES_CUBIERTOS = [
-  { nombre: "Espana", fuente: "BOE" },
-  { nombre: "Brasil", fuente: "LexML" },
-  { nombre: "Reino Unido", fuente: "legislation.gov.uk" },
-  { nombre: "Estados Unidos", fuente: "Congress.gov" },
-  { nombre: "Union Europea", fuente: "EUR-Lex / CELLAR" },
+const JURISDICCIONES = [
+  { nombre: "Espana", fuente: "BOE", disponible: true },
+  { nombre: "Brasil", fuente: "LexML", disponible: true },
+  { nombre: "Reino Unido", fuente: "legislation.gov.uk", disponible: true },
+  { nombre: "Estados Unidos", fuente: "Congress.gov", disponible: true },
+  { nombre: "Union Europea", fuente: "EUR-Lex / CELLAR", disponible: true },
+  { nombre: "Chile", fuente: "sin API en vivo", disponible: false },
+  { nombre: "Alemania", fuente: "sin API en vivo", disponible: false },
 ];
-const PAISES_SIN_API = ["Chile", "Alemania"];
 
-const state = { ultimosResultados: [], ultimaConsulta: "" };
+const EJES_SUGERIDOS = [
+  "Ambito de aplicacion",
+  "Autoridad competente",
+  "Derechos de las personas",
+  "Sanciones e incumplimiento",
+  "Plazos y procedimiento",
+  "Transparencia y publicidad",
+];
 
-function renderCobertura() {
-  const box = document.getElementById("cobertura");
-  let html = "<div class='pais-grid'>";
-  PAISES_CUBIERTOS.forEach((p) => {
-    html += "<div class='pais media_alta'><strong>" + p.nombre + "</strong><span>" + p.fuente + "</span></div>";
+const state = { jurisdiccionesSeleccionadas: new Set(), ejesSeleccionados: new Set(), resultados: [] };
+
+function renderJurisdicciones() {
+  const box = document.getElementById("jurisdicciones");
+  box.innerHTML = "";
+  JURISDICCIONES.forEach((j) => {
+    const label = document.createElement("label");
+    label.className = "eje" + (j.disponible ? "" : " deshabilitado");
+    label.innerHTML = "<input type='checkbox' " + (j.disponible ? "" : "disabled") + "><span class='eje-title'>" + j.nombre + "</span><span class='eje-text'>" + j.fuente + "</span>";
+    const input = label.querySelector("input");
+    if (j.disponible) {
+      input.checked = true;
+      state.jurisdiccionesSeleccionadas.add(j.nombre);
+      label.classList.add("selected");
+      input.addEventListener("change", (e) => {
+        if (e.target.checked) { state.jurisdiccionesSeleccionadas.add(j.nombre); label.classList.add("selected"); }
+        else { state.jurisdiccionesSeleccionadas.delete(j.nombre); label.classList.remove("selected"); }
+      });
+    }
+    box.appendChild(label);
   });
-  PAISES_SIN_API.forEach((n) => {
-    html += "<div class='pais'><strong>" + n + "</strong><span>Sin fuente en vivo disponible</span></div>";
+}
+
+function renderEjes() {
+  const box = document.getElementById("ejes");
+  box.innerHTML = "";
+  EJES_SUGERIDOS.forEach((eje) => {
+    const label = document.createElement("label");
+    label.className = "eje";
+    label.innerHTML = "<input type='checkbox'><span class='eje-title'>" + eje + "</span>";
+    label.querySelector("input").addEventListener("change", (e) => {
+      if (e.target.checked) { state.ejesSeleccionados.add(eje); label.classList.add("selected"); }
+      else { state.ejesSeleccionados.delete(eje); label.classList.remove("selected"); }
+    });
+    box.appendChild(label);
   });
-  html += "</div>";
-  box.innerHTML = html;
 }
 
 async function ejecutarBusqueda() {
@@ -33,6 +67,7 @@ async function ejecutarBusqueda() {
   const out = document.getElementById("resultadosApi");
   const err = document.getElementById("errApi");
   if (!consulta) { estado.textContent = "Escribe una consulta primero."; return; }
+  if (!state.jurisdiccionesSeleccionadas.size) { estado.textContent = "Selecciona al menos una jurisdiccion."; return; }
 
   btn.disabled = true; btn.innerHTML = "<span class='spinner'></span>Buscando en fuentes oficiales...";
   estado.textContent = "Consultando APIs en vivo...";
@@ -42,21 +77,30 @@ async function ejecutarBusqueda() {
   const fecha = new Date().toLocaleString("es-CL", { dateStyle: "short", timeStyle: "short" });
   try {
     const res = await window.IJARBusquedaExterna.ejecutarBusquedaExterna(consulta);
-    state.ultimosResultados = res.resultados || [];
-    state.ultimaConsulta = consulta;
-    try { sessionStorage.setItem("legiscompare_resultados", JSON.stringify({ consulta, resultados: state.ultimosResultados, fecha })); } catch (e) {}
+    const filtrados = (res.resultados || []).filter((r) => state.jurisdiccionesSeleccionadas.has(r.pais));
+    state.resultados = filtrados;
 
-    if (!res.resultados.length) {
-      out.innerHTML = "<div class='empty'>Sin resultados en las fuentes oficiales para esta consulta. Prueba con terminos mas generales o en el idioma del pais (ej. en frances para Francia, en aleman para Alemania).</div>";
+    try {
+      sessionStorage.setItem("legiscompare_brief", JSON.stringify({
+        consulta,
+        jurisdicciones: Array.from(state.jurisdiccionesSeleccionadas),
+        ejes: Array.from(state.ejesSeleccionados),
+        resultados: filtrados,
+        fechaConsulta: fecha,
+      }));
+    } catch (e) {}
+
+    if (!filtrados.length) {
+      out.innerHTML = "<div class='empty'>Sin resultados en las jurisdicciones seleccionadas. Prueba con terminos mas generales.</div>";
       estado.textContent = "Sin resultados en vivo.";
     } else {
-      res.resultados.forEach((r) => {
+      filtrados.forEach((r) => {
         const d = document.createElement("div");
         d.className = "item api";
-        d.innerHTML = "<strong>" + r.pais + "</strong><span class='tag api'>API en vivo</span><br><a href='" + r.url + "' target='_blank' rel='noopener'>" + r.titulo + "</a><span class='meta'>Consultado " + fecha + " - verificar vigencia en la fuente oficial</span>";
+        d.innerHTML = "<strong>" + r.pais + "</strong><span class='tag api'>API en vivo</span><br><a href='" + r.url + "' target='_blank' rel='noopener'>" + r.titulo + "</a><span class='meta'>" + (r.fecha ? "Fecha: " + r.fecha + " - " : "") + "consultado " + fecha + "</span>";
         out.appendChild(d);
       });
-      estado.textContent = res.resultados.length + " resultado(s) en vivo encontrados.";
+      estado.textContent = filtrados.length + " resultado(s) en vivo encontrados.";
       estado.className = "status ok";
     }
     if (res.errores && res.errores.length) err.innerHTML = res.errores.join("<br>");
@@ -68,12 +112,13 @@ async function ejecutarBusqueda() {
 }
 
 function abrirDossier() {
-  if (!state.ultimosResultados.length) { alert("Ejecuta primero una busqueda con resultados."); return; }
+  if (!state.resultados.length) { alert("Ejecuta primero una busqueda con resultados."); return; }
   window.location.href = "dossier.html";
 }
 
 function init() {
-  renderCobertura();
+  renderJurisdicciones();
+  renderEjes();
   document.getElementById("btnBuscarApi").addEventListener("click", ejecutarBusqueda);
   document.getElementById("abrirDossier").addEventListener("click", abrirDossier);
 }
