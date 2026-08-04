@@ -59,6 +59,20 @@ function guardarHallazgos() {
   } catch (e) {}
 }
 
+async function pedirSintesisIA(data) {
+  try {
+    const r = await fetch("/.netlify/functions/sintetizar", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ consulta: data.consulta, ejes: data.ejes, resultados: data.resultados }),
+    });
+    const out = await r.json();
+    return out;
+  } catch (e) {
+    return { error: e.message };
+  }
+}
+
 function render(data) {
   if (!data || !data.resultados || !data.resultados.length) {
     document.getElementById("contenido").innerHTML = "<div class='empty'>No hay resultados en vivo guardados. Vuelve a la consulta y ejecuta una busqueda primero.</div>";
@@ -71,11 +85,22 @@ function render(data) {
   html += "<h3>Ejes juridicos seleccionados</h3><div>" + renderEjes(data) + "</div>";
   html += "<h3>Matriz comparada</h3>" + renderMatriz(data);
   html += "<h3>Timeline normativo</h3>" + renderTimeline(data);
+  html += "<h3>Sintesis comparada (borrador IA)</h3>";
+  html += "<div id='sintesisBox'><div class='empty'>Generando borrador con IA...</div></div>";
   html += "<h3>Hallazgos e implicancias</h3><p class='note'>Este espacio lo completa el abogado a cargo del analisis. La IA no interpreta ni concluye por ti.</p>";
   html += "<textarea class='hallazgos' id='hallazgos' placeholder='Escribe aqui los hallazgos, diferencias, vacios e implicancias (ej. para Chile)...'>" + (data.hallazgos || "") + "</textarea>";
 
   document.getElementById("contenido").innerHTML = html;
   document.getElementById("hallazgos").addEventListener("input", guardarHallazgos);
+
+  pedirSintesisIA(data).then((out) => {
+    const box = document.getElementById("sintesisBox");
+    if (out.error) {
+      box.innerHTML = "<div class='err'>No se pudo generar el borrador con IA: " + out.error + "</div>";
+      return;
+    }
+    box.innerHTML = "<div class='disclaimer'>Borrador generado por IA a partir solo de los titulos y metadatos encontrados. Requiere validacion de un abogado antes de usarse; puede omitir matices del texto legal completo.</div><div style=\"white-space:pre-wrap;font-size:14px;line-height:1.5;background:#fbfdff;border:1px solid var(--line);border-radius:12px;padding:14px\">" + (out.borrador || "Sin contenido generado.") + "</div>";
+  });
 }
 
 function init() {

@@ -47,8 +47,10 @@ autorizado. No implementado.
 1. Sube este repositorio a GitHub.
 2. En Netlify: Add new site > Import an existing project, conecta el repo.
 3. Build settings: sin build command, publish directory = `site`.
-4. En Site settings > Environment variables agrega `CONGRESS_API_KEY`
-   (gratis en https://api.congress.gov/sign-up/).
+4. En Site settings > Environment variables agrega:
+   - `CONGRESS_API_KEY` (gratis en https://api.congress.gov/sign-up/)
+   - `ANTHROPIC_API_KEY` (para el borrador de sintesis comparada por eje;
+     sin esto el informe funciona igual pero sin esa seccion)
 5. Deploy. La busqueda en vivo funciona via `/.netlify/functions/buscar`.
 
 ## Desarrollo local
