@@ -83,6 +83,63 @@ async function buscarEurLex(q) {
   }));
 }
 
+
+async function buscarFrancia(q) {
+  const clientId = process.env.LEGIFRANCE_CLIENT_ID;
+  const clientSecret = process.env.LEGIFRANCE_CLIENT_SECRET;
+  if (!clientId || !clientSecret) throw new Error("Francia: falta LEGIFRANCE_CLIENT_ID / LEGIFRANCE_CLIENT_SECRET en variables de entorno de Netlify (registro gratis en piste.gouv.fr)");
+
+  const tokenResp = await fetch("https://oauth.piste.gouv.fr/api/oauth/token", {
+    method: "POST",
+    headers: { "content-type": "application/x-www-form-urlencoded" },
+    body: "grant_type=client_credentials&client_id=" + encodeURIComponent(clientId) + "&client_secret=" + encodeURIComponent(clientSecret) + "&scope=openid",
+  });
+  if (!tokenResp.ok) throw new Error("Francia (oauth) " + tokenResp.status);
+  const tokenData = await tokenResp.json();
+  const token = tokenData.access_token;
+
+  const searchBody = {
+    recherche: {
+      champs: [{ typeChamp: "ALL", criteres: [{ typeRecherche: "UN_DES_MOTS", valeur: q, operateur: "ET" }], operateur: "ET" }],
+      pageNumber: 1,
+      pageSize: 5,
+      sort: "PERTINENCE",
+      typePagination: "DEFAUT",
+    },
+    fond: "LODA_DATE",
+  };
+  const r = await fetch("https://api.piste.gouv.fr/dila/legifrance/lf-engine-app/search", {
+    method: "POST",
+    headers: { "content-type": "application/json", Authorization: "Bearer " + token },
+    body: JSON.stringify(searchBody),
+  });
+  if (!r.ok) throw new Error("Francia (search) " + r.status);
+  const data = await r.json();
+  const items = (data && data.results) || [];
+  return items.slice(0, 5).map((it) => ({
+    pais: "Francia",
+    titulo: it.titre || it.title || "Norma Legifrance",
+    url: it.url || "https://www.legifrance.gouv.fr/",
+    fecha: it.dateDebut || null,
+  }));
+}
+
+async function buscarNuevaZelanda(q) {
+  const apiKey = process.env.NZ_LEGISLATION_API_KEY;
+  if (!apiKey) throw new Error("Nueva Zelanda: falta NZ_LEGISLATION_API_KEY en variables de entorno de Netlify (se solicita por correo a contact@pco.govt.nz)");
+  const url = "https://api.legislation.govt.nz/search?keywords=" + encodeURIComponent(q) + "&results-per-page=5";
+  const r = await fetch(url, { headers: { Accept: "application/json", "x-api-key": apiKey } });
+  if (!r.ok) throw new Error("Nueva Zelanda " + r.status);
+  const data = await r.json();
+  const items = (data && data.results) || (data && data.items) || [];
+  return items.slice(0, 5).map((it) => ({
+    pais: "Nueva Zelanda",
+    titulo: it.title || it.name || "Norma NZ",
+    url: it.link || it.url || "https://www.legislation.govt.nz/",
+    fecha: it.date || it.year || null,
+  }));
+}
+
 exports.handler = async function (event) {
   const q = (event.queryStringParameters && event.queryStringParameters.q) || "";
   if (!q) {
@@ -96,6 +153,8 @@ exports.handler = async function (event) {
     ["UK", buscarUK],
     ["Congress.gov", buscarUSCongress],
     ["EUR-Lex", buscarEurLex],
+    ["Francia", buscarFrancia],
+    ["Nueva Zelanda", buscarNuevaZelanda],
   ];
   for (const [nombre, fn] of fuentes) {
     try {

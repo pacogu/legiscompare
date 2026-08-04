@@ -35,8 +35,11 @@ netlify.toml            configuracion de build/deploy de Netlify
 | Reino Unido | legislation.gov.uk | No | feed Atom via URL, sin token |
 | Estados Unidos | Congress.gov API | Si | requiere `CONGRESS_API_KEY` |
 | Union Europea | EUR-Lex / CELLAR (SPARQL) | No | endpoint publico SPARQL |
-| Chile | matriz curada | - | sin API publica de busqueda |
-| Alemania | matriz curada | - | sin API publica de busqueda |
+| Francia | Legifrance (API PISTE) | Si | requiere `LEGIFRANCE_CLIENT_ID` y `LEGIFRANCE_CLIENT_SECRET` (registro gratis en piste.gouv.fr) |
+| Nueva Zelanda | legislation.govt.nz | Si | requiere `NZ_LEGISLATION_API_KEY` (se solicita por correo a contact@pco.govt.nz) |
+| Chile | sin fuente en vivo | - | sin API publica de busqueda |
+| Alemania | sin fuente en vivo | - | sin API publica de busqueda |
+| Australia, Canada, Argentina | sin fuente en vivo | - | sin API publica de busqueda confiable identificada |
 
 Pendiente: FAOLEX/NATLEX y tratados via UN Data no exponen API REST
 publica moderna; requeriria descarga periodica de datasets o un crawler
@@ -49,8 +52,9 @@ autorizado. No implementado.
 3. Build settings: sin build command, publish directory = `site`.
 4. En Site settings > Environment variables agrega:
    - `CONGRESS_API_KEY` (gratis en https://api.congress.gov/sign-up/)
-   - `ANTHROPIC_API_KEY` (para el borrador de sintesis comparada por eje;
-     sin esto el informe funciona igual pero sin esa seccion)
+   - `GEMINI_API_KEY` (para el borrador de sintesis comparada por eje,
+     gratis en https://aistudio.google.com/apikey; sin esto el informe
+     funciona igual pero sin esa seccion)
 5. Deploy. La busqueda en vivo funciona via `/.netlify/functions/buscar`.
 
 ## Desarrollo local

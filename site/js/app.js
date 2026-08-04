@@ -9,6 +9,8 @@ const JURISDICCIONES = [
   { nombre: "Reino Unido", fuente: "legislation.gov.uk", disponible: true },
   { nombre: "Estados Unidos", fuente: "Congress.gov", disponible: true },
   { nombre: "Union Europea", fuente: "EUR-Lex / CELLAR", disponible: true },
+  { nombre: "Francia", fuente: "Legifrance (PISTE)", disponible: true },
+  { nombre: "Nueva Zelanda", fuente: "legislation.govt.nz", disponible: true },
   { nombre: "Chile", fuente: "sin API en vivo", disponible: false },
   { nombre: "Alemania", fuente: "sin API en vivo", disponible: false },
 ];
