@@ -126,7 +126,7 @@ async function ejecutarBusqueda() {
   guardarReciente(consulta);
   document.getElementById("autocompleteList").hidden = true;
   btn.disabled = true; btn.innerHTML = "<span class='spinner'></span>Buscando...";
-  estado.textContent = "Buscando el nombre de la norma en fuentes oficiales...";
+  estado.textContent = "Analizando fuentes oficiales para la consulta...";
   estado.className = "status";
   out.innerHTML = ""; err.innerHTML = ""; abrirBtn.style.display = "none";
 
@@ -172,7 +172,7 @@ async function ejecutarBusqueda() {
         const d = document.createElement("div");
         d.className = "item api";
         const enlace = r.url ? "<a href='" + r.url + "' target='_blank' rel='noopener'>" + r.titulo + "</a>" : r.titulo;
-        const etiqueta = r.esDirectorio ? "Fuente oficial" : "Norma vigente";
+        const etiqueta = r.esDirectorio ? "Fuente oficial" : "Analisis de fuente";
         d.innerHTML = "<strong>" + r.pais + "</strong><span class='tag api'>" + etiqueta + "</span><br>" + enlace + (r.resumen ? "<br><span class='meta'>" + r.resumen + "</span>" : "") + "<span class='meta'>" + (r.fecha ? "Fecha: " + r.fecha + " - " : "") + "consultado " + fecha + "</span>";
         out.appendChild(d);
       });

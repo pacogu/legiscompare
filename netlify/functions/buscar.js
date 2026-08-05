@@ -1,51 +1,57 @@
-// Busqueda de legislacion comparada usando Google Gemini con la
-// herramienta de Google Search (grounding, nivel gratuito sin tarjeta):
-// una sola llamada que busca en la web real y devuelve el nombre real
-// de la norma, sin necesidad de integrar una API distinta por cada
-// fuente oficial. Si Gemini falla o se queda sin cuota, el cliente
-// (site/js/busqueda_api.js) cae automaticamente al catalogo local de
-// fuentes oficiales para no dejar la busqueda sin resultado.
+// Busqueda de legislacion comparada usando Groq (gratis, sin tarjeta de
+// credito). Groq no tiene busqueda web propia en su nivel gratuito, asi
+// que en vez de arriesgar titulos de leyes inventados, este endpoint usa
+// el catalogo curado de fuentes oficiales (site/data/fuentes_oficiales.json,
+// pasado como contexto desde el cliente) y le pide al modelo que redacte,
+// para cada fuente, un analisis breve y honesto de que buscar ahi para la
+// consulta del usuario - sin inventar el nombre exacto de una norma que
+// no pueda verificar.
 
 exports.handler = async function (event) {
-  const apiKey = process.env.GEMINI_API_KEY;
+  const apiKey = process.env.GROQ_API_KEY;
   if (!apiKey) {
-    return { statusCode: 200, headers: cors(), body: JSON.stringify({ resultados: [], errores: ["Falta GEMINI_API_KEY en variables de entorno de Netlify."] }) };
+    return { statusCode: 200, headers: cors(), body: JSON.stringify({ resultados: [], errores: ["Falta GROQ_API_KEY en variables de entorno de Netlify."] }) };
   }
 
   const q = (event.queryStringParameters && event.queryStringParameters.q) || "";
-  const paises = (event.queryStringParameters && event.queryStringParameters.paises) || "";
   const fuentesParam = (event.queryStringParameters && event.queryStringParameters.fuentes) || "";
   if (!q) {
     return { statusCode: 400, headers: cors(), body: JSON.stringify({ error: "falta parametro q" }) };
   }
 
-  const contextoPaises = paises ? "Limita la busqueda a estos paises o bloques: " + paises + "." : "Ambito global, con foco en fuentes oficiales vigentes.";
-
   let fuentesLista = [];
   try { fuentesLista = fuentesParam ? JSON.parse(fuentesParam) : []; } catch (e) { fuentesLista = []; }
-  const contextoFuentes = fuentesLista.length
-    ? "\n\nPara cada pais, busca preferentemente directamente en su fuente oficial de legislacion (dominio exacto). " +
-      "Usa estos portales oficiales como punto de partida de la busqueda, no te limites a ellos si no encuentras nada:\n" +
-      fuentesLista.map((f) => "- " + f.pais + ": " + (f.fuente || "") + (f.url ? " (" + f.url + ")" : "")).join("\n")
-    : "";
 
-  const prompt = "Actua como consultor de derecho comparado de una biblioteca parlamentaria. " +
-    "Busca el NOMBRE REAL Y EXACTO de leyes, reglamentos o tratados vigentes relacionados con: \"" + q + "\". " +
-    contextoPaises + contextoFuentes + " " +
-    "Devuelve HASTA 12 resultados reales (no inventados), cada uno con el titulo oficial de la norma (no el nombre del portal ni del sitio donde se busco). " +
-    "Si el titulo original no esta en espanol, tradúcelo al espanol entre parentesis junto al titulo original, por ejemplo: " +
-    "\"Bundesdatenschutzgesetz (Ley Federal de Proteccion de Datos)\". " +
-    "El campo resumen debe describir brevemente el CONTENIDO de la norma (que regula), no donde se encontro. " +
-    "Responde UNICAMENTE con un bloque de codigo JSON (sin texto antes ni despues) con este formato exacto: " +
-    "[{\"pais\": \"nombre del pais\", \"titulo\": \"titulo oficial de la norma, traducido si corresponde\", \"url\": \"URL oficial de la norma especifica si existe, o del portal oficial\", \"fecha\": \"AAAA-MM-DD o AAAA si no hay mas precision, o null\", \"resumen\": \"que regula la norma, en una oracion\"}]";
+  if (!fuentesLista.length) {
+    return { statusCode: 200, headers: cors(), body: JSON.stringify({ resultados: [], errores: ["No hay fuentes oficiales para los paises seleccionados."] }) };
+  }
+
+  const listaFuentesTexto = fuentesLista.map((f, i) =>
+    (i + 1) + ". Pais: " + f.pais + " | Fuente: " + (f.fuente || "s/d") +
+    " | Tipo de normas que cubre: " + (f.tipo || "s/d") +
+    " | URL: " + (f.url || "s/d")
+  ).join("\n");
+
+  const prompt = "Eres un asistente de investigacion juridica para una biblioteca parlamentaria. " +
+    "Un analista quiere investigar: \"" + q + "\". " +
+    "A continuacion tienes el catalogo de fuentes oficiales de legislacion disponibles para los paises consultados. " +
+    "IMPORTANTE: no inventes el titulo de ninguna ley especifica que no este listada aqui explicitamente; solo tienes el " +
+    "nombre del PORTAL/fuente oficial, no el texto de las normas. Para cada fuente de la lista, escribe una nota breve " +
+    "(1-2 oraciones, en espanol, tono tecnico y cauteloso) explicando que tipo de norma relacionada con la consulta " +
+    "el analista deberia buscar en ese portal especifico, basandote en el tipo de fuente indicado. Si el tipo de fuente " +
+    "no parece relacionado con la consulta, dilo explicitamente en vez de forzar una relacion.\n\n" +
+    "Fuentes:\n" + listaFuentesTexto + "\n\n" +
+    "Responde UNICAMENTE con un bloque de codigo JSON (sin texto antes ni despues), un elemento por cada fuente listada, " +
+    "en el mismo orden, con este formato exacto: " +
+    "[{\"pais\": \"nombre del pais\", \"titulo\": \"nombre de la fuente oficial (copialo tal cual)\", \"url\": \"la URL indicada\", \"resumen\": \"tu nota de 1-2 oraciones\"}]";
 
   try {
-    const model = "gemini-2.0-flash";
-    const url = "https://generativelanguage.googleapis.com/v1beta/models/" + model + ":generateContent?key=" + apiKey;
+    const url = "https://api.groq.com/openai/v1/chat/completions";
     const body = JSON.stringify({
-      contents: [{ role: "user", parts: [{ text: prompt }] }],
-      tools: [{ google_search: {} }],
-      generationConfig: { maxOutputTokens: 2500, temperature: 0.2 },
+      model: "llama-3.3-70b-versatile",
+      messages: [{ role: "user", content: prompt }],
+      max_tokens: 2500,
+      temperature: 0.3,
     });
 
     let r;
@@ -53,7 +59,11 @@ exports.handler = async function (event) {
     const maxIntentos = 3;
     while (true) {
       intentos++;
-      r = await fetch(url, { method: "POST", headers: { "content-type": "application/json" }, body });
+      r = await fetch(url, {
+        method: "POST",
+        headers: { "content-type": "application/json", authorization: "Bearer " + apiKey },
+        body,
+      });
       if (r.status !== 429 || intentos >= maxIntentos) break;
       await new Promise((resolve) => setTimeout(resolve, 1500 * intentos));
     }
@@ -66,17 +76,17 @@ exports.handler = async function (event) {
           headers: cors(),
           body: JSON.stringify({
             resultados: [],
-            errores: ["Se alcanzo el limite de uso gratuito de Gemini por ahora."],
+            errores: ["Se alcanzo el limite de uso gratuito de Groq por ahora."],
             tipoError: "quota",
           }),
         };
       }
-      return { statusCode: 200, headers: cors(), body: JSON.stringify({ resultados: [], errores: ["Gemini API " + r.status + ": " + t.slice(0, 300)], tipoError: "error" }) };
+      return { statusCode: 200, headers: cors(), body: JSON.stringify({ resultados: [], errores: ["Groq API " + r.status + ": " + t.slice(0, 300)], tipoError: "error" }) };
     }
 
     const data = await r.json();
-    const parts = (data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts) || [];
-    let texto = parts.map((p) => p.text || "").join("\n").trim();
+    let texto = (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) || "";
+    texto = texto.trim();
     const bloqueJson = texto.match(/```json\s*([\s\S]*?)```/i) || texto.match(/(\[[\s\S]*\])\s*$/);
     if (bloqueJson) texto = bloqueJson[1].trim();
     texto = texto.replace(/^```json\s*/i, "").replace(/^```\s*/, "").replace(/```\s*$/, "").trim();
@@ -86,17 +96,17 @@ exports.handler = async function (event) {
       resultados = JSON.parse(texto);
       if (!Array.isArray(resultados)) resultados = [];
     } catch (e) {
-      return { statusCode: 200, headers: cors(), body: JSON.stringify({ resultados: [], errores: ["No se pudo interpretar la respuesta de Gemini como JSON: " + e.message], tipoError: "error" }) };
+      return { statusCode: 200, headers: cors(), body: JSON.stringify({ resultados: [], errores: ["No se pudo interpretar la respuesta de Groq como JSON: " + e.message], tipoError: "error" }) };
     }
 
     resultados = resultados
       .filter((it) => it && it.titulo && it.pais)
-      .slice(0, 12)
+      .slice(0, 20)
       .map((it) => ({
         pais: it.pais,
         titulo: it.titulo,
         url: it.url || null,
-        fecha: it.fecha || null,
+        fecha: null,
         resumen: it.resumen || null,
       }));
 

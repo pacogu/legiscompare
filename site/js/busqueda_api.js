@@ -1,11 +1,11 @@
 // LegisCompare - busqueda en vivo de legislacion comparada.
-// 1) Intenta obtener el nombre real de la norma con Gemini + Google
-//    Search (gratis, sin tarjeta), usando el catalogo de fuentes
-//    oficiales como contexto/pistas de busqueda.
-// 2) Si Gemini falla o se queda sin cuota del dia, cae automaticamente
-//    al catalogo local (site/data/fuentes_oficiales.json): muestra el
-//    portal oficial de cada pais para que el usuario busque ahi
-//    directamente, en vez de dejar la busqueda sin resultado.
+// 1) Filtra el catalogo local de fuentes oficiales (site/data/fuentes_oficiales.json)
+//    por pais y coincidencia de palabras con la consulta.
+// 2) Envia esas fuentes a Groq (gratis, sin tarjeta) para que redacte, por
+//    cada una, una nota breve de que buscar ahi para la consulta - sin
+//    inventar el nombre de una ley especifica que no pueda verificar.
+// 3) Si Groq falla o se queda sin cuota, cae al directorio simple (solo
+//    nombre de la fuente y URL), asi la busqueda nunca queda vacia.
 // Cache de 30 minutos en localStorage para no repetir la misma consulta.
 
 (function () {
@@ -26,7 +26,7 @@
     return (t || "").toString().toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
   }
 
-  async function buscarEnCatalogo(query, paises) {
+  async function seleccionarFuentes(query, paises) {
     const catalogo = await cargarCatalogo();
     const paisesSet = new Set((paises || []).map((p) => normalizar(p)));
     const terminos = normalizar(query).split(/\s+/).filter((t) => t.length > 2);
@@ -39,8 +39,11 @@
       });
       if (conCoincidencia.length) candidatos = conCoincidencia;
     }
+    return candidatos.slice(0, 20);
+  }
 
-    const resultados = candidatos.slice(0, 20).map((r) => {
+  function directorioSimple(candidatos) {
+    return candidatos.map((r) => {
       const partesResumen = [];
       if (r.tipo) partesResumen.push(r.tipo);
       if (r.nivel) partesResumen.push("Nivel: " + r.nivel);
@@ -53,7 +56,6 @@
         esDirectorio: true,
       };
     });
-    return resultados;
   }
 
   async function ejecutarBusquedaExterna(query, paises) {
@@ -63,16 +65,16 @@
       if (cached && Date.now() - cached.ts < 30 * 60 * 1000) return cached.data;
     } catch (e) {}
 
-    const catalogo = await cargarCatalogo();
-    const paisesSet = new Set((paises || []).map((p) => normalizar(p)));
-    const fuentesRelevantes = catalogo
-      .filter((r) => !paisesSet.size || paisesSet.has(normalizar(r.pais)))
-      .map((r) => ({ pais: r.pais, fuente: r.fuente, url: r.url }));
+    const candidatos = await seleccionarFuentes(query, paises);
+    if (!candidatos.length) {
+      const data = { resultados: [], errores: ["No hay fuentes oficiales registradas para ese filtro. Prueba con otro pais."] };
+      return data;
+    }
 
+    const fuentesParaAnalisis = candidatos.map((r) => ({ pais: r.pais, fuente: r.fuente, tipo: r.tipo, url: r.url }));
     const params = new URLSearchParams();
     params.set("q", query);
-    if (paises && paises.length) params.set("paises", paises.join(", "));
-    if (fuentesRelevantes.length) params.set("fuentes", JSON.stringify(fuentesRelevantes));
+    params.set("fuentes", JSON.stringify(fuentesParaAnalisis));
 
     let data;
     try {
@@ -83,20 +85,18 @@
       data = { resultados: [], errores: [e.message], tipoError: "error" };
     }
 
-    // Si Gemini no devolvio resultados (cuota, error o clave faltante),
-    // cae al directorio local para que la busqueda nunca quede vacia.
+    // Si Groq no devolvio resultados (cuota, error o clave faltante), cae
+    // al directorio simple para que la busqueda nunca quede vacia.
     if (!data.resultados.length) {
-      const directorio = await buscarEnCatalogo(query, paises);
-      if (directorio.length) {
-        data = {
-          resultados: directorio,
-          errores: data.errores && data.errores.length
-            ? [data.errores[0] + " Mostrando el directorio de fuentes oficiales en su lugar."]
-            : [],
-          tipoError: data.tipoError,
-          modo: "directorio",
-        };
-      }
+      const directorio = directorioSimple(candidatos);
+      data = {
+        resultados: directorio,
+        errores: data.errores && data.errores.length
+          ? [data.errores[0] + " Mostrando el directorio de fuentes oficiales en su lugar."]
+          : [],
+        tipoError: data.tipoError,
+        modo: "directorio",
+      };
     }
 
     try { localStorage.setItem(cacheKey, JSON.stringify({ ts: Date.now(), data })); } catch (e) {}
