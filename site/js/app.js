@@ -146,7 +146,18 @@ async function ejecutarBusqueda() {
       }));
     } catch (e) {}
 
-    if (!state.resultados.length) {
+    const esErrorCuota = res.tipoError === "quota" || (res.errores || []).some((m) => /limite de uso|quota|429/i.test(m));
+
+    if (esErrorCuota) {
+      out.innerHTML = "<div class='empty'>Se alcanzo el limite de uso gratuito de la API de Gemini. Espera unos minutos y vuelve a intentar.</div>";
+      estado.textContent = "Limite de cuota alcanzado.";
+      const retry = document.createElement("button");
+      retry.className = "btn secondary";
+      retry.style.marginTop = "10px";
+      retry.textContent = "Reintentar";
+      retry.addEventListener("click", ejecutarBusqueda);
+      out.appendChild(retry);
+    } else if (!state.resultados.length) {
       out.innerHTML = "<div class='empty'>Sin resultados. Prueba con terminos mas generales.</div>";
       estado.textContent = "Sin resultados.";
     } else {
@@ -161,7 +172,7 @@ async function ejecutarBusqueda() {
       estado.className = "status ok";
       abrirBtn.style.display = "inline-flex";
     }
-    if (res.errores && res.errores.length) err.innerHTML = res.errores.join("<br>");
+    if (!esErrorCuota && res.errores && res.errores.length) err.innerHTML = res.errores.join("<br>");
   } catch (e) {
     err.innerHTML = "Error al buscar: " + e.message;
     estado.textContent = "Error en la busqueda.";

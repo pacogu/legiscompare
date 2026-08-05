@@ -28,17 +28,36 @@ exports.handler = async function (event) {
   try {
     const model = "gemini-2.0-flash";
     const url = "https://generativelanguage.googleapis.com/v1beta/models/" + model + ":generateContent?key=" + apiKey;
-    const r = await fetch(url, {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({
-        contents: [{ role: "user", parts: [{ text: prompt }] }],
-        tools: [{ google_search: {} }],
-        generationConfig: { maxOutputTokens: 2000, temperature: 0.2 },
-      }),
+    const body = JSON.stringify({
+      contents: [{ role: "user", parts: [{ text: prompt }] }],
+      tools: [{ google_search: {} }],
+      generationConfig: { maxOutputTokens: 2000, temperature: 0.2 },
     });
+
+    let r;
+    let intentos = 0;
+    const maxIntentos = 3;
+    while (true) {
+      intentos++;
+      r = await fetch(url, { method: "POST", headers: { "content-type": "application/json" }, body });
+      if (r.status !== 429 || intentos >= maxIntentos) break;
+      // Backoff simple antes de reintentar por cuota momentanea.
+      await new Promise((resolve) => setTimeout(resolve, 1200 * intentos));
+    }
+
     if (!r.ok) {
       const t = await r.text();
+      if (r.status === 429) {
+        return {
+          statusCode: 200,
+          headers: cors(),
+          body: JSON.stringify({
+            resultados: [],
+            errores: ["Se alcanzo el limite de uso gratuito de la API de Gemini por ahora. Espera unos minutos y vuelve a intentar, o revisa tu plan y facturacion en Google AI Studio."],
+            tipoError: "quota",
+          }),
+        };
+      }
       return { statusCode: 200, headers: cors(), body: JSON.stringify({ resultados: [], errores: ["Gemini API " + r.status + ": " + t.slice(0, 200)] }) };
     }
     const data = await r.json();
