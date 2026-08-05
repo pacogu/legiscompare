@@ -8,7 +8,7 @@
 //    buscar en cada una - sin inventar el nombre de una norma que no
 //    pueda verificar.
 
-const CONECTORES_REALES = new Set(["brasil", "reino unido"]);
+const CONECTORES_REALES = new Set(["brasil", "reino unido", "union europea"]);
 
 exports.handler = async function (event) {
   const q = (event.queryStringParameters && event.queryStringParameters.q) || "";
@@ -35,6 +35,7 @@ exports.handler = async function (event) {
     try {
       if (pais === "brasil") resultadosReales = resultadosReales.concat(await buscarBrasil(q));
       else if (pais === "reino unido") resultadosReales = resultadosReales.concat(await buscarReinoUnido(q));
+      else if (pais === "union europea") resultadosReales = resultadosReales.concat(await buscarUnionEuropea(q));
     } catch (e) {
       errores.push("Conector de " + pais + ": " + e.message);
     }
@@ -88,6 +89,37 @@ async function buscarReinoUnido(q) {
       titulo: decodificarEntidades(titulo),
       url: link,
       fecha: fecha ? fecha.slice(0, 10) : null,
+      resumen: null,
+      relevancia: null,
+    };
+  });
+}
+
+// --- Conector real: EUR-Lex / CELLAR (SPARQL publico, sin llave) ---
+// Cubre normativa de la Union Europea (reglamentos, directivas, decisiones).
+async function buscarUnionEuropea(q) {
+  const termino = q.toLowerCase().replace(/"/g, "");
+  const sparql =
+    "PREFIX cdm: <http://publications.europa.eu/ontology/cdm#>\n" +
+    "SELECT DISTINCT ?work ?title WHERE {\n" +
+    "  ?exp cdm:expression_title ?title .\n" +
+    "  ?exp cdm:expression_belongs_to_work ?work .\n" +
+    "  ?exp cdm:expression_uses_language <http://publications.europa.eu/resource/authority/language/ENG> .\n" +
+    "  FILTER(CONTAINS(LCASE(STR(?title)), \"" + termino + "\"))\n" +
+    "} LIMIT 8";
+  const url = "https://publications.europa.eu/webapi/rdf/sparql?format=json&query=" + encodeURIComponent(sparql);
+  const r = await fetch(url, { headers: { accept: "application/sparql-results+json" } });
+  if (!r.ok) throw new Error("EUR-Lex SPARQL " + r.status);
+  const data = await r.json();
+  const filas = (data && data.results && data.results.bindings) || [];
+  return filas.map((fila) => {
+    const workUri = fila.work ? fila.work.value : null;
+    const celex = workUri ? (workUri.match(/celex\/([^/]+)/) || [])[1] : null;
+    return {
+      pais: "Union Europea",
+      titulo: fila.title ? fila.title.value : "Norma sin titulo",
+      url: celex ? "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:" + celex : workUri,
+      fecha: null,
       resumen: null,
       relevancia: null,
     };

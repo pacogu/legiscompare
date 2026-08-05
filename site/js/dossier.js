@@ -50,6 +50,13 @@ function renderEjes(data) {
   return data.ejes.map((e) => "<span class='axis-chip'>" + e + "</span>").join("");
 }
 
+function renderFuentesNumeradas(data) {
+  return "<ol style='padding-left:20px;font-size:13px;line-height:1.7'>" +
+    data.resultados.map((r) =>
+      "<li><strong>" + r.pais + "</strong> - " + (r.url ? "<a href='" + r.url + "' target='_blank' rel='noopener'>" + r.titulo + "</a>" : r.titulo) + "</li>"
+    ).join("") + "</ol>";
+}
+
 function guardarHallazgos() {
   const texto = document.getElementById("hallazgos").value;
   try {
@@ -89,11 +96,13 @@ function render(data) {
   html += "<div id='sintesisBox'><div class='empty'>Generando borrador con IA...</div></div>";
   html += "<h3>Hallazgos e implicancias</h3><p class='note'>Este espacio lo completa el abogado a cargo del analisis. La IA no interpreta ni concluye por ti.</p>";
   html += "<textarea class='hallazgos' id='hallazgos' placeholder='Escribe aqui los hallazgos, diferencias, vacios e implicancias (ej. para Chile)...'>" + (data.hallazgos || "") + "</textarea>";
+  html += "<h3>Fuentes citables (para la seccion de consultas)</h3>" + renderFuentesNumeradas(data);
 
   document.getElementById("contenido").innerHTML = html;
   document.getElementById("hallazgos").addEventListener("input", guardarHallazgos);
 
   cargarSintesis(data);
+  initChat(data);
 }
 
 function renderErrorSintesis(mensaje, data) {
@@ -119,9 +128,80 @@ function cargarSintesis(data) {
   });
 }
 
+// --- Capa de interaccion: consultas de seguimiento sobre el informe ---
+// Mantiene trazabilidad citando [n] segun la lista numerada de fuentes.
+
+function obtenerHistorialChat() {
+  try { return JSON.parse(sessionStorage.getItem("legiscompare_chat") || "[]"); } catch (e) { return []; }
+}
+
+function guardarHistorialChat(historial) {
+  try { sessionStorage.setItem("legiscompare_chat", JSON.stringify(historial)); } catch (e) {}
+}
+
+function renderChatLog(historial) {
+  const log = document.getElementById("chatLog");
+  log.innerHTML = historial.map((h) => {
+    const esUsuario = h.rol === "usuario";
+    return "<div style='align-self:" + (esUsuario ? "flex-end" : "flex-start") + ";max-width:80%;background:" +
+      (esUsuario ? "var(--blue)" : "#f4f6f8") + ";color:" + (esUsuario ? "#fff" : "var(--ink)") +
+      ";padding:10px 14px;border-radius:16px;font-size:13px;line-height:1.5;white-space:pre-wrap'>" +
+      escaparHtml(h.texto) + "</div>";
+  }).join("");
+  log.scrollTop = log.scrollHeight;
+}
+
+function escaparHtml(s) {
+  return (s || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
+async function enviarPreguntaChat(data) {
+  const input = document.getElementById("chatInput");
+  const btn = document.getElementById("btnChatEnviar");
+  const pregunta = input.value.trim();
+  if (!pregunta) return;
+
+  let historial = obtenerHistorialChat();
+  historial.push({ rol: "usuario", texto: pregunta });
+  guardarHistorialChat(historial);
+  renderChatLog(historial);
+  input.value = "";
+  btn.disabled = true; btn.textContent = "Pensando...";
+
+  try {
+    const r = await fetch("/.netlify/functions/consultar", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ consulta: data.consulta, resultados: data.resultados, pregunta, historial }),
+    });
+    const out = await r.json();
+    historial = obtenerHistorialChat();
+    historial.push({ rol: "asistente", texto: out.error ? "No se pudo responder: " + out.error : out.respuesta });
+    guardarHistorialChat(historial);
+    renderChatLog(historial);
+  } catch (e) {
+    historial = obtenerHistorialChat();
+    historial.push({ rol: "asistente", texto: "Error al consultar: " + e.message });
+    guardarHistorialChat(historial);
+    renderChatLog(historial);
+  }
+  btn.disabled = false; btn.textContent = "Preguntar";
+}
+
+function initChat(data) {
+  document.getElementById("chatCard").style.display = "block";
+  const historial = obtenerHistorialChat();
+  renderChatLog(historial);
+  document.getElementById("btnChatEnviar").addEventListener("click", () => enviarPreguntaChat(data));
+  document.getElementById("chatInput").addEventListener("keydown", (e) => {
+    if (e.key === "Enter") enviarPreguntaChat(data);
+  });
+}
+
 function init() {
   let data = null;
   try { data = JSON.parse(sessionStorage.getItem("legiscompare_brief") || "null"); } catch (e) {}
+  sessionStorage.removeItem("legiscompare_chat");
   render(data);
   document.getElementById("btnImprimir").addEventListener("click", () => window.print());
 }

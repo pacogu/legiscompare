@@ -23,18 +23,24 @@ site/
   js/app.js               logica de la pagina de consulta
   js/dossier.js            logica del dossier
   js/busqueda_api.js       cliente de busqueda, con fallback al directorio simple (cache 30min)
-netlify/functions/buscar.js      analisis de fuentes oficiales para la consulta (Groq)
+netlify/functions/buscar.js      busqueda (conectores reales + Groq de respaldo)
 netlify/functions/sintetizar.js  borrador de sintesis comparada (Groq, opcional)
+netlify/functions/consultar.js   consultas de seguimiento sobre el informe (Groq)
 netlify.toml            configuracion de build/deploy de Netlify
 ```
 
 ## Como funciona la busqueda
 
-El sitio no tiene una API de busqueda web propia (para evitar depender de
-proveedores pagos como Gemini/Claude/OpenAI que se quedan sin cuota o
-saldo). En su lugar combina dos piezas:
+El sitio no depende de una sola API de busqueda web paga. Combina tres
+piezas:
 
-1. **Catalogo curado** en `site/data/fuentes_oficiales.json`: 46 paises y
+1. **Conectores reales a APIs oficiales gratuitas** (sin llave, sin
+   costo): Brasil (Camara de Diputados, `dadosabertos.camara.leg.br`) y
+   Reino Unido (`legislation.gov.uk`). Para estos paises, el sitio trae
+   el NOMBRE REAL de proyectos y leyes directamente de la fuente oficial,
+   sin usar IA. Se pueden agregar mas paises sumando una funcion
+   `buscarNombrePais(q)` en `netlify/functions/buscar.js`.
+2. **Catalogo curado** en `site/data/fuentes_oficiales.json`: 46 paises y
    bloques (Union Europea, Alemania, Argentina, Australia, Austria,
    Belgica, Bolivia, Brasil, Canada, Chile, Colombia, Corea del Sur,
    Costa Rica, Cuba, Dinamarca, Ecuador, Espana, Estados Unidos, Estonia,
@@ -45,13 +51,20 @@ saldo). En su lugar combina dos piezas:
    Uruguay) con la fuente oficial, URL y tipo de normas que cubre cada
    pais. El sitio filtra este catalogo por los paises seleccionados y por
    coincidencia de palabras con la consulta.
-2. **Analisis con Groq** (gratis, sin tarjeta de credito): para cada
-   fuente filtrada, el modelo redacta una nota breve indicando que tipo
-   de norma buscar ahi para la consulta del analista. Groq no tiene
-   busqueda web propia en su nivel gratuito, asi que el modelo NUNCA
-   inventa el titulo de una ley especifica: solo analiza el tipo de
-   fuente ya conocido y orienta la busqueda manual del analista en el
-   portal oficial correspondiente (con enlace directo).
+3. **Analisis con Groq** (gratis, sin tarjeta de credito) para los
+   paises SIN conector real: el modelo redacta una nota breve indicando
+   que tipo de norma buscar en cada fuente para la consulta del analista.
+   Groq no tiene busqueda web propia en su nivel gratuito, asi que NUNCA
+   inventa el titulo de una ley especifica que no este en el catalogo:
+   solo analiza el tipo de fuente ya conocido y orienta la busqueda
+   manual del analista en el portal oficial correspondiente.
+
+Cada resultado trae ademas una estimacion de relevancia (0-100%) cuando
+proviene del analisis con Groq; los resultados de conectores reales no
+llevan este porcentaje porque ya son coincidencias directas de busqueda.
+En la pagina de consulta, los resultados se muestran como tarjetas
+seleccionables: el analista puede excluir las que no le sirvan antes de
+generar el informe.
 
 **Respaldo sin IA:** si Groq se queda sin cuota gratuita o la clave no
 esta configurada, el sitio no muestra "sin resultados": cae
@@ -77,6 +90,18 @@ busqueda), asi que su consumo de cuota es mucho menor. Usa la misma
 variable `GROQ_API_KEY`. Si no esta configurada, el dossier funciona
 igual pero sin el borrador automatico (el analista redacta directamente
 sus hallazgos).
+
+## Consultas de seguimiento (capa conversacional)
+
+El dossier analitico incluye una seccion de "Consultas sobre este
+informe": el analista puede preguntar, pedir precisiones o pedir que se
+reformule algo sobre los resultados ya encontrados. Cada respuesta se
+genera con Groq usando UNICAMENTE las fuentes listadas en el informe
+(numeradas en la seccion "Fuentes citables") y cita el numero de fuente
+correspondiente en cada afirmacion (ej. "...establece un plazo de 10 dias
+[2]"), manteniendo trazabilidad. Si la pregunta pide algo que las fuentes
+no cubren, el modelo lo dice explicitamente en vez de inventar una
+respuesta. Usa la misma variable `GROQ_API_KEY`.
 
 ## Como desplegar en Netlify
 
