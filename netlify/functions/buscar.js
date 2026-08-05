@@ -11,7 +11,7 @@
 const CONECTORES_REALES = new Set([
   "brasil", "reino unido", "union europea", "irlanda",
   "colombia", "panama", "paises bajos", "suecia",
-  "dinamarca", "suiza", "nueva zelanda", "canada",
+  "dinamarca", "suiza", "nueva zelanda", "canada", "polonia", "japon",
 ]);
 
 exports.handler = async function (event) {
@@ -49,6 +49,8 @@ exports.handler = async function (event) {
       else if (pais === "suiza") resultadosReales = resultadosReales.concat(await buscarSuiza(q));
       else if (pais === "nueva zelanda") resultadosReales = resultadosReales.concat(await buscarNuevaZelanda(q));
       else if (pais === "canada") resultadosReales = resultadosReales.concat(await buscarCanada(q));
+      else if (pais === "polonia") resultadosReales = resultadosReales.concat(await buscarPolonia(q));
+      else if (pais === "japon") resultadosReales = resultadosReales.concat(await buscarJapon(q));
     } catch (e) {
       errores.push("Conector de " + pais + ": " + e.message);
     }
@@ -281,6 +283,46 @@ async function buscarCanada(q) {
     resumen: null,
     relevancia: null,
   }));
+}
+
+// --- Conector real: Sejm/ELI API (Polonia, REST, verificado en vivo) ---
+async function buscarPolonia(q) {
+  const url = "https://api.sejm.gov.pl/eli/acts/search?title=" + encodeURIComponent(q) + "&limit=8";
+  const r = await fetch(url, { headers: { accept: "application/json" } });
+  if (!r.ok) throw new Error("API Sejm/ELI Polonia " + r.status);
+  const data = await r.json();
+  const items = (data && data.items) || [];
+  return items.map((it) => ({
+    pais: "Polonia",
+    titulo: it.title || "Norma sin titulo",
+    url: it.ELI ? "https://api.sejm.gov.pl/eli/acts/" + it.ELI + "/text.pdf" : (it.address ? "https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=" + it.address : null),
+    fecha: it.promulgation || it.announcementDate || null,
+    resumen: it.type ? it.type + (it.status ? " - " + it.status : "") : null,
+    relevancia: null,
+  }));
+}
+
+// --- Conector real: e-Gov Law API v1 (Japon), formato JSON confirmado
+// por documentacion oficial (LawNumbers[].LawName/LawId/PromulgationDate) ---
+async function buscarJapon(q) {
+  const url = "https://laws.e-gov.go.jp/api/1/keyword?keyword=" + encodeURIComponent(q);
+  const r = await fetch(url, { headers: { accept: "application/json" } });
+  if (!r.ok) throw new Error("API e-Gov Japon " + r.status);
+  const data = await r.json();
+  const items = (data && data.LawNumbers) || [];
+  return items.slice(0, 8).map((it) => ({
+    pais: "Japon",
+    titulo: it.LawName || "Norma sin titulo",
+    url: it.LawId ? "https://laws.e-gov.go.jp/law/" + it.LawId : null,
+    fecha: formatearFechaJapon(it.PromulgationDate),
+    resumen: it.LawNo || null,
+    relevancia: null,
+  }));
+}
+
+function formatearFechaJapon(s) {
+  if (!s || s.length !== 8) return null;
+  return s.slice(0, 4) + "-" + s.slice(4, 6) + "-" + s.slice(6, 8);
 }
 
 function decodificarEntidades(s) {

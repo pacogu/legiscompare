@@ -47,23 +47,23 @@ piezas:
    - **Suiza** - OpenParlData.ch (REST v1).
    - **Nueva Zelanda** - legislation.govt.nz (REST OpenAPI v0).
    - **Canada** - Justice Laws Website (OData).
+   - **Polonia** - Sejm/ELI API (`api.sejm.gov.pl/eli/acts/search`) - verificado en vivo, funcionando (titulo, fecha, tipo de norma reales).
+   - **Japon** - e-Gov Law API v1 (`laws.e-gov.go.jp/api/1/keyword`) - formato de respuesta confirmado por documentacion oficial (`LawNumbers[].LawName/LawId/PromulgationDate`).
 
    Cada conector esta aislado con manejo de errores propio: si uno falla
    (cambio de formato, caida del servicio, etc.), no afecta a los demas
-   paises ni a Groq como respaldo. Los ultimos 6 (Colombia, Panama,
-   Paises Bajos, Suecia, Dinamarca, Suiza, Nueva Zelanda, Canada) estan
-   implementados segun su documentacion publica pero no se pudieron
-   verificar en vivo en la sesion en que se escribieron (fallo temporal
-   de la herramienta de verificacion) - probar en el sitio desplegado y
-   ajustar el mapeo de campos si el formato real difiere.
+   paises ni a Groq como respaldo. Colombia, Panama, Paises Bajos, Suecia,
+   Dinamarca, Suiza, Nueva Zelanda y Canada estan implementados segun su
+   documentacion publica pero no se pudieron verificar en vivo con datos
+   reales - probar en el sitio desplegado y ajustar el mapeo de campos si
+   el formato real difiere.
 
-   El catalogo tiene otras ~11 fuentes con "Tiene_API: Si" (Polonia,
-   Noruega, Israel, Finlandia, Francia, Austria, Japon, Corea del Sur,
-   Australia, Costa Rica, Mexico, Paraguay, Republica Checa) que son
-   candidatas a nuevos conectores, pero requieren mas investigacion del
-   formato exacto de busqueda de cada una (algunas piden llave propia
-   gratuita registrada,
-   otras usan parametros no estandar). Se agregan sumando una funcion
+   El catalogo tiene otras ~9 fuentes con "Tiene_API: Si" (Noruega,
+   Israel, Finlandia, Francia, Austria, Corea del Sur, Australia,
+   Costa Rica, Mexico, Paraguay, Republica Checa) que son candidatas a
+   nuevos conectores, pero requieren llave propia registrada, tienen
+   parametros de busqueda no estandar, o no se pudo confirmar su formato
+   exacto todavia. Se agregan sumando una funcion
    `buscarNombrePais(q)` en `netlify/functions/buscar.js` y añadiendo el
    pais a `CONECTORES_REALES`.
 2. **Catalogo curado** en `site/data/fuentes_oficiales.json`: 46 paises y
