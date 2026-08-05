@@ -35,11 +35,28 @@ El sitio no depende de una sola API de busqueda web paga. Combina tres
 piezas:
 
 1. **Conectores reales a APIs oficiales gratuitas** (sin llave, sin
-   costo): Brasil (Camara de Diputados, `dadosabertos.camara.leg.br`) y
-   Reino Unido (`legislation.gov.uk`). Para estos paises, el sitio trae
-   el NOMBRE REAL de proyectos y leyes directamente de la fuente oficial,
-   sin usar IA. Se pueden agregar mas paises sumando una funcion
-   `buscarNombrePais(q)` en `netlify/functions/buscar.js`.
+   costo), integrados en `netlify/functions/buscar.js`:
+   - **Brasil** - Camara de Diputados (`dadosabertos.camara.leg.br`) - verificado en vivo, funcionando.
+   - **Reino Unido** - `legislation.gov.uk` (feed Atom) - verificado en vivo, funcionando.
+   - **Union Europea** - EUR-Lex / CELLAR (SPARQL publico) - endpoint verificado en vivo (consulta base funciona); cubre los 27 paises del bloque.
+   - **Irlanda** - Oireachtas (`api.oireachtas.ie`) - verificado en vivo, funcionando.
+   - **Colombia** y **Panama** - portales de datos abiertos con patron CKAN estandar (`/api/3/action/package_search`), usado identicamente por cientos de gobiernos en el mundo. Alta confianza por ser un estandar fijo, aunque no se pudo confirmar la respuesta exacta en esta sesion.
+   - **Paises Bajos** - Tweede Kamer (OData v4, patron estandar).
+   - **Suecia** - Riksdagen (`data.riksdagen.se/dokumentlista`), documentado publicamente.
+
+   Cada conector esta aislado con manejo de errores propio: si uno falla
+   (cambio de formato, caida del servicio, etc.), no afecta a los demas
+   paises ni a Groq como respaldo.
+
+   El catalogo tiene otras ~15 fuentes con "Tiene_API: Si" (Polonia,
+   Noruega, Nueva Zelanda, Israel, Finlandia, Francia, Austria,
+   Dinamarca, Suiza, Japon, Corea del Sur, Canada, Australia, Costa Rica,
+   Mexico, Paraguay, Republica Checa) que son candidatas a nuevos
+   conectores, pero requieren mas investigacion del formato exacto de
+   busqueda de cada una (algunas piden llave propia gratuita registrada,
+   otras usan parametros no estandar). Se agregan sumando una funcion
+   `buscarNombrePais(q)` en `netlify/functions/buscar.js` y añadiendo el
+   pais a `CONECTORES_REALES`.
 2. **Catalogo curado** en `site/data/fuentes_oficiales.json`: 46 paises y
    bloques (Union Europea, Alemania, Argentina, Australia, Austria,
    Belgica, Bolivia, Brasil, Canada, Chile, Colombia, Corea del Sur,

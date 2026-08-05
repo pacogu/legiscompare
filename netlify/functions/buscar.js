@@ -8,7 +8,10 @@
 //    buscar en cada una - sin inventar el nombre de una norma que no
 //    pueda verificar.
 
-const CONECTORES_REALES = new Set(["brasil", "reino unido", "union europea"]);
+const CONECTORES_REALES = new Set([
+  "brasil", "reino unido", "union europea", "irlanda",
+  "colombia", "panama", "paises bajos", "suecia",
+]);
 
 exports.handler = async function (event) {
   const q = (event.queryStringParameters && event.queryStringParameters.q) || "";
@@ -36,6 +39,11 @@ exports.handler = async function (event) {
       if (pais === "brasil") resultadosReales = resultadosReales.concat(await buscarBrasil(q));
       else if (pais === "reino unido") resultadosReales = resultadosReales.concat(await buscarReinoUnido(q));
       else if (pais === "union europea") resultadosReales = resultadosReales.concat(await buscarUnionEuropea(q));
+      else if (pais === "irlanda") resultadosReales = resultadosReales.concat(await buscarIrlanda(q));
+      else if (pais === "colombia") resultadosReales = resultadosReales.concat(await buscarCKAN(q, "Colombia", "https://www.datos.gov.co"));
+      else if (pais === "panama") resultadosReales = resultadosReales.concat(await buscarCKAN(q, "Panama", "https://www.datosabiertos.gob.pa"));
+      else if (pais === "paises bajos") resultadosReales = resultadosReales.concat(await buscarPaisesBajos(q));
+      else if (pais === "suecia") resultadosReales = resultadosReales.concat(await buscarSuecia(q));
     } catch (e) {
       errores.push("Conector de " + pais + ": " + e.message);
     }
@@ -124,6 +132,81 @@ async function buscarUnionEuropea(q) {
       relevancia: null,
     };
   });
+}
+
+// --- Conector real: Oireachtas (parlamento de Irlanda, api.oireachtas.ie) ---
+async function buscarIrlanda(q) {
+  const url = "https://api.oireachtas.ie/v1/legislation?bill_title=" + encodeURIComponent(q) + "&limit=8";
+  const r = await fetch(url, { headers: { accept: "application/json" } });
+  if (!r.ok) throw new Error("API Oireachtas " + r.status);
+  const data = await r.json();
+  const resultados = (data && data.results) || [];
+  return resultados.map((it) => {
+    const b = it.bill || {};
+    const version = (b.versions && b.versions[0] && b.versions[0].version) || {};
+    return {
+      pais: "Irlanda",
+      titulo: (b.shortTitleEn || "Proyecto de ley sin titulo") + (b.billNo ? " (" + b.billNo + "/" + b.billYear + ")" : ""),
+      url: version.formats && version.formats.pdf ? version.formats.pdf.uri : (b.uri || null),
+      fecha: b.contextDate || null,
+      resumen: b.longTitleEn ? b.longTitleEn.replace(/<[^>]+>/g, "").slice(0, 220) : null,
+      relevancia: null,
+    };
+  });
+}
+
+// --- Conector real: CKAN (patron estandar de datos abiertos, usado por
+// Colombia, Panama y muchos otros gobiernos con el mismo formato) ---
+async function buscarCKAN(q, pais, baseUrl) {
+  const url = baseUrl + "/api/3/action/package_search?q=" + encodeURIComponent(q) + "&rows=8";
+  const r = await fetch(url, { headers: { accept: "application/json" } });
+  if (!r.ok) throw new Error("API CKAN " + pais + " " + r.status);
+  const data = await r.json();
+  const items = (data && data.result && data.result.results) || [];
+  return items.map((it) => ({
+    pais,
+    titulo: it.title || "Conjunto de datos sin titulo",
+    url: baseUrl + "/dataset/" + it.name,
+    fecha: it.metadata_modified ? it.metadata_modified.slice(0, 10) : null,
+    resumen: it.notes ? it.notes.replace(/\s+/g, " ").slice(0, 200) : null,
+    relevancia: null,
+  }));
+}
+
+// --- Conector real: Tweede Kamer (parlamento de Paises Bajos, OData) ---
+async function buscarPaisesBajos(q) {
+  const url = "https://gegevensmagazijn.tweedekamer.nl/OData/v4/2.0/Document?$filter=" +
+    encodeURIComponent("contains(Onderwerp,'" + q.replace(/'/g, "") + "')") + "&$top=8";
+  const r = await fetch(url, { headers: { accept: "application/json" } });
+  if (!r.ok) throw new Error("API Tweede Kamer " + r.status);
+  const data = await r.json();
+  const items = (data && data.value) || [];
+  return items.map((it) => ({
+    pais: "Paises Bajos",
+    titulo: it.Onderwerp || it.Titel || "Documento sin titulo",
+    url: it.Id ? "https://www.tweedekamer.nl/kamerstukken/detail?id=" + it.Id : null,
+    fecha: it.Datum ? it.Datum.slice(0, 10) : null,
+    resumen: null,
+    relevancia: null,
+  }));
+}
+
+// --- Conector real: Riksdagen (parlamento de Suecia) ---
+async function buscarSuecia(q) {
+  const url = "https://data.riksdagen.se/dokumentlista/?sok=" + encodeURIComponent(q) + "&utformat=json&sz=8";
+  const r = await fetch(url, { headers: { accept: "application/json" } });
+  if (!r.ok) throw new Error("API Riksdagen " + r.status);
+  const data = await r.json();
+  const items = (data && data.dokumentlista && data.dokumentlista.dokument) || [];
+  const arr = Array.isArray(items) ? items : [items];
+  return arr.filter(Boolean).map((it) => ({
+    pais: "Suecia",
+    titulo: it.titel || it.sokdata_titel || "Documento sin titulo",
+    url: it.dokument_url_html || it.dokumentstatus_url_xml || null,
+    fecha: it.datum ? it.datum.slice(0, 10) : null,
+    resumen: it.summary || null,
+    relevancia: null,
+  }));
 }
 
 function decodificarEntidades(s) {
