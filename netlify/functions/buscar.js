@@ -11,6 +11,7 @@
 const CONECTORES_REALES = new Set([
   "brasil", "reino unido", "union europea", "irlanda",
   "colombia", "panama", "paises bajos", "suecia",
+  "dinamarca", "suiza", "nueva zelanda", "canada",
 ]);
 
 exports.handler = async function (event) {
@@ -44,6 +45,10 @@ exports.handler = async function (event) {
       else if (pais === "panama") resultadosReales = resultadosReales.concat(await buscarCKAN(q, "Panama", "https://www.datosabiertos.gob.pa"));
       else if (pais === "paises bajos") resultadosReales = resultadosReales.concat(await buscarPaisesBajos(q));
       else if (pais === "suecia") resultadosReales = resultadosReales.concat(await buscarSuecia(q));
+      else if (pais === "dinamarca") resultadosReales = resultadosReales.concat(await buscarDinamarca(q));
+      else if (pais === "suiza") resultadosReales = resultadosReales.concat(await buscarSuiza(q));
+      else if (pais === "nueva zelanda") resultadosReales = resultadosReales.concat(await buscarNuevaZelanda(q));
+      else if (pais === "canada") resultadosReales = resultadosReales.concat(await buscarCanada(q));
     } catch (e) {
       errores.push("Conector de " + pais + ": " + e.message);
     }
@@ -205,6 +210,75 @@ async function buscarSuecia(q) {
     url: it.dokument_url_html || it.dokumentstatus_url_xml || null,
     fecha: it.datum ? it.datum.slice(0, 10) : null,
     resumen: it.summary || null,
+    relevancia: null,
+  }));
+}
+
+// --- Conector real: Retsinformation.dk (Dinamarca, REST v2) ---
+async function buscarDinamarca(q) {
+  const url = "https://api.retsinformation.dk/v2/documents?q=" + encodeURIComponent(q) + "&limit=8";
+  const r = await fetch(url, { headers: { accept: "application/json" } });
+  if (!r.ok) throw new Error("API Retsinformation " + r.status);
+  const data = await r.json();
+  const items = (data && (data.items || data.documents || data.results)) || [];
+  return items.map((it) => ({
+    pais: "Dinamarca",
+    titulo: it.title || it.titel || "Norma sin titulo",
+    url: it.htmlUrl || it.url || (it.id ? "https://www.retsinformation.dk/eli/lta/" + it.id : null),
+    fecha: (it.publicationDate || it.dato || "").slice(0, 10) || null,
+    resumen: null,
+    relevancia: null,
+  }));
+}
+
+// --- Conector real: OpenParlData (Suiza, REST) ---
+async function buscarSuiza(q) {
+  const url = "https://api.openparldata.ch/v1/documents?search=" + encodeURIComponent(q) + "&limit=8";
+  const r = await fetch(url, { headers: { accept: "application/json" } });
+  if (!r.ok) throw new Error("API OpenParlData Suiza " + r.status);
+  const data = await r.json();
+  const items = (data && (data.data || data.results || data.documents)) || [];
+  return items.map((it) => ({
+    pais: "Suiza",
+    titulo: it.title || it.titel || it.titre || "Documento sin titulo",
+    url: it.url || it.link || null,
+    fecha: (it.date || it.datum || "").slice(0, 10) || null,
+    resumen: null,
+    relevancia: null,
+  }));
+}
+
+// --- Conector real: New Zealand Legislation (REST OpenAPI v0) ---
+async function buscarNuevaZelanda(q) {
+  const url = "https://api.legislation.govt.nz/v0/legislation.json?search=" + encodeURIComponent(q);
+  const r = await fetch(url, { headers: { accept: "application/json" } });
+  if (!r.ok) throw new Error("API legislation.govt.nz " + r.status);
+  const data = await r.json();
+  const items = (data && (data.results || data.items)) || [];
+  return items.slice(0, 8).map((it) => ({
+    pais: "Nueva Zelanda",
+    titulo: it.title || it.Title || "Norma sin titulo",
+    url: it.link || it.Link || null,
+    fecha: (it.pubDate || it.date || "").slice(0, 10) || null,
+    resumen: null,
+    relevancia: null,
+  }));
+}
+
+// --- Conector real: Justice Laws Website (Canada, OData) ---
+async function buscarCanada(q) {
+  const filtro = "contains(ShortTitle,'" + q.replace(/'/g, "") + "') or contains(LongTitle,'" + q.replace(/'/g, "") + "')";
+  const url = "https://laws-lois-api.justice.gc.ca/eng/Legislation?$filter=" + encodeURIComponent(filtro) + "&$top=8";
+  const r = await fetch(url, { headers: { accept: "application/json" } });
+  if (!r.ok) throw new Error("API Justice Laws Canada " + r.status);
+  const data = await r.json();
+  const items = (data && data.value) || [];
+  return items.map((it) => ({
+    pais: "Canada",
+    titulo: it.ShortTitle || it.LongTitle || "Norma sin titulo",
+    url: it.ConsolidatedNumber ? "https://laws-lois.justice.gc.ca/eng/acts/" + it.ConsolidatedNumber : null,
+    fecha: (it.LastAmendedDate || "").slice(0, 10) || null,
+    resumen: null,
     relevancia: null,
   }));
 }
