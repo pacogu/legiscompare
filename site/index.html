@@ -4,44 +4,56 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>LegisCompare - Consulta de derecho comparado</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/app.css">
 </head>
 <body>
-<header class="hero hero-search">
-  <div class="hero-inner">
+<header class="topbar">
+  <div class="topbar-inner">
     <div class="brand"><span class="brand-mark">LC</span><span class="brand-name">LegisCompare</span></div>
-    <h1>Derecho comparado en vivo</h1>
-    <p>Sistema de consulta y analisis de legislacion comparada a partir de fuentes oficiales, para apoyar la elaboracion de informes de asesoria tecnica parlamentaria.</p>
-
-    <div class="search-bar-wrap">
-      <div class="search-bar">
-        <input type="text" id="consulta" placeholder="Ej: proteccion de datos personales" autocomplete="off">
-        <button class="btn primary" id="btnBuscarApi">Buscar</button>
-      </div>
-      <div class="autocomplete-list" id="autocompleteList" hidden></div>
-    </div>
-    <button class="btn ghost" id="toggleFiltros" type="button">Filtros: todos los paises, sin ejes &#9662;</button>
-
-    <div class="filtros-panel" id="filtrosPanel">
-      <div class="filtros-col">
-        <p class="filtros-label">Jurisdicciones</p>
-        <div class="ejes" id="jurisdicciones"></div>
-      </div>
-      <div class="filtros-col">
-        <p class="filtros-label">Ejes juridicos (opcional)</p>
-        <div class="ejes" id="ejes"></div>
-      </div>
-    </div>
+    <span class="eyebrow-top">Derecho comparado en vivo</span>
   </div>
 </header>
 
 <main>
-  <span class="status" id="estadoConsulta">Escribe tu consulta y presiona Enter o "Buscar".</span>
+  <section class="hero-search">
+    <div class="hero-inner">
+      <span class="eyebrow">Observatorio juridico &bull; Fuentes oficiales en vivo</span>
+      <h1>Derecho comparado en vivo</h1>
+      <p>Sistema de consulta y analisis de legislacion comparada a partir de fuentes oficiales, para apoyar la elaboracion de informes de asesoria tecnica parlamentaria.</p>
 
-  <div id="resultadosApi" class="fuentes-list" style="margin-top:14px"><div class="empty">Sin busqueda ejecutada.</div></div>
-  <div id="errApi" class="err"></div>
+      <div class="search-bar-wrap">
+        <div class="search-bar">
+          <input type="text" id="consulta" placeholder="Ej: proteccion de datos personales" autocomplete="off">
+          <button class="btn primary" id="btnBuscarApi">Buscar</button>
+        </div>
+        <div class="autocomplete-list" id="autocompleteList" hidden></div>
+      </div>
+      <button class="btn ghost" id="toggleFiltros" type="button">Filtros: todos los paises, sin ejes &#9662;</button>
 
-  <button class="btn primary" id="abrirDossier" style="margin-top:16px;display:none">Abrir informe analitico</button>
+      <div class="filtros-panel" id="filtrosPanel">
+        <div class="filtros-col">
+          <p class="filtros-label">Jurisdicciones</p>
+          <div class="ejes" id="jurisdicciones"></div>
+        </div>
+        <div class="filtros-col">
+          <p class="filtros-label">Ejes juridicos (opcional)</p>
+          <div class="ejes" id="ejes"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="results-section">
+    <span class="status" id="estadoConsulta">Escribe tu consulta y presiona Enter o "Buscar".</span>
+
+    <div id="resultadosApi" class="fuentes-list" style="margin-top:14px"><div class="empty">Sin busqueda ejecutada.</div></div>
+    <div id="errApi" class="err"></div>
+
+    <button class="btn primary" id="abrirDossier" style="margin-top:16px;display:none">Abrir informe analitico</button>
+  </section>
 </main>
 
 <script src="js/busqueda_api.js"></script>
