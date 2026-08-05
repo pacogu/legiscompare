@@ -101,6 +101,9 @@ textarea.hallazgos{width:100%;min-height:140px;padding:14px;border-radius:18px;b
 .filtros-col{min-width:220px}
 .filtros-label{color:#dbeafe;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;margin:0 0 10px}
 .filtros-panel .eje{background:rgba(255,255,255,.95)}
+.filtros-panel .eje-title{color:#14181f}
+.filtros-panel .eje.selected{background:#eaf7ee;border-color:#15803d}
+.filtros-panel .eje.selected .eje-title{color:#0f5c2c}
 main .status{display:block;text-align:center;margin-top:6px}
 .autocomplete-list{position:absolute;top:calc(100% + 8px);left:0;right:0;background:#fff;border-radius:20px;box-shadow:var(--shadow-lg);overflow:hidden;text-align:left;z-index:20}
 .autocomplete-list button{display:block;width:100%;text-align:left;background:none;border:none;border-bottom:1px solid var(--line);padding:12px 18px;font-size:14px;font-weight:600;color:var(--ink);cursor:pointer;font-family:inherit}
