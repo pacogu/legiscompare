@@ -12,18 +12,30 @@ exports.handler = async function (event) {
 
   const q = (event.queryStringParameters && event.queryStringParameters.q) || "";
   const paises = (event.queryStringParameters && event.queryStringParameters.paises) || "";
+  const fuentesParam = (event.queryStringParameters && event.queryStringParameters.fuentes) || "";
   if (!q) {
     return { statusCode: 400, headers: cors(), body: JSON.stringify({ error: "falta parametro q" }) };
   }
 
   const contextoPaises = paises ? "Limita la busqueda a estos paises o bloques: " + paises + "." : "Ambito global, con foco en fuentes oficiales vigentes.";
 
+  let fuentesLista = [];
+  try { fuentesLista = fuentesParam ? JSON.parse(fuentesParam) : []; } catch (e) { fuentesLista = []; }
+  const contextoFuentes = fuentesLista.length
+    ? "\n\nPara cada pais, busca preferentemente directamente en su fuente oficial de legislacion (dominio exacto). " +
+      "Usa estos portales oficiales como punto de partida de la busqueda, no te limites a ellos si no encuentras nada:\n" +
+      fuentesLista.map((f) => "- " + f.pais + ": " + (f.fuente || "") + (f.url ? " (" + f.url + ")" : "")).join("\n")
+    : "";
+
   const prompt = "Actua como consultor de derecho comparado de una biblioteca parlamentaria. " +
-    "Busca evidencia juridica de alta precision y vigencia para la consulta: \"" + q + "\". " +
-    contextoPaises + " " +
-    "Devuelve HASTA 12 resultados reales (no inventados), priorizando leyes vigentes, reglamentos y tratados de fuentes oficiales. " +
+    "Busca el NOMBRE REAL Y EXACTO de leyes, reglamentos o tratados vigentes relacionados con: \"" + q + "\". " +
+    contextoPaises + contextoFuentes + " " +
+    "Devuelve HASTA 12 resultados reales (no inventados), cada uno con el titulo oficial de la norma (no el nombre del portal ni del sitio donde se busco). " +
+    "Si el titulo original no esta en espanol, tradúcelo al espanol entre parentesis junto al titulo original, por ejemplo: " +
+    "\"Bundesdatenschutzgesetz (Ley Federal de Proteccion de Datos)\". " +
+    "El campo resumen debe describir brevemente el CONTENIDO de la norma (que regula), no donde se encontro. " +
     "Al final de tu respuesta, incluye UNICAMENTE un bloque de codigo JSON (sin texto despues) con este formato exacto: " +
-    "[{\"pais\": \"nombre del pais\", \"titulo\": \"titulo de la norma\", \"url\": \"URL oficial\", \"fecha\": \"AAAA-MM-DD o AAAA si no hay mas precision, o null\", \"resumen\": \"una oracion breve\"}]";
+    "[{\"pais\": \"nombre del pais\", \"titulo\": \"titulo oficial de la norma, traducido si corresponde\", \"url\": \"URL oficial de la norma especifica si existe, o del portal oficial\", \"fecha\": \"AAAA-MM-DD o AAAA si no hay mas precision, o null\", \"resumen\": \"que regula la norma, en una oracion\"}]";
 
   try {
     const url = "https://api.anthropic.com/v1/messages";

@@ -1,68 +1,52 @@
-// LegisCompare - directorio de fuentes oficiales de legislacion comparada.
-// Ya no depende de una API de IA para la busqueda base: usa un catalogo
-// curado (site/data/fuentes_oficiales.json) con la fuente oficial, URL y
-// datos de API de cada pais. Esto evita cuotas/limites de proveedores de
-// IA y errores 429 en la busqueda principal.
+// LegisCompare - busqueda en vivo de legislacion comparada.
+// El nombre real de la norma se obtiene con Claude (Anthropic) + web_search,
+// usando como contexto el catalogo curado de fuentes oficiales
+// (site/data/fuentes_oficiales.json) para orientar la busqueda hacia el
+// portal oficial correcto de cada pais y evitar traer texto generico.
+// Cache de 30 minutos en localStorage para no repetir la misma consulta.
 
 (function () {
   let CATALOGO = null;
 
   async function cargarCatalogo() {
     if (CATALOGO) return CATALOGO;
-    const res = await fetch("data/fuentes_oficiales.json");
-    if (!res.ok) throw new Error("No se pudo cargar el catalogo de fuentes oficiales.");
-    CATALOGO = await res.json();
+    try {
+      const res = await fetch("data/fuentes_oficiales.json");
+      CATALOGO = res.ok ? await res.json() : [];
+    } catch (e) {
+      CATALOGO = [];
+    }
     return CATALOGO;
   }
 
   function normalizar(t) {
-    return (t || "").toString().toLowerCase()
-      .normalize("NFD").replace(/[̀-ͯ]/g, "");
+    return (t || "").toString().toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
   }
 
-  async function ejecutarBusquedaExterna(consulta, paisesSeleccionados) {
+  async function ejecutarBusquedaExterna(query, paises) {
+    const cacheKey = "legiscompare_busqueda_" + query.toLowerCase().trim() + "_" + (paises || []).join(",");
+    try {
+      const cached = JSON.parse(localStorage.getItem(cacheKey) || "null");
+      if (cached && Date.now() - cached.ts < 30 * 60 * 1000) return cached.data;
+    } catch (e) {}
+
     const catalogo = await cargarCatalogo();
-    const paisesSet = new Set((paisesSeleccionados || []).map((p) => normalizar(p)));
-    const consultaNorm = normalizar(consulta);
-    const terminos = consultaNorm.split(/\s+/).filter((t) => t.length > 2);
+    const paisesSet = new Set((paises || []).map((p) => normalizar(p)));
+    const fuentesRelevantes = catalogo
+      .filter((r) => !paisesSet.size || paisesSet.has(normalizar(r.pais)))
+      .map((r) => ({ pais: r.pais, fuente: r.fuente, url: r.url }));
 
-    let candidatos = catalogo.filter((r) => !paisesSet.size || paisesSet.has(normalizar(r.pais)));
+    const params = new URLSearchParams();
+    params.set("q", query);
+    if (paises && paises.length) params.set("paises", paises.join(", "));
+    if (fuentesRelevantes.length) params.set("fuentes", JSON.stringify(fuentesRelevantes));
 
-    // Si hay terminos de busqueda, prioriza fuentes cuyo tipo/nombre/notas
-    // los mencionen; si ninguna coincide, se muestra igual el directorio
-    // completo de fuentes oficiales de los paises seleccionados.
-    if (terminos.length) {
-      const conCoincidencia = candidatos.filter((r) => {
-        const texto = normalizar([r.fuente, r.tipo, r.notas].join(" "));
-        return terminos.some((t) => texto.includes(t));
-      });
-      if (conCoincidencia.length) candidatos = conCoincidencia;
-    }
-
-    const resultados = candidatos.slice(0, 30).map((r) => {
-      const partesResumen = [];
-      if (r.tipo) partesResumen.push(r.tipo);
-      if (r.nivel) partesResumen.push("Nivel: " + r.nivel);
-      if (r.tiene_api) partesResumen.push("API: " + r.tiene_api);
-      return {
-        pais: r.pais,
-        titulo: r.fuente || (r.pais + " - fuente oficial"),
-        url: r.url || r.api_url || null,
-        fecha: null,
-        resumen: partesResumen.join(" · "),
-        api_url: r.api_url || null,
-        api_docs: r.api_docs || null,
-        api_params: r.api_params || null,
-        formato: r.formato || null,
-      };
-    });
-
-    const errores = [];
-    if (!resultados.length) {
-      errores.push("No hay fuentes oficiales registradas para ese filtro todavia. Prueba con otro pais.");
-    }
-
-    return { resultados, errores };
+    const url = "/.netlify/functions/buscar?" + params.toString();
+    const r = await fetch(url);
+    const out = await r.json();
+    const data = { resultados: out.resultados || [], errores: out.errores || [], tipoError: out.tipoError };
+    try { localStorage.setItem(cacheKey, JSON.stringify({ ts: Date.now(), data })); } catch (e) {}
+    return data;
   }
 
   window.IJARBusquedaExterna = { ejecutarBusquedaExterna };

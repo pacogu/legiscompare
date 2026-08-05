@@ -126,7 +126,7 @@ async function ejecutarBusqueda() {
   guardarReciente(consulta);
   document.getElementById("autocompleteList").hidden = true;
   btn.disabled = true; btn.innerHTML = "<span class='spinner'></span>Buscando...";
-  estado.textContent = "Buscando en el catalogo de fuentes oficiales...";
+  estado.textContent = "Buscando el nombre de la norma en fuentes oficiales...";
   estado.className = "status";
   out.innerHTML = ""; err.innerHTML = ""; abrirBtn.style.display = "none";
 
@@ -149,7 +149,7 @@ async function ejecutarBusqueda() {
     const esErrorCuota = res.tipoError === "quota" || (res.errores || []).some((m) => /limite de uso|quota|429/i.test(m));
 
     if (esErrorCuota) {
-      out.innerHTML = "<div class='empty'>Se alcanzo el limite de uso gratuito de la API de Gemini. Espera unos minutos y vuelve a intentar.</div>";
+      out.innerHTML = "<div class='empty'>Se alcanzo el limite de uso gratuito de la API de Claude. Espera unos minutos y vuelve a intentar.</div>";
       estado.textContent = "Limite de cuota alcanzado.";
       const retry = document.createElement("button");
       retry.className = "btn secondary";
@@ -165,8 +165,7 @@ async function ejecutarBusqueda() {
         const d = document.createElement("div");
         d.className = "item api";
         const enlace = r.url ? "<a href='" + r.url + "' target='_blank' rel='noopener'>" + r.titulo + "</a>" : r.titulo;
-        const apiInfo = r.api_url ? "<br><span class='meta'>API: " + r.api_url + (r.formato ? " (" + r.formato + ")" : "") + "</span>" : "";
-        d.innerHTML = "<strong>" + r.pais + "</strong><span class='tag api'>Fuente oficial</span><br>" + enlace + (r.resumen ? "<br><span class='meta'>" + r.resumen + "</span>" : "") + apiInfo + "<span class='meta'>Catalogo actualizado - consultado " + fecha + "</span>";
+        d.innerHTML = "<strong>" + r.pais + "</strong><span class='tag api'>Norma vigente</span><br>" + enlace + (r.resumen ? "<br><span class='meta'>" + r.resumen + "</span>" : "") + "<span class='meta'>" + (r.fecha ? "Fecha: " + r.fecha + " - " : "") + "consultado " + fecha + "</span>";
         out.appendChild(d);
       });
       estado.textContent = state.resultados.length + " resultado(s) encontrados.";
