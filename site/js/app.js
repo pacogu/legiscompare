@@ -146,33 +146,41 @@ async function ejecutarBusqueda() {
       }));
     } catch (e) {}
 
-    const esErrorCuota = res.tipoError === "quota" || (res.errores || []).some((m) => /limite de uso|quota|429/i.test(m));
+    const esModoDirectorio = res.modo === "directorio";
 
-    if (esErrorCuota) {
-      out.innerHTML = "<div class='empty'>Se alcanzo el limite de uso o creditos de la API por ahora. Espera unos minutos y vuelve a intentar.</div>";
-      estado.textContent = "Limite de cuota alcanzado.";
+    if (!state.resultados.length) {
+      const esErrorCuota = res.tipoError === "quota" || (res.errores || []).some((m) => /limite de uso|quota|429/i.test(m));
+      out.innerHTML = esErrorCuota
+        ? "<div class='empty'>Se alcanzo el limite de uso o creditos de la API por ahora. Espera unos minutos y vuelve a intentar.</div>"
+        : "<div class='empty'>Sin resultados. Prueba con terminos mas generales.</div>";
+      estado.textContent = esErrorCuota ? "Limite de cuota alcanzado." : "Sin resultados.";
       const retry = document.createElement("button");
       retry.className = "btn secondary";
       retry.style.marginTop = "10px";
       retry.textContent = "Reintentar";
       retry.addEventListener("click", ejecutarBusqueda);
       out.appendChild(retry);
-    } else if (!state.resultados.length) {
-      out.innerHTML = "<div class='empty'>Sin resultados. Prueba con terminos mas generales.</div>";
-      estado.textContent = "Sin resultados.";
     } else {
+      if (esModoDirectorio) {
+        const aviso = document.createElement("div");
+        aviso.className = "note";
+        aviso.style.marginBottom = "10px";
+        aviso.textContent = "La busqueda con IA no esta disponible ahora mismo, asi que se muestra el directorio de fuentes oficiales para buscar directamente en el portal de cada pais.";
+        out.appendChild(aviso);
+      }
       state.resultados.forEach((r) => {
         const d = document.createElement("div");
         d.className = "item api";
         const enlace = r.url ? "<a href='" + r.url + "' target='_blank' rel='noopener'>" + r.titulo + "</a>" : r.titulo;
-        d.innerHTML = "<strong>" + r.pais + "</strong><span class='tag api'>Norma vigente</span><br>" + enlace + (r.resumen ? "<br><span class='meta'>" + r.resumen + "</span>" : "") + "<span class='meta'>" + (r.fecha ? "Fecha: " + r.fecha + " - " : "") + "consultado " + fecha + "</span>";
+        const etiqueta = r.esDirectorio ? "Fuente oficial" : "Norma vigente";
+        d.innerHTML = "<strong>" + r.pais + "</strong><span class='tag api'>" + etiqueta + "</span><br>" + enlace + (r.resumen ? "<br><span class='meta'>" + r.resumen + "</span>" : "") + "<span class='meta'>" + (r.fecha ? "Fecha: " + r.fecha + " - " : "") + "consultado " + fecha + "</span>";
         out.appendChild(d);
       });
       estado.textContent = state.resultados.length + " resultado(s) encontrados.";
       estado.className = "status ok";
       abrirBtn.style.display = "inline-flex";
     }
-    if (!esErrorCuota && res.errores && res.errores.length) err.innerHTML = res.errores.join("<br>");
+    if (!esModoDirectorio && res.errores && res.errores.length) err.innerHTML = res.errores.join("<br>");
   } catch (e) {
     err.innerHTML = "Error al buscar: " + e.message;
     estado.textContent = "Error en la busqueda.";

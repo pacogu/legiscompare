@@ -22,20 +22,19 @@ site/
   css/app.css             estilos
   js/app.js               logica de la pagina de consulta
   js/dossier.js            logica del dossier
-  js/busqueda_api.js       cliente que llama a la funcion de busqueda (con cache 30min)
-netlify/functions/buscar.js      busqueda en vivo del nombre de la norma (AI/ML API, perplexity/sonar)
-netlify/functions/sintetizar.js  borrador de sintesis comparada (AI/ML API, opcional)
+  js/busqueda_api.js       cliente de busqueda, con fallback al catalogo local (cache 30min)
+netlify/functions/buscar.js      busqueda en vivo del nombre de la norma (Gemini + Google Search)
+netlify/functions/sintetizar.js  borrador de sintesis comparada (Gemini, opcional)
 netlify.toml            configuracion de build/deploy de Netlify
 ```
 
 ## Como funciona la busqueda
 
 El sitio busca el NOMBRE REAL de la norma (no solo el portal donde
-buscar). Usa AI/ML API (aimlapi.com) con el modelo `perplexity/sonar`,
-construido especificamente para busqueda web con resultados y citas
-reales: devuelve el titulo oficial de cada norma, traducido al espanol
-cuando el original esta en otro idioma, junto con pais, URL, fecha y un
-resumen de que regula.
+buscar). Usa Google Gemini (nivel gratuito, sin tarjeta de credito) con
+Google Search (grounding): devuelve el titulo oficial de cada norma,
+traducido al espanol cuando el original esta en otro idioma, junto con
+pais, URL, fecha y un resumen de que regula.
 
 Como contexto, cada busqueda se acota con el catalogo curado en
 `site/data/fuentes_oficiales.json` (46 paises y bloques: Union Europea,
@@ -47,43 +46,51 @@ Luxemburgo, Mexico, Nicaragua, Noruega, Nueva Zelanda, Paises Bajos,
 Panama, Paraguay, Peru, Polonia, Portugal, Reino Unido, Republica Checa,
 Suecia, Suiza, Turquia y Uruguay). Esto orienta al modelo a buscar
 directamente en el portal oficial de cada pais seleccionado en vez de
-fuentes genericas. Para agregar mas paises, basta con sumar un objeto
-nuevo a `fuentes_oficiales.json` con los campos `pais`, `fuente`, `tipo`,
+fuentes genericas.
+
+**Respaldo sin IA:** si Gemini se queda sin cuota gratuita del dia (o la
+clave no esta configurada), el sitio no muestra "sin resultados": cae
+automaticamente al mismo catalogo local y muestra el directorio de
+fuentes oficiales de los paises filtrados, con enlace directo al portal
+de cada uno, para que el usuario busque ahi manualmente. Esto hace que
+la busqueda nunca quede vacia, con o sin cuota de IA disponible.
+
+Para agregar mas paises al catalogo, basta con sumar un objeto nuevo a
+`fuentes_oficiales.json` con los campos `pais`, `fuente`, `tipo`,
 `nivel`, `url`, `tiene_api`, `api_url`, `api_tipo`, `api_docs`,
 `api_params`, `formato`, `notas`.
 
-Requiere la variable de entorno `AIMLAPI_API_KEY` en Netlify (ver mas
-abajo). Los resultados se cachean 30 minutos en el navegador para no
-repetir llamadas con la misma consulta. Si se agota el saldo o el limite
-de uso, el sitio reintenta automaticamente y, si persiste, muestra un
-mensaje claro con boton de reintentar.
+Requiere la variable de entorno `GEMINI_API_KEY` en Netlify (ver mas
+abajo) para la busqueda con IA; sin ella, el sitio funciona igual pero
+siempre en modo directorio. Los resultados se cachean 30 minutos en el
+navegador para no repetir llamadas con la misma consulta.
 
 ## Sintesis comparada (opcional, usa IA)
 
 El dossier analitico (`dossier.html`) puede generar un borrador de
-sintesis comparada por eje juridico usando el mismo modelo, a partir de
-las fuentes ya encontradas. Esto es un paso opcional y puntual (no se
-ejecuta en cada busqueda), asi que su consumo es mucho menor. Usa la
-misma variable `AIMLAPI_API_KEY`. Si no esta configurada, el dossier
-funciona igual pero sin el borrador automatico (el analista redacta
-directamente sus hallazgos).
+sintesis comparada por eje juridico usando Gemini, a partir de las
+fuentes ya encontradas. Esto es un paso opcional y puntual (no se
+ejecuta en cada busqueda), asi que su consumo de cuota es mucho menor.
+Usa la misma variable `GEMINI_API_KEY`. Si no esta configurada, el
+dossier funciona igual pero sin el borrador automatico (el analista
+redacta directamente sus hallazgos).
 
 ## Como desplegar en Netlify
 
 1. Sube este repositorio a GitHub.
 2. En Netlify: Add new site > Import an existing project, conecta el repo.
 3. Build settings: sin build command, publish directory = `site`.
-4. En Site settings > Environment variables agrega `AIMLAPI_API_KEY`
-   (se obtiene en https://aimlapi.com/app/keys; marcar "Contains secret
-   values"). Se usa tanto para la busqueda como para el borrador de
-   sintesis.
-5. Deploy. La busqueda funciona via `/.netlify/functions/buscar`.
+4. En Site settings > Environment variables agrega `GEMINI_API_KEY`
+   (gratis, sin tarjeta, en https://aistudio.google.com/apikey; marcar
+   "Contains secret values").
+5. Deploy. La busqueda funciona via `/.netlify/functions/buscar`, con
+   fallback automatico al catalogo local si no hay cuota disponible.
 
 ## Desarrollo local
 
 Sin build. Para probar el sitio basta con abrir `site/index.html` o
 servirlo con cualquier servidor estatico. Para probar la funcion
-serverless de sintesis localmente:
+serverless localmente:
 
 ```
 npm install -g netlify-cli
