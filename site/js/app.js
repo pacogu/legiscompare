@@ -3,10 +3,10 @@
 // escribir y Enter/Buscar. Jurisdicciones y ejes son filtros opcionales.
 
 const REGIONES = [
-  { id: "UE", nombre: "Union Europea", paises: ["Alemania", "Austria", "Belgica", "Dinamarca"] },
-  { id: "AL", nombre: "America Latina", paises: ["Argentina", "Bolivia", "Brasil", "Colombia", "Costa Rica", "Cuba", "Ecuador"] },
-  { id: "CW", nombre: "Commonwealth", paises: ["Australia", "Canada"] },
-  { id: "AS", nombre: "Asia", paises: ["Corea del Sur"] },
+  { id: "UE", nombre: "Union Europea y Europa", paises: ["Union Europea", "Alemania", "Austria", "Belgica", "Dinamarca", "Espana", "Estonia", "Finlandia", "Francia", "Grecia", "Hungria", "Irlanda", "Islandia", "Italia", "Letonia", "Lituania", "Luxemburgo", "Noruega", "Paises Bajos", "Polonia", "Portugal", "Reino Unido", "Republica Checa", "Suecia", "Suiza", "Turquia"] },
+  { id: "AL", nombre: "America Latina", paises: ["Argentina", "Bolivia", "Brasil", "Chile", "Colombia", "Costa Rica", "Cuba", "Ecuador", "Mexico", "Nicaragua", "Panama", "Paraguay", "Peru", "Uruguay"] },
+  { id: "NA", nombre: "Norteamerica y Oceania", paises: ["Estados Unidos", "Canada", "Australia", "Nueva Zelanda"] },
+  { id: "AS", nombre: "Asia y Medio Oriente", paises: ["Corea del Sur", "Japon", "Israel"] },
 ];
 
 const EJES_SUGERIDOS = [

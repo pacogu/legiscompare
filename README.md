@@ -32,9 +32,14 @@ netlify.toml            configuracion de build/deploy de Netlify
 La busqueda principal ya NO depende de una API de IA externa (se elimino
 esa dependencia por los limites de cuota/creditos que generaba). En su
 lugar usa un catalogo curado en `site/data/fuentes_oficiales.json` con la
-fuente oficial, URL y datos de API (si existe) de cada pais: Alemania,
-Argentina, Australia, Austria, Belgica, Bolivia, Brasil, Canada, Colombia,
-Corea del Sur, Costa Rica, Cuba, Dinamarca y Ecuador.
+fuente oficial, URL y datos de API (si existe) de 46 paises y bloques,
+incluyendo Union Europea, Alemania, Argentina, Australia, Austria,
+Belgica, Bolivia, Brasil, Canada, Chile, Colombia, Corea del Sur,
+Costa Rica, Cuba, Dinamarca, Ecuador, Espana, Estados Unidos, Estonia,
+Finlandia, Francia, Grecia, Hungria, Irlanda, Islandia, Israel, Italia,
+Japon, Letonia, Lituania, Luxemburgo, Mexico, Nicaragua, Noruega,
+Nueva Zelanda, Paises Bajos, Panama, Paraguay, Peru, Polonia, Portugal,
+Reino Unido, Republica Checa, Suecia, Suiza, Turquia y Uruguay.
 
 Al buscar, el sitio filtra este catalogo por los paises seleccionados y
 por coincidencia de palabras con el termino buscado (en el nombre de la
