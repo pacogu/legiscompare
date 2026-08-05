@@ -1,13 +1,12 @@
-// Busqueda de legislacion comparada usando Google Gemini con la
-// herramienta de Google Search (grounding, nivel gratuito sin tarjeta):
-// una sola llamada que busca en la web real y devuelve el nombre real
-// de la norma, sin necesidad de integrar una API distinta por cada
-// fuente oficial.
+// Busqueda de legislacion comparada usando AI/ML API (aimlapi.com) con el
+// modelo perplexity/sonar, hecho especificamente para busqueda web con
+// resultados y citas reales. Una sola llamada que busca en la web real y
+// devuelve el nombre real de la norma para cualquier pais.
 
 exports.handler = async function (event) {
-  const apiKey = process.env.GEMINI_API_KEY;
+  const apiKey = process.env.AIMLAPI_API_KEY;
   if (!apiKey) {
-    return { statusCode: 200, headers: cors(), body: JSON.stringify({ resultados: [], errores: ["Falta GEMINI_API_KEY en variables de entorno de Netlify."] }) };
+    return { statusCode: 200, headers: cors(), body: JSON.stringify({ resultados: [], errores: ["Falta AIMLAPI_API_KEY en variables de entorno de Netlify."] }) };
   }
 
   const q = (event.queryStringParameters && event.queryStringParameters.q) || "";
@@ -38,12 +37,12 @@ exports.handler = async function (event) {
     "[{\"pais\": \"nombre del pais\", \"titulo\": \"titulo oficial de la norma, traducido si corresponde\", \"url\": \"URL oficial de la norma especifica si existe, o del portal oficial\", \"fecha\": \"AAAA-MM-DD o AAAA si no hay mas precision, o null\", \"resumen\": \"que regula la norma, en una oracion\"}]";
 
   try {
-    const model = "gemini-2.0-flash";
-    const url = "https://generativelanguage.googleapis.com/v1beta/models/" + model + ":generateContent?key=" + apiKey;
+    const url = "https://api.aimlapi.com/v1/chat/completions";
     const body = JSON.stringify({
-      contents: [{ role: "user", parts: [{ text: prompt }] }],
-      tools: [{ google_search: {} }],
-      generationConfig: { maxOutputTokens: 2500, temperature: 0.2 },
+      model: "perplexity/sonar",
+      messages: [{ role: "user", content: prompt }],
+      max_tokens: 2500,
+      temperature: 0.2,
     });
 
     let r;
@@ -51,7 +50,11 @@ exports.handler = async function (event) {
     const maxIntentos = 3;
     while (true) {
       intentos++;
-      r = await fetch(url, { method: "POST", headers: { "content-type": "application/json" }, body });
+      r = await fetch(url, {
+        method: "POST",
+        headers: { "content-type": "application/json", authorization: "Bearer " + apiKey },
+        body,
+      });
       if (r.status !== 429 || intentos >= maxIntentos) break;
       await new Promise((resolve) => setTimeout(resolve, 1500 * intentos));
     }
@@ -64,17 +67,17 @@ exports.handler = async function (event) {
           headers: cors(),
           body: JSON.stringify({
             resultados: [],
-            errores: ["Se alcanzo el limite de uso gratuito de Gemini por ahora. Espera unos minutos y vuelve a intentar (el limite se reinicia periodicamente sin costo)."],
+            errores: ["Se alcanzo el limite de uso o creditos de AI/ML API por ahora. Espera unos minutos y vuelve a intentar, o revisa tu saldo en aimlapi.com/app/billing."],
             tipoError: "quota",
           }),
         };
       }
-      return { statusCode: 200, headers: cors(), body: JSON.stringify({ resultados: [], errores: ["Gemini API " + r.status + ": " + t.slice(0, 300)] }) };
+      return { statusCode: 200, headers: cors(), body: JSON.stringify({ resultados: [], errores: ["AI/ML API " + r.status + ": " + t.slice(0, 300)] }) };
     }
 
     const data = await r.json();
-    const parts = (data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts) || [];
-    let texto = parts.map((p) => p.text || "").join("\n").trim();
+    let texto = (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) || "";
+    texto = texto.trim();
     const bloqueJson = texto.match(/```json\s*([\s\S]*?)```/i) || texto.match(/(\[[\s\S]*\])\s*$/);
     if (bloqueJson) texto = bloqueJson[1].trim();
     texto = texto.replace(/^```json\s*/i, "").replace(/^```\s*/, "").replace(/```\s*$/, "").trim();
@@ -84,7 +87,7 @@ exports.handler = async function (event) {
       resultados = JSON.parse(texto);
       if (!Array.isArray(resultados)) resultados = [];
     } catch (e) {
-      return { statusCode: 200, headers: cors(), body: JSON.stringify({ resultados: [], errores: ["No se pudo interpretar la respuesta de Gemini como JSON: " + e.message] }) };
+      return { statusCode: 200, headers: cors(), body: JSON.stringify({ resultados: [], errores: ["No se pudo interpretar la respuesta como JSON: " + e.message] }) };
     }
 
     resultados = resultados

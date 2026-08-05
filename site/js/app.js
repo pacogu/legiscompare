@@ -149,7 +149,7 @@ async function ejecutarBusqueda() {
     const esErrorCuota = res.tipoError === "quota" || (res.errores || []).some((m) => /limite de uso|quota|429/i.test(m));
 
     if (esErrorCuota) {
-      out.innerHTML = "<div class='empty'>Se alcanzo el limite de uso gratuito de Gemini por ahora. Espera unos minutos y vuelve a intentar.</div>";
+      out.innerHTML = "<div class='empty'>Se alcanzo el limite de uso o creditos de la API por ahora. Espera unos minutos y vuelve a intentar.</div>";
       estado.textContent = "Limite de cuota alcanzado.";
       const retry = document.createElement("button");
       retry.className = "btn secondary";

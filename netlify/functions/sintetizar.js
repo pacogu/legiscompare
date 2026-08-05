@@ -1,14 +1,14 @@
 // Genera un borrador de sintesis comparada por eje juridico, usando
-// Gemini (nivel gratuito) sobre los resultados ya encontrados (titulo,
-// resumen y fecha obtenidos por la busqueda con Google Search grounding).
+// AI/ML API (aimlapi.com, modelo perplexity/sonar) sobre los resultados
+// ya encontrados (titulo, resumen y fecha obtenidos por la busqueda).
 // Este texto es SIEMPRE un borrador que debe validar un abogado: el
 // sistema no emite un informe legal definitivo (principio del piloto
 // Comparative Law++).
 
 exports.handler = async function (event) {
-  const apiKey = process.env.GEMINI_API_KEY;
+  const apiKey = process.env.AIMLAPI_API_KEY;
   if (!apiKey) {
-    return { statusCode: 200, headers: cors(), body: JSON.stringify({ error: "Falta GEMINI_API_KEY en variables de entorno de Netlify. Sin esto no se puede generar el borrador de sintesis." }) };
+    return { statusCode: 200, headers: cors(), body: JSON.stringify({ error: "Falta AIMLAPI_API_KEY en variables de entorno de Netlify. Sin esto no se puede generar el borrador de sintesis." }) };
   }
 
   let body;
@@ -39,26 +39,26 @@ exports.handler = async function (event) {
     "y vacios de informacion entre las jurisdicciones listadas. Usa un tono tecnico, cauteloso y no concluyente.";
 
   try {
-    const model = "gemini-2.0-flash";
-    const url = "https://generativelanguage.googleapis.com/v1beta/models/" + model + ":generateContent?key=" + apiKey;
+    const url = "https://api.aimlapi.com/v1/chat/completions";
     const r = await fetch(url, {
       method: "POST",
-      headers: { "content-type": "application/json" },
+      headers: { "content-type": "application/json", authorization: "Bearer " + apiKey },
       body: JSON.stringify({
-        contents: [{ role: "user", parts: [{ text: prompt }] }],
-        generationConfig: { maxOutputTokens: 900, temperature: 0.3 },
+        model: "perplexity/sonar",
+        messages: [{ role: "user", content: prompt }],
+        max_tokens: 900,
+        temperature: 0.3,
       }),
     });
     if (!r.ok) {
       const t = await r.text();
       if (r.status === 429) {
-        return { statusCode: 200, headers: cors(), body: JSON.stringify({ error: "Se alcanzo el limite de uso gratuito de Gemini. Espera unos minutos y vuelve a intentar." }) };
+        return { statusCode: 200, headers: cors(), body: JSON.stringify({ error: "Se alcanzo el limite de uso o creditos de AI/ML API. Espera unos minutos y vuelve a intentar." }) };
       }
-      return { statusCode: 200, headers: cors(), body: JSON.stringify({ error: "Gemini API " + r.status + ": " + t.slice(0, 200) }) };
+      return { statusCode: 200, headers: cors(), body: JSON.stringify({ error: "AI/ML API " + r.status + ": " + t.slice(0, 300) }) };
     }
     const data = await r.json();
-    const parts = (data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts) || [];
-    const texto = parts.map((p) => p.text || "").join("\n").trim();
+    const texto = ((data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) || "").trim();
     return { statusCode: 200, headers: cors(), body: JSON.stringify({ borrador: texto || "Sin contenido generado." }) };
   } catch (e) {
     return { statusCode: 200, headers: cors(), body: JSON.stringify({ error: e.message }) };
