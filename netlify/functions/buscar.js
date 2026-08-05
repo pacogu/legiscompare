@@ -1,13 +1,13 @@
-// Busqueda de legislacion comparada usando Claude (Anthropic) con la
-// herramienta de busqueda web integrada (web_search): una sola llamada
-// que busca en la web real y devuelve resultados estructurados de
-// cualquier pais, sin necesidad de integrar una API distinta por cada
+// Busqueda de legislacion comparada usando Google Gemini con la
+// herramienta de Google Search (grounding, nivel gratuito sin tarjeta):
+// una sola llamada que busca en la web real y devuelve el nombre real
+// de la norma, sin necesidad de integrar una API distinta por cada
 // fuente oficial.
 
 exports.handler = async function (event) {
-  const apiKey = process.env.ANTHROPIC_API_KEY;
+  const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) {
-    return { statusCode: 200, headers: cors(), body: JSON.stringify({ resultados: [], errores: ["Falta ANTHROPIC_API_KEY en variables de entorno de Netlify."] }) };
+    return { statusCode: 200, headers: cors(), body: JSON.stringify({ resultados: [], errores: ["Falta GEMINI_API_KEY en variables de entorno de Netlify."] }) };
   }
 
   const q = (event.queryStringParameters && event.queryStringParameters.q) || "";
@@ -34,17 +34,16 @@ exports.handler = async function (event) {
     "Si el titulo original no esta en espanol, tradúcelo al espanol entre parentesis junto al titulo original, por ejemplo: " +
     "\"Bundesdatenschutzgesetz (Ley Federal de Proteccion de Datos)\". " +
     "El campo resumen debe describir brevemente el CONTENIDO de la norma (que regula), no donde se encontro. " +
-    "Al final de tu respuesta, incluye UNICAMENTE un bloque de codigo JSON (sin texto despues) con este formato exacto: " +
+    "Responde UNICAMENTE con un bloque de codigo JSON (sin texto antes ni despues) con este formato exacto: " +
     "[{\"pais\": \"nombre del pais\", \"titulo\": \"titulo oficial de la norma, traducido si corresponde\", \"url\": \"URL oficial de la norma especifica si existe, o del portal oficial\", \"fecha\": \"AAAA-MM-DD o AAAA si no hay mas precision, o null\", \"resumen\": \"que regula la norma, en una oracion\"}]";
 
   try {
-    const url = "https://api.anthropic.com/v1/messages";
+    const model = "gemini-2.0-flash";
+    const url = "https://generativelanguage.googleapis.com/v1beta/models/" + model + ":generateContent?key=" + apiKey;
     const body = JSON.stringify({
-      model: "claude-sonnet-4-5-20250929",
-      max_tokens: 2000,
-      temperature: 0.2,
-      tools: [{ type: "web_search_20250305", name: "web_search", max_uses: 6 }],
-      messages: [{ role: "user", content: prompt }],
+      contents: [{ role: "user", parts: [{ text: prompt }] }],
+      tools: [{ google_search: {} }],
+      generationConfig: { maxOutputTokens: 2500, temperature: 0.2 },
     });
 
     let r;
@@ -52,17 +51,9 @@ exports.handler = async function (event) {
     const maxIntentos = 3;
     while (true) {
       intentos++;
-      r = await fetch(url, {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-          "x-api-key": apiKey,
-          "anthropic-version": "2023-06-01",
-        },
-        body,
-      });
+      r = await fetch(url, { method: "POST", headers: { "content-type": "application/json" }, body });
       if (r.status !== 429 || intentos >= maxIntentos) break;
-      await new Promise((resolve) => setTimeout(resolve, 1200 * intentos));
+      await new Promise((resolve) => setTimeout(resolve, 1500 * intentos));
     }
 
     if (!r.ok) {
@@ -73,16 +64,17 @@ exports.handler = async function (event) {
           headers: cors(),
           body: JSON.stringify({
             resultados: [],
-            errores: ["Se alcanzo el limite de uso o cuota de la API de Claude por ahora. Espera unos minutos y vuelve a intentar, o revisa tu plan y facturacion en console.anthropic.com."],
+            errores: ["Se alcanzo el limite de uso gratuito de Gemini por ahora. Espera unos minutos y vuelve a intentar (el limite se reinicia periodicamente sin costo)."],
             tipoError: "quota",
           }),
         };
       }
-      return { statusCode: 200, headers: cors(), body: JSON.stringify({ resultados: [], errores: ["Claude API " + r.status + ": " + t.slice(0, 300)] }) };
+      return { statusCode: 200, headers: cors(), body: JSON.stringify({ resultados: [], errores: ["Gemini API " + r.status + ": " + t.slice(0, 300)] }) };
     }
 
     const data = await r.json();
-    let texto = extraerTexto(data).trim();
+    const parts = (data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts) || [];
+    let texto = parts.map((p) => p.text || "").join("\n").trim();
     const bloqueJson = texto.match(/```json\s*([\s\S]*?)```/i) || texto.match(/(\[[\s\S]*\])\s*$/);
     if (bloqueJson) texto = bloqueJson[1].trim();
     texto = texto.replace(/^```json\s*/i, "").replace(/^```\s*/, "").replace(/```\s*$/, "").trim();
@@ -92,7 +84,7 @@ exports.handler = async function (event) {
       resultados = JSON.parse(texto);
       if (!Array.isArray(resultados)) resultados = [];
     } catch (e) {
-      return { statusCode: 200, headers: cors(), body: JSON.stringify({ resultados: [], errores: ["No se pudo interpretar la respuesta de Claude como JSON: " + e.message] }) };
+      return { statusCode: 200, headers: cors(), body: JSON.stringify({ resultados: [], errores: ["No se pudo interpretar la respuesta de Gemini como JSON: " + e.message] }) };
     }
 
     resultados = resultados
@@ -111,18 +103,6 @@ exports.handler = async function (event) {
     return { statusCode: 200, headers: cors(), body: JSON.stringify({ resultados: [], errores: [e.message] }) };
   }
 };
-
-// La API de Claude devuelve content[] con distintos tipos de bloque
-// (server_tool_use, web_search_tool_result, text). El texto final del
-// modelo esta en los bloques type:"text".
-function extraerTexto(data) {
-  const content = data.content || [];
-  let texto = "";
-  for (const block of content) {
-    if (block.type === "text" && block.text) texto += block.text;
-  }
-  return texto;
-}
 
 function cors() {
   return { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" };

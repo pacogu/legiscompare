@@ -1,13 +1,14 @@
-// Genera un borrador de sintesis comparada por eje juridico, usando Claude
-// (Anthropic) sobre los resultados ya encontrados (titulo, resumen y fecha
-// obtenidos por la busqueda con web_search). Este texto es SIEMPRE un
-// borrador que debe validar un abogado: el sistema no emite un informe
-// legal definitivo (principio del piloto Comparative Law++).
+// Genera un borrador de sintesis comparada por eje juridico, usando
+// Gemini (nivel gratuito) sobre los resultados ya encontrados (titulo,
+// resumen y fecha obtenidos por la busqueda con Google Search grounding).
+// Este texto es SIEMPRE un borrador que debe validar un abogado: el
+// sistema no emite un informe legal definitivo (principio del piloto
+// Comparative Law++).
 
 exports.handler = async function (event) {
-  const apiKey = process.env.ANTHROPIC_API_KEY;
+  const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) {
-    return { statusCode: 200, headers: cors(), body: JSON.stringify({ error: "Falta ANTHROPIC_API_KEY en variables de entorno de Netlify. Sin esto no se puede generar el borrador de sintesis." }) };
+    return { statusCode: 200, headers: cors(), body: JSON.stringify({ error: "Falta GEMINI_API_KEY en variables de entorno de Netlify. Sin esto no se puede generar el borrador de sintesis." }) };
   }
 
   let body;
@@ -38,44 +39,31 @@ exports.handler = async function (event) {
     "y vacios de informacion entre las jurisdicciones listadas. Usa un tono tecnico, cauteloso y no concluyente.";
 
   try {
-    const url = "https://api.anthropic.com/v1/messages";
+    const model = "gemini-2.0-flash";
+    const url = "https://generativelanguage.googleapis.com/v1beta/models/" + model + ":generateContent?key=" + apiKey;
     const r = await fetch(url, {
       method: "POST",
-      headers: {
-        "content-type": "application/json",
-        "x-api-key": apiKey,
-        "anthropic-version": "2023-06-01",
-      },
+      headers: { "content-type": "application/json" },
       body: JSON.stringify({
-        model: "claude-sonnet-4-5-20250929",
-        max_tokens: 900,
-        temperature: 0.3,
-        messages: [{ role: "user", content: prompt }],
+        contents: [{ role: "user", parts: [{ text: prompt }] }],
+        generationConfig: { maxOutputTokens: 900, temperature: 0.3 },
       }),
     });
     if (!r.ok) {
       const t = await r.text();
       if (r.status === 429) {
-        return { statusCode: 200, headers: cors(), body: JSON.stringify({ error: "Se alcanzo el limite de uso o cuota de la API de Claude. Espera unos minutos y vuelve a intentar." }) };
+        return { statusCode: 200, headers: cors(), body: JSON.stringify({ error: "Se alcanzo el limite de uso gratuito de Gemini. Espera unos minutos y vuelve a intentar." }) };
       }
-      return { statusCode: 200, headers: cors(), body: JSON.stringify({ error: "Claude API " + r.status + ": " + t.slice(0, 300) }) };
+      return { statusCode: 200, headers: cors(), body: JSON.stringify({ error: "Gemini API " + r.status + ": " + t.slice(0, 200) }) };
     }
     const data = await r.json();
-    const texto = extraerTexto(data).trim();
+    const parts = (data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts) || [];
+    const texto = parts.map((p) => p.text || "").join("\n").trim();
     return { statusCode: 200, headers: cors(), body: JSON.stringify({ borrador: texto || "Sin contenido generado." }) };
   } catch (e) {
     return { statusCode: 200, headers: cors(), body: JSON.stringify({ error: e.message }) };
   }
 };
-
-function extraerTexto(data) {
-  const content = data.content || [];
-  let texto = "";
-  for (const block of content) {
-    if (block.type === "text" && block.text) texto += block.text;
-  }
-  return texto;
-}
 
 function cors() {
   return { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" };
