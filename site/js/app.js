@@ -29,7 +29,7 @@ const TEMAS_SUGERIDOS = [
   "Regulacion de plataformas digitales",
 ];
 
-const state = { paisesSeleccionados: new Set(), ejesSeleccionados: new Set(), resultados: [] };
+const state = { paisesSeleccionados: new Set(), ejesSeleccionados: new Set(), resultados: [], seleccionados: new Set() };
 
 function obtenerRecientes() {
   try { return JSON.parse(localStorage.getItem("legiscompare_recientes") || "[]"); } catch (e) { return []; }
@@ -131,22 +131,16 @@ async function ejecutarBusqueda() {
   out.innerHTML = ""; err.innerHTML = ""; abrirBtn.style.display = "none";
 
   const fecha = new Date().toLocaleString("es-CL", { dateStyle: "short", timeStyle: "short" });
+  state.fechaConsulta = fecha;
+  state.consulta = consulta;
   try {
     const paisesArray = Array.from(state.paisesSeleccionados);
     const res = await window.IJARBusquedaExterna.ejecutarBusquedaExterna(consulta, paisesArray);
     state.resultados = res.resultados || [];
-
-    try {
-      sessionStorage.setItem("legiscompare_brief", JSON.stringify({
-        consulta,
-        jurisdicciones: paisesArray,
-        ejes: Array.from(state.ejesSeleccionados),
-        resultados: state.resultados,
-        fechaConsulta: fecha,
-      }));
-    } catch (e) {}
+    state.seleccionados = new Set(state.resultados.map((_, i) => i));
 
     const esModoDirectorio = res.modo === "directorio";
+    state.esModoDirectorio = esModoDirectorio;
 
     if (!state.resultados.length) {
       const esErrorCuota = res.tipoError === "quota" || (res.errores || []).some((m) => /limite de uso|quota|429/i.test(m));
@@ -164,21 +158,16 @@ async function ejecutarBusqueda() {
       if (esModoDirectorio) {
         const aviso = document.createElement("div");
         aviso.className = "note";
-        aviso.style.marginBottom = "10px";
+        aviso.style.gridColumn = "1 / -1";
+        aviso.style.marginBottom = "4px";
         aviso.textContent = "La busqueda con IA no esta disponible ahora mismo, asi que se muestra el directorio de fuentes oficiales para buscar directamente en el portal de cada pais.";
         out.appendChild(aviso);
       }
-      state.resultados.forEach((r) => {
-        const d = document.createElement("div");
-        d.className = "item api";
-        const enlace = r.url ? "<a href='" + r.url + "' target='_blank' rel='noopener'>" + r.titulo + "</a>" : r.titulo;
-        const etiqueta = r.esDirectorio ? "Fuente oficial" : "Analisis de fuente";
-        d.innerHTML = "<strong>" + r.pais + "</strong><span class='tag api'>" + etiqueta + "</span><br>" + enlace + (r.resumen ? "<br><span class='meta'>" + r.resumen + "</span>" : "") + "<span class='meta'>" + (r.fecha ? "Fecha: " + r.fecha + " - " : "") + "consultado " + fecha + "</span>";
-        out.appendChild(d);
-      });
-      estado.textContent = state.resultados.length + " resultado(s) encontrados.";
+      renderResultados();
+      estado.textContent = state.resultados.length + " resultado(s) encontrados. Deselecciona los que no quieras incluir en el informe.";
       estado.className = "status ok";
       abrirBtn.style.display = "inline-flex";
+      actualizarContadorSeleccion();
     }
     if (!esModoDirectorio && res.errores && res.errores.length) err.innerHTML = res.errores.join("<br>");
   } catch (e) {
@@ -188,8 +177,60 @@ async function ejecutarBusqueda() {
   btn.disabled = false; btn.textContent = "Buscar";
 }
 
+function renderResultados() {
+  const out = document.getElementById("resultadosApi");
+  const avisoExistente = out.querySelector(".note");
+  out.innerHTML = "";
+  if (avisoExistente) out.appendChild(avisoExistente);
+
+  state.resultados.forEach((r, idx) => {
+    const card = document.createElement("div");
+    card.className = "resultado-card" + (r.esDirectorio ? " directorio" : "") + (state.seleccionados.has(idx) ? " seleccionada" : "");
+    card.setAttribute("data-idx", idx);
+
+    const etiqueta = r.esDirectorio ? "<span class='card-tag-directorio'>Fuente oficial</span>" : "";
+    const relevancia = (!r.esDirectorio && Number.isFinite(r.relevancia)) ? "<span class='card-relevancia'>" + r.relevancia + "%</span>" : "<span></span>";
+    const enlace = r.url ? "<a class='card-link' href='" + r.url + "' target='_blank' rel='noopener' onclick='event.stopPropagation()'>Ver fuente &rarr;</a>" : "<span></span>";
+
+    card.innerHTML =
+      "<div class='card-check'>&#10003;</div>" +
+      "<div class='card-pais'><span class='card-pais-nombre'>" + r.pais + "</span></div>" +
+      etiqueta +
+      "<div class='card-titulo'>" + r.titulo + "</div>" +
+      (r.resumen ? "<div class='card-resumen'>" + r.resumen + "</div>" : "") +
+      "<div class='card-footer'>" + enlace + relevancia + "</div>";
+
+    card.addEventListener("click", () => toggleSeleccion(idx));
+    out.appendChild(card);
+  });
+}
+
+function toggleSeleccion(idx) {
+  if (state.seleccionados.has(idx)) state.seleccionados.delete(idx);
+  else state.seleccionados.add(idx);
+  const card = document.querySelector(".resultado-card[data-idx='" + idx + "']");
+  if (card) card.classList.toggle("seleccionada");
+  actualizarContadorSeleccion();
+}
+
+function actualizarContadorSeleccion() {
+  const contador = document.getElementById("contadorSeleccion");
+  if (contador) contador.textContent = state.seleccionados.size;
+}
+
 function abrirDossier() {
   if (!state.resultados.length) { alert("Ejecuta primero una busqueda con resultados."); return; }
+  const seleccionados = state.resultados.filter((_, i) => state.seleccionados.has(i));
+  if (!seleccionados.length) { alert("Selecciona al menos un resultado para incluir en el informe."); return; }
+  try {
+    sessionStorage.setItem("legiscompare_brief", JSON.stringify({
+      consulta: state.consulta,
+      jurisdicciones: Array.from(state.paisesSeleccionados),
+      ejes: Array.from(state.ejesSeleccionados),
+      resultados: seleccionados,
+      fechaConsulta: state.fechaConsulta,
+    }));
+  } catch (e) {}
   window.location.href = "dossier.html";
 }
 

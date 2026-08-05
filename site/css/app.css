@@ -60,6 +60,23 @@ h1{margin:0;font-size:44px;font-weight:900;letter-spacing:-.03em;line-height:1.0
 .tag{display:inline-block;font-size:9px;text-transform:uppercase;letter-spacing:.06em;font-weight:900;padding:4px 10px;border-radius:var(--r-pill);background:rgba(31,78,121,.08);color:var(--blue);margin-left:6px}
 .tag.api{background:#ede9fe;color:#5b21b6}
 
+.resultados-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+.resultado-card{position:relative;text-align:left;border:1.5px solid var(--line);border-radius:22px;background:var(--paper);padding:16px;box-shadow:var(--shadow-sm);cursor:pointer;transition:border-color .15s,box-shadow .15s;display:flex;flex-direction:column;gap:8px}
+.resultado-card:hover{box-shadow:var(--shadow-lg)}
+.resultado-card.seleccionada{border-color:var(--blue);box-shadow:0 0 0 3px rgba(31,78,121,.12),var(--shadow-sm)}
+.resultado-card .card-check{position:absolute;top:12px;right:12px;width:22px;height:22px;border-radius:50%;border:2px solid var(--line);background:var(--paper);display:flex;align-items:center;justify-content:center;font-size:12px;color:transparent;transition:all .15s}
+.resultado-card.seleccionada .card-check{background:var(--blue);border-color:var(--blue);color:#fff}
+.resultado-card .card-pais{display:flex;align-items:center;justify-content:space-between;padding-right:26px}
+.resultado-card .card-pais-nombre{font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:.1em;color:var(--blue)}
+.resultado-card .card-titulo{font-weight:800;font-size:14px;line-height:1.3;color:var(--ink)}
+.resultado-card .card-resumen{font-size:11px;color:var(--muted);line-height:1.5;font-weight:500;flex:1}
+.resultado-card .card-footer{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:6px}
+.resultado-card .card-link{font-size:10px;font-weight:800;color:var(--blue);text-decoration:none;text-transform:uppercase;letter-spacing:.05em}
+.resultado-card .card-link:hover{text-decoration:underline}
+.resultado-card .card-relevancia{font-size:11px;font-weight:900;color:var(--green-dark)}
+.resultado-card.directorio .card-titulo{font-size:13px}
+.resultado-card .card-tag-directorio{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);background:rgba(0,0,0,.04);padding:3px 8px;border-radius:var(--r-pill);align-self:flex-start}
+
 .empty{color:var(--muted);font-style:italic;padding:16px;border:1.5px dashed var(--line);border-radius:20px;font-size:13px;text-align:center}
 .note{color:var(--muted);font-size:12px;line-height:1.6;margin-top:10px;font-weight:500}
 .err{color:#9a3412;font-size:12px;margin-top:8px;font-weight:600}
