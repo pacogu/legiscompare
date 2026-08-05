@@ -3,10 +3,10 @@
 // escribir y Enter/Buscar. Jurisdicciones y ejes son filtros opcionales.
 
 const REGIONES = [
-  { id: "UE", nombre: "Union Europea", paises: ["Espana", "Francia", "Alemania", "Italia", "Belgica", "Portugal", "Suecia"] },
-  { id: "AL", nombre: "America Latina", paises: ["Chile", "Argentina", "Brasil", "Mexico", "Colombia", "Peru", "Uruguay"] },
-  { id: "CW", nombre: "Commonwealth", paises: ["Reino Unido", "Canada", "Australia", "Nueva Zelanda"] },
-  { id: "NA", nombre: "Norteamerica", paises: ["Estados Unidos", "Canada"] },
+  { id: "UE", nombre: "Union Europea", paises: ["Alemania", "Austria", "Belgica", "Dinamarca"] },
+  { id: "AL", nombre: "America Latina", paises: ["Argentina", "Bolivia", "Brasil", "Colombia", "Costa Rica", "Cuba", "Ecuador"] },
+  { id: "CW", nombre: "Commonwealth", paises: ["Australia", "Canada"] },
+  { id: "AS", nombre: "Asia", paises: ["Corea del Sur"] },
 ];
 
 const EJES_SUGERIDOS = [
@@ -126,7 +126,7 @@ async function ejecutarBusqueda() {
   guardarReciente(consulta);
   document.getElementById("autocompleteList").hidden = true;
   btn.disabled = true; btn.innerHTML = "<span class='spinner'></span>Buscando...";
-  estado.textContent = "Buscando en la web con Gemini...";
+  estado.textContent = "Buscando en el catalogo de fuentes oficiales...";
   estado.className = "status";
   out.innerHTML = ""; err.innerHTML = ""; abrirBtn.style.display = "none";
 
@@ -165,7 +165,8 @@ async function ejecutarBusqueda() {
         const d = document.createElement("div");
         d.className = "item api";
         const enlace = r.url ? "<a href='" + r.url + "' target='_blank' rel='noopener'>" + r.titulo + "</a>" : r.titulo;
-        d.innerHTML = "<strong>" + r.pais + "</strong><span class='tag api'>Gemini + busqueda web</span><br>" + enlace + (r.resumen ? "<br><span class='meta'>" + r.resumen + "</span>" : "") + "<span class='meta'>" + (r.fecha ? "Fecha: " + r.fecha + " - " : "") + "consultado " + fecha + "</span>";
+        const apiInfo = r.api_url ? "<br><span class='meta'>API: " + r.api_url + (r.formato ? " (" + r.formato + ")" : "") + "</span>" : "";
+        d.innerHTML = "<strong>" + r.pais + "</strong><span class='tag api'>Fuente oficial</span><br>" + enlace + (r.resumen ? "<br><span class='meta'>" + r.resumen + "</span>" : "") + apiInfo + "<span class='meta'>Catalogo actualizado - consultado " + fecha + "</span>";
         out.appendChild(d);
       });
       estado.textContent = state.resultados.length + " resultado(s) encontrados.";

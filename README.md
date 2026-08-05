@@ -8,8 +8,9 @@ analitico preliminar (matriz, timeline, ejes juridicos); los hallazgos,
 implicancias y el informe final los redacta el abogado.
 
 Flujo: consulta inicial -> seleccion de jurisdicciones y ejes ->
-busqueda en vivo -> matriz comparada -> timeline -> informe analitico
-preliminar (editable, imprimible) -> redaccion humana del informe final.
+busqueda en el catalogo de fuentes oficiales -> matriz comparada ->
+timeline -> informe analitico preliminar (editable, imprimible) ->
+redaccion humana del informe final.
 
 ## Estructura
 
@@ -17,53 +18,64 @@ preliminar (editable, imprimible) -> redaccion humana del informe final.
 site/
   index.html          pagina de consulta (punto de entrada)
   dossier.html         dossier analitico comparado
-  data/                  matriz curada de fuentes normativas (JSON)
+  data/fuentes_oficiales.json  catalogo curado de fuentes oficiales por pais
   css/app.css             estilos
   js/app.js               logica de la pagina de consulta
   js/dossier.js            logica del dossier
-  js/busqueda_api.js       cliente de busqueda en APIs externas (con cache 30min)
-netlify/functions/buscar.js  proxy serverless (evita CORS, protege API keys)
+  js/busqueda_api.js       filtra el catalogo local de fuentes oficiales
+netlify/functions/sintetizar.js  borrador de sintesis comparada (Claude, opcional)
 netlify.toml            configuracion de build/deploy de Netlify
 ```
 
 ## Como funciona la busqueda
 
-Adaptado de `portal-legislativo/pages/ForeignLegislation.tsx` (BCN Chile,
-Escritorio ATP): en vez de mantener un conector distinto por cada pais, el
-sistema hace una sola llamada a Gemini con la herramienta de Google Search
-(grounding). Gemini busca en la web real y devuelve resultados
-estructurados (pais, titulo, url, fecha, resumen) de cualquier jurisdiccion,
-no solo las que tienen una API publica propia. Esto cubre Chile, Alemania,
-y en general cualquier pais, sin necesidad de integrar APIs una por una.
+La busqueda principal ya NO depende de una API de IA externa (se elimino
+esa dependencia por los limites de cuota/creditos que generaba). En su
+lugar usa un catalogo curado en `site/data/fuentes_oficiales.json` con la
+fuente oficial, URL y datos de API (si existe) de cada pais: Alemania,
+Argentina, Australia, Austria, Belgica, Bolivia, Brasil, Canada, Colombia,
+Corea del Sur, Costa Rica, Cuba, Dinamarca y Ecuador.
 
-Los filtros de "jurisdicciones" y "ejes juridicos" en la interfaz son
-opcionales: si se seleccionan, se pasan como contexto al prompt para
-acotar la busqueda; si no, busca en un ambito global.
+Al buscar, el sitio filtra este catalogo por los paises seleccionados y
+por coincidencia de palabras con el termino buscado (en el nombre de la
+fuente, el tipo de norma y las notas). Si no hay coincidencia exacta,
+igual se muestra el directorio completo de fuentes oficiales del pais
+seleccionado, para que el usuario navegue directo a la fuente primaria.
+
+Esto hace la busqueda base 100% confiable y sin costos de API: no hay
+llamadas de red mas que cargar el JSON local. Para agregar mas paises,
+basta con sumar un objeto nuevo a `fuentes_oficiales.json` con los campos
+`pais`, `fuente`, `tipo`, `nivel`, `url`, `tiene_api`, `api_url`,
+`api_tipo`, `api_docs`, `api_params`, `formato`, `notas`.
+
+## Sintesis comparada (opcional, usa IA)
+
+El dossier analitico (`dossier.html`) puede generar un borrador de
+sintesis comparada por eje juridico usando Claude (Anthropic), a partir
+de las fuentes ya encontradas. Esto es un paso opcional y puntual (no se
+ejecuta en cada busqueda), asi que su consumo de API es mucho menor.
+Requiere la variable de entorno `ANTHROPIC_API_KEY` en Netlify. Si no esta
+configurada, el dossier funciona igual pero sin el borrador automatico
+(el analista redacta directamente sus hallazgos).
 
 ## Como desplegar en Netlify
 
 1. Sube este repositorio a GitHub.
 2. En Netlify: Add new site > Import an existing project, conecta el repo.
 3. Build settings: sin build command, publish directory = `site`.
-4. En Site settings > Environment variables agrega `GEMINI_API_KEY`
-   (gratis en https://aistudio.google.com/apikey, marcar "Contains secret
-   values"). Se usa tanto para la busqueda como para el borrador de sintesis.
-5. Deploy. La busqueda funciona via `/.netlify/functions/buscar`.
+4. (Opcional, solo para el borrador de sintesis) En Site settings >
+   Environment variables agrega `ANTHROPIC_API_KEY` (se obtiene en
+   https://console.anthropic.com/settings/keys; marcar "Contains secret
+   values").
+5. Deploy. La busqueda principal funciona sin configuracion adicional.
 
 ## Desarrollo local
 
-Sin build. Para probar las funciones serverless localmente:
+Sin build. Para probar el sitio basta con abrir `site/index.html` o
+servirlo con cualquier servidor estatico. Para probar la funcion
+serverless de sintesis localmente:
 
 ```
 npm install -g netlify-cli
 netlify dev
 ```
-
-## Sin datos precargados
-
-Este proyecto no usa catalogo curado ni matriz estatica: cada resultado
-que se muestra viene en vivo de la API oficial del pais en el momento
-de la busqueda. Chile y Alemania no tienen API publica de busqueda por
-palabra clave, asi que para esos dos paises el sistema muestra
-explicitamente "sin fuente en vivo disponible" en vez de datos
-guardados de antemano.
