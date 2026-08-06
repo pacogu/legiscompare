@@ -56,6 +56,7 @@ piezas:
    - **Austria** - RIS-OGDService (`data.bka.gv.at/ris/OGDService.asmx`), servicio SOAP oficial sin llave, documentado en el manual tecnico del RIS (busqueda por "Suchworte" en Bundesrecht consolidado); requiere parsear XML doblemente escapado dentro del sobre SOAP, pendiente de confirmar en el sitio real.
    - **Chile** - LeyChile / BCN (`datos.bcn.cl/sparql`), SPARQL publico sobre la ontologia bcn-norms (`bcnnorms:Norm`, `dc:title`), mismo patron que Union Europea y Luxemburgo, pendiente de confirmar en el sitio real.
    - **Corea del Sur** (opcional) - DRF `lawSearch.do` del Ministerio de Legislacion (`open.law.go.kr`), con busqueda de texto real por "query". Requiere una llave gratuita propia (identificador OC, registro instantaneo y sin costo en open.law.go.kr) configurada como `LAW_KR_OC` en Netlify; sin ella, Corea del Sur sigue funcionando igual via Groq como cualquier pais sin conector.
+   - **Italia** - Normattiva, API Open Data oficial del Istituto Poligrafico e Zecca dello Stato (`api.normattiva.it/t/normattiva.api/bff-opendata/v1/api/v1/ricerca/semplice`), sin llave, ambiente de produccion. Busqueda de texto libre real (`testoRicerca`); implementado a partir de la especificacion tecnica oficial en PDF (con ejemplos reales de request/response), mayor confianza que los conectores basados solo en documentacion inferida, pendiente de confirmar en el sitio real.
 
    Cada conector esta aislado con manejo de errores propio: si uno falla
    (cambio de formato, caida del servicio, etc.), no afecta a los demas

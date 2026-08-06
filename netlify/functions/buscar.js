@@ -12,7 +12,7 @@ const CONECTORES_REALES = new Set([
   "brasil", "reino unido", "union europea", "irlanda",
   "colombia", "panama", "paises bajos", "suecia",
   "dinamarca", "suiza", "nueva zelanda", "canada", "polonia", "japon",
-  "israel", "noruega", "espana", "luxemburgo", "austria", "chile",
+  "israel", "noruega", "espana", "luxemburgo", "austria", "chile", "italia",
 ]);
 
 // Corea del Sur requiere una llave gratuita opcional (LAW_KR_OC,
@@ -70,6 +70,7 @@ exports.handler = async function (event) {
       else if (pais === "luxemburgo") resultadosReales = resultadosReales.concat(await buscarLuxemburgo(q));
       else if (pais === "austria") resultadosReales = resultadosReales.concat(await buscarAustria(q));
       else if (pais === "chile") resultadosReales = resultadosReales.concat(await buscarChile(q));
+      else if (pais === "italia") resultadosReales = resultadosReales.concat(await buscarItalia(q));
       else if (pais === "corea del sur") resultadosReales = resultadosReales.concat(await buscarCoreaDelSur(q));
     } catch (e) {
       errores.push("Conector de " + pais + ": " + e.message);
@@ -555,6 +556,45 @@ async function buscarCoreaDelSur(q) {
     resumen: it["소관부처명"] || null,
     relevancia: null,
   }));
+}
+
+// Italia - Normattiva (Istituto Poligrafico e Zecca dello Stato), API Open
+// Data oficial, sin llave, produccion (documentacion tecnica en PDF
+// aportada por el usuario). Busqueda de texto libre real via
+// "ricerca/semplice".
+async function buscarItalia(q) {
+  const url = "https://api.normattiva.it/t/normattiva.api/bff-opendata/v1/api/v1/ricerca/semplice";
+  const body = {
+    testoRicerca: q,
+    orderType: "recente",
+    paginazione: { paginaCorrente: 1, numeroElementiPerPagina: 8 },
+  };
+  const r = await fetch(url, {
+    method: "POST",
+    headers: { "content-type": "application/json", accept: "application/json" },
+    body: JSON.stringify(body),
+  });
+  if (!r.ok) throw new Error("API Normattiva Italia " + r.status);
+  const data = await r.json();
+  const items = (data && data.listaAtti) || [];
+  const arr = Array.isArray(items) ? items : [];
+  return arr.slice(0, 8).map((it) => {
+    let titulo = it.titoloAtto || it.descrizioneAtto || "Norma sin titulo";
+    titulo = String(titulo).replace(/^\[/, "").replace(/\]$/, "").trim();
+    let urlAtto = null;
+    if (it.dataGU && it.codiceRedazionale) {
+      urlAtto = "https://www.normattiva.it/atto/caricaDettaglioAtto?atto.dataPubblicazioneGazzetta=" +
+        String(it.dataGU).slice(0, 10) + "&atto.codiceRedazionale=" + it.codiceRedazionale;
+    }
+    return {
+      pais: "Italia",
+      titulo,
+      url: urlAtto,
+      fecha: it.dataEmanazione ? String(it.dataEmanazione).slice(0, 10) : null,
+      resumen: it.descrizioneAtto || null,
+      relevancia: null,
+    };
+  });
 }
 
 function escaparXml(s) {
