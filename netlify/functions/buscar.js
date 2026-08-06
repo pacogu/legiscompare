@@ -12,7 +12,7 @@ const CONECTORES_REALES = new Set([
   "brasil", "reino unido", "union europea", "irlanda",
   "colombia", "panama", "paises bajos", "suecia",
   "dinamarca", "suiza", "nueva zelanda", "canada", "polonia", "japon",
-  "israel", "noruega", "espana",
+  "israel", "noruega", "espana", "luxemburgo",
 ]);
 
 exports.handler = async function (event) {
@@ -55,6 +55,7 @@ exports.handler = async function (event) {
       else if (pais === "israel") resultadosReales = resultadosReales.concat(await buscarIsrael(q));
       else if (pais === "noruega") resultadosReales = resultadosReales.concat(await buscarNoruega(q));
       else if (pais === "espana") resultadosReales = resultadosReales.concat(await buscarEspana(q));
+      else if (pais === "luxemburgo") resultadosReales = resultadosReales.concat(await buscarLuxemburgo(q));
     } catch (e) {
       errores.push("Conector de " + pais + ": " + e.message);
     }
@@ -412,6 +413,32 @@ async function buscarEspana(q) {
     url: it.url_html_consolidada || it.url_eli || (it.identificador ? "https://www.boe.es/buscar/act.php?id=" + it.identificador : null),
     fecha: it.fecha_actualizacion || it.fecha_publicacion || null,
     resumen: it.rango || null,
+    relevancia: null,
+  }));
+}
+
+// --- Conector real: Legilux (Luxemburgo), SPARQL publico sobre la
+// ontologia JOLux, mismo patron que el conector de la Union Europea. ---
+async function buscarLuxemburgo(q) {
+  const termino = q.toLowerCase().replace(/"/g, "");
+  const sparql =
+    "PREFIX jolux: <http://data.legilux.public.lu/resource/ontology/jolux#>\n" +
+    "SELECT DISTINCT ?act ?title WHERE {\n" +
+    "  ?expr jolux:title ?title .\n" +
+    "  ?act jolux:isRealizedBy ?expr .\n" +
+    "  FILTER(CONTAINS(LCASE(STR(?title)), \"" + termino + "\"))\n" +
+    "} LIMIT 8";
+  const url = "https://data.legilux.public.lu/sparql?format=json&query=" + encodeURIComponent(sparql);
+  const r = await fetch(url, { headers: { accept: "application/sparql-results+json" } });
+  if (!r.ok) throw new Error("Legilux SPARQL " + r.status);
+  const data = await r.json();
+  const filas = (data && data.results && data.results.bindings) || [];
+  return filas.map((fila) => ({
+    pais: "Luxemburgo",
+    titulo: fila.title ? fila.title.value : "Norma sin titulo",
+    url: fila.act ? fila.act.value : null,
+    fecha: null,
+    resumen: null,
     relevancia: null,
   }));
 }
