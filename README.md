@@ -127,12 +127,17 @@ navegador para no repetir llamadas con la misma consulta.
 ## Sintesis comparada (opcional, usa IA)
 
 El dossier analitico (`dossier.html`) puede generar un borrador de
-sintesis comparada por eje juridico usando Groq, a partir de las fuentes
-ya analizadas. Esto es un paso opcional y puntual (no se ejecuta en cada
-busqueda), asi que su consumo de cuota es mucho menor. Usa la misma
-variable `GROQ_API_KEY`. Si no esta configurada, el dossier funciona
-igual pero sin el borrador automatico (el analista redacta directamente
-sus hallazgos).
+sintesis comparada usando Groq, a partir de las fuentes ya analizadas.
+El borrador sigue la misma estructura de las notas de Asesoria Tecnica
+Parlamentaria de la BCN (ver ejemplos en la carpeta de referencia del
+analista): Resumen, Introduccion, uno o mas apartados numerados en
+romano por eje juridico o bloque tematico (con citas `[n]` a las fuentes
+oficiales), Vacios de informacion y Fuentes citadas (lista numerada
+pais - titulo - URL). Esto es un paso opcional y puntual (no se ejecuta
+en cada busqueda), asi que su consumo de cuota es mucho menor. Usa la
+misma variable `GROQ_API_KEY`. Si no esta configurada, el dossier
+funciona igual pero sin el borrador automatico (el analista redacta
+directamente sus hallazgos).
 
 ## Consultas de seguimiento (capa conversacional)
 

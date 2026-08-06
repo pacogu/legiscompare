@@ -25,18 +25,39 @@ exports.handler = async function (event) {
   }).join("\n");
   const listaEjes = (ejes && ejes.length) ? ejes.join(", ") : "sin ejes especificos seleccionados (usa tu criterio para identificar los ejes relevantes)";
 
-  const prompt = "Eres un asistente de investigacion juridica para un analista de una biblioteca parlamentaria. " +
-    "Tu tarea NO es redactar un informe legal definitivo ni dar asesoria legal. Tu tarea es preparar un BORRADOR " +
-    "de sintesis comparada, organizado por eje juridico, a partir UNICAMENTE de las fuentes oficiales listadas abajo " +
-    "(son portales de fuentes oficiales, no el texto de las normas). No inventes el contenido especifico de ninguna " +
-    "norma. Si no hay informacion suficiente para un eje o jurisdiccion, dilo explicitamente en vez de inventar. " +
-    "Este texto sera revisado y validado por un abogado antes de usarse.\n\n" +
+  const prompt = "Eres un asistente de investigacion juridica para un analista de la Biblioteca del Congreso " +
+    "Nacional (BCN). Tu tarea NO es redactar un informe legal definitivo ni dar asesoria legal. Tu tarea es " +
+    "preparar un BORRADOR de nota de Asesoria Tecnica Parlamentaria de legislacion comparada, a partir " +
+    "UNICAMENTE de las fuentes oficiales listadas abajo (son resultados de busqueda en portales de fuentes " +
+    "oficiales, no el texto completo de las normas). No inventes el contenido especifico de ninguna norma. Si " +
+    "no hay informacion suficiente para un eje o jurisdiccion, dilo explicitamente en vez de inventar. Este " +
+    "texto sera revisado y validado por un abogado antes de usarse.\n\n" +
     "Consulta: " + consulta + "\n" +
     "Ejes a comparar: " + listaEjes + "\n\n" +
-    "Fuentes oficiales disponibles (unica base disponible):\n" + listaFuentes + "\n\n" +
-    "Devuelve un texto breve (maximo 300 palabras) organizado por eje juridico, indicando en que fuente oficial " +
-    "de cada jurisdiccion el analista deberia profundizar la busqueda, y senalando vacios de informacion. " +
-    "Usa un tono tecnico, cauteloso y no concluyente.";
+    "Fuentes oficiales disponibles (unica base disponible, numeradas para citar):\n" + listaFuentes + "\n\n" +
+    "Redacta el borrador siguiendo EXACTAMENTE esta estructura, tal como en las notas de Asesoria Tecnica " +
+    "Parlamentaria de la BCN, usando estos mismos titulos de seccion en mayuscula/formato tal cual (texto " +
+    "plano, sin markdown, sin asteriscos ni numerales tipo '#'):\n\n" +
+    "RESUMEN\n" +
+    "Un parrafo breve (4-6 lineas) que sintetice el hallazgo principal de la comparacion.\n\n" +
+    "INTRODUCCION\n" +
+    "Un parrafo que indique el objeto del informe: la consulta, las jurisdicciones y ejes comparados, y la " +
+    "advertencia de que se trata de un borrador basado solo en fuentes oficiales de busqueda, pendiente de " +
+    "validacion por un abogado.\n\n" +
+    "I. [Nombre del primer eje juridico o bloque tematico]\n" +
+    "Analisis comparado por jurisdiccion dentro de este eje, citando la fuente oficial correspondiente entre " +
+    "corchetes con el numero de la lista (ej. [1]) cada vez que se mencione un hallazgo de una fuente. Si " +
+    "faltan ejes en la lista de arriba, usa tu criterio para identificar 1 a 3 ejes relevantes segun la consulta " +
+    "y los resultados disponibles.\n" +
+    "II. [Nombre del segundo eje juridico, si corresponde]\n" +
+    "(mismo formato)\n\n" +
+    "VACIOS DE INFORMACION\n" +
+    "Lista breve de jurisdicciones o ejes donde las fuentes disponibles no permiten sacar conclusiones.\n\n" +
+    "FUENTES CITADAS\n" +
+    "Lista numerada (misma numeracion usada en las citas [1], [2], etc.) de las fuentes oficiales efectivamente " +
+    "citadas en el texto, formato: [n] Pais - Titulo - URL.\n\n" +
+    "Usa un tono tecnico, cauteloso, neutral y no concluyente, propio de un documento de asesoria " +
+    "parlamentaria (no academico, sintetico y oportuno). Maximo 500 palabras en total.";
 
   try {
     const url = "https://api.groq.com/openai/v1/chat/completions";
@@ -46,7 +67,7 @@ exports.handler = async function (event) {
       body: JSON.stringify({
         model: "llama-3.3-70b-versatile",
         messages: [{ role: "user", content: prompt }],
-        max_tokens: 900,
+        max_tokens: 1400,
         temperature: 0.3,
       }),
     });
