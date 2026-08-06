@@ -12,7 +12,7 @@ const CONECTORES_REALES = new Set([
   "brasil", "reino unido", "union europea", "irlanda",
   "colombia", "panama", "paises bajos", "suecia",
   "dinamarca", "suiza", "nueva zelanda", "canada", "polonia", "japon",
-  "israel", "noruega",
+  "israel", "noruega", "espana",
 ]);
 
 exports.handler = async function (event) {
@@ -54,6 +54,7 @@ exports.handler = async function (event) {
       else if (pais === "japon") resultadosReales = resultadosReales.concat(await buscarJapon(q));
       else if (pais === "israel") resultadosReales = resultadosReales.concat(await buscarIsrael(q));
       else if (pais === "noruega") resultadosReales = resultadosReales.concat(await buscarNoruega(q));
+      else if (pais === "espana") resultadosReales = resultadosReales.concat(await buscarEspana(q));
     } catch (e) {
       errores.push("Conector de " + pais + ": " + e.message);
     }
@@ -392,6 +393,27 @@ function parsearFechaStorting(s) {
   const m = String(s).match(/\/Date\((\d+)/);
   if (!m) return null;
   return new Date(Number(m[1])).toISOString().slice(0, 10);
+}
+
+// --- Conector real: BOE - Agencia Estatal Boletin Oficial del Estado
+// (España), API de legislacion consolidada, oficial, sin llave, con
+// busqueda de texto libre en el parametro "query". ---
+async function buscarEspana(q) {
+  const url = "https://www.boe.es/datosabiertos/api/legislacion-consolidada?query=" +
+    encodeURIComponent(q) + "&limit=8";
+  const r = await fetch(url, { headers: { accept: "application/json" } });
+  if (!r.ok) throw new Error("API BOE " + r.status);
+  const data = await r.json();
+  const items = (data && data.data && (data.data.legislacion_consolidada || data.data)) || (data && data.results) || [];
+  const arr = Array.isArray(items) ? items : (Array.isArray(data) ? data : []);
+  return arr.slice(0, 8).map((it) => ({
+    pais: "España",
+    titulo: it.titulo || it.identificador || "Norma sin titulo",
+    url: it.url_html_consolidada || it.url_eli || (it.identificador ? "https://www.boe.es/buscar/act.php?id=" + it.identificador : null),
+    fecha: it.fecha_actualizacion || it.fecha_publicacion || null,
+    resumen: it.rango || null,
+    relevancia: null,
+  }));
 }
 
 function formatearFechaJapon(s) {

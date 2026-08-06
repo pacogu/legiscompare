@@ -51,6 +51,7 @@ piezas:
    - **Japon** - e-Gov Law API v1 (`laws.e-gov.go.jp/api/1/keyword`) - formato de respuesta confirmado por documentacion oficial (`LawNumbers[].LawName/LawId/PromulgationDate`).
    - **Israel** - Knesset OData (`knesset.gov.il/Odata/ParliamentInfo.svc/KNS_Bill`) - sin llave, implementado segun documentacion oficial (`substringof('texto',Name)`), pendiente de confirmar en el sitio real.
    - **Noruega** - Stortinget (`data.stortinget.no/eksport/saker`) - verificado en vivo (devuelve casos/proyectos reales con titulo, id y fecha). Esta API no tiene busqueda de texto en el servidor, asi que el conector trae los "saker" de la sesion parlamentaria actual (con fallback a la sesion anterior) y filtra por palabra clave del lado del servidor, sobre datos 100% reales.
+   - **España** - BOE, API de legislacion consolidada (`boe.es/datosabiertos/api/legislacion-consolidada`) - oficial, sin llave, con busqueda de texto libre (`query=`); documentacion tecnica publica en PDF, pendiente de confirmar el formato exacto de respuesta en el sitio real.
 
    Cada conector esta aislado con manejo de errores propio: si uno falla
    (cambio de formato, caida del servicio, etc.), no afecta a los demas
@@ -60,18 +61,23 @@ piezas:
    con datos reales - probar en el sitio desplegado y ajustar el mapeo de
    campos si el formato real difiere.
 
-   El catalogo tiene otras ~7 fuentes con "Tiene_API: Si" (Finlandia,
-   Francia, Austria, Corea del Sur, Australia, Costa Rica, Mexico,
-   Paraguay, Republica Checa) que quedan sin conector real: Francia
-   (Légifrance/PISTE) y Corea del Sur (open.law.go.kr) exigen registrar
-   una cuenta/llave gratuita (no solo llamar sin credenciales); Costa
-   Rica, Paraguay y Republica Checa no tienen una API REST de busqueda
-   documentada publicamente (solo portales de datos abiertos genericos o
-   sitios web); Australia tiene un dominio de API (`api.prod.legislation.gov.au`)
-   pero sin documentacion publica confirmada del formato de consulta. Se
-   agregan sumando una funcion `buscarNombrePais(q)` en
-   `netlify/functions/buscar.js` y añadiendo el pais a
-   `CONECTORES_REALES`.
+   El catalogo tiene otras fuentes con "Tiene_API: Si" que quedan sin
+   conector real: Francia (Légifrance/PISTE), Corea del Sur
+   (open.law.go.kr) y Alemania (Bundestag DIP) exigen registrar una
+   cuenta/llave gratuita (no solo llamar sin credenciales) - si el
+   analista consigue una llave gratuita de alguna de estas, se puede
+   integrar facilmente como variable de entorno adicional (igual que
+   `GROQ_API_KEY`). Estados Unidos (`api.congress.gov`) tambien requiere
+   llave gratuita instantanea (sin tarjeta), buen candidato si interesa.
+   Costa Rica, Paraguay y Republica Checa no tienen una API REST de
+   busqueda documentada publicamente (solo portales de datos abiertos
+   genericos o sitios web). Australia tiene un dominio de API
+   (`api.prod.legislation.gov.au`) pero sin documentacion publica
+   confirmada del formato de consulta. Chile (BCN) tiene un endpoint
+   SPARQL publico pero su vocabulario RDF no se pudo confirmar con
+   consultas de ejemplo documentadas. Se agregan sumando una funcion
+   `buscarNombrePais(q)` en `netlify/functions/buscar.js` y añadiendo el
+   pais a `CONECTORES_REALES`.
 2. **Catalogo curado** en `site/data/fuentes_oficiales.json`: 46 paises y
    bloques (Union Europea, Alemania, Argentina, Australia, Austria,
    Belgica, Bolivia, Brasil, Canada, Chile, Colombia, Corea del Sur,
