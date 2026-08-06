@@ -12,7 +12,7 @@ const CONECTORES_REALES = new Set([
   "brasil", "reino unido", "union europea", "irlanda",
   "colombia", "panama", "paises bajos", "suecia",
   "dinamarca", "suiza", "nueva zelanda", "canada", "polonia", "japon",
-  "israel", "noruega", "espana", "luxemburgo",
+  "israel", "noruega", "espana", "luxemburgo", "austria",
 ]);
 
 exports.handler = async function (event) {
@@ -56,6 +56,7 @@ exports.handler = async function (event) {
       else if (pais === "noruega") resultadosReales = resultadosReales.concat(await buscarNoruega(q));
       else if (pais === "espana") resultadosReales = resultadosReales.concat(await buscarEspana(q));
       else if (pais === "luxemburgo") resultadosReales = resultadosReales.concat(await buscarLuxemburgo(q));
+      else if (pais === "austria") resultadosReales = resultadosReales.concat(await buscarAustria(q));
     } catch (e) {
       errores.push("Conector de " + pais + ": " + e.message);
     }
@@ -441,6 +442,59 @@ async function buscarLuxemburgo(q) {
     resumen: null,
     relevancia: null,
   }));
+}
+
+// --- Conector real: RIS-OGDService (Austria), SOAP oficial sin llave
+// (data.bka.gv.at/ris/OGDService.asmx), documentado en el manual tecnico
+// oficial del RIS. Busca por Suchworte (texto libre) en Bundesrecht
+// consolidado. La respuesta viene como XML doblemente escapado dentro
+// del sobre SOAP, se desescapa y parsea con expresiones regulares. ---
+async function buscarAustria(q) {
+  const termino = escaparXml(q);
+  const innerXml =
+    '<OGDSearchRequest xmlns="http://ris.bka.gv.at/Search/1.3/OGD" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">' +
+    '<Suchworte xsi:type="PhraseSearchExpression"><Value>' + termino + "</Value></Suchworte>" +
+    "<DokumenteProSeite>Ten</DokumenteProSeite><Seitennummer>1</Seitennummer>" +
+    "</OGDSearchRequest>";
+  const soapBody =
+    '<?xml version="1.0" encoding="utf-8"?>' +
+    '<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">' +
+    "<soap:Body><request xmlns=\"http://ogd.bka.gv.at/\"><application>Br</application><query>" +
+    escaparXml(innerXml) + "</query></request></soap:Body></soap:Envelope>";
+
+  const r = await fetch("http://data.bka.gv.at/ris/OGDService.asmx", {
+    method: "POST",
+    headers: {
+      "content-type": "text/xml; charset=utf-8",
+      soapaction: "http://ogd.bka.gv.at/request",
+    },
+    body: soapBody,
+  });
+  if (!r.ok) throw new Error("API RIS Austria " + r.status);
+  let xml = await r.text();
+  xml = desescaparXml(xml);
+  const bloques = xml.split("<OGDDocumentReference>").slice(1).slice(0, 8);
+  return bloques.map((frag) => {
+    const titulo = (frag.match(/<Kurzinformation>([\s\S]*?)<\/Kurzinformation>/) || [])[1] || "Norma sin titulo";
+    const url = (frag.match(/<DokumentUrl>(?:<!\[CDATA\[)?([\s\S]*?)(?:\]\]>)?<\/DokumentUrl>/) || [])[1] || null;
+    const parte = (frag.match(/<ArtikelParagraphAnlage>([\s\S]*?)<\/ArtikelParagraphAnlage>/) || [])[1] || null;
+    return {
+      pais: "Austria",
+      titulo,
+      url,
+      fecha: null,
+      resumen: parte,
+      relevancia: null,
+    };
+  });
+}
+
+function escaparXml(s) {
+  return (s || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&apos;");
+}
+
+function desescaparXml(s) {
+  return (s || "").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"').replace(/&apos;/g, "'").replace(/&amp;/g, "&");
 }
 
 function formatearFechaJapon(s) {

@@ -53,6 +53,7 @@ piezas:
    - **Noruega** - Stortinget (`data.stortinget.no/eksport/saker`) - verificado en vivo (devuelve casos/proyectos reales con titulo, id y fecha). Esta API no tiene busqueda de texto en el servidor, asi que el conector trae los "saker" de la sesion parlamentaria actual (con fallback a la sesion anterior) y filtra por palabra clave del lado del servidor, sobre datos 100% reales.
    - **España** - BOE, API de legislacion consolidada (`boe.es/datosabiertos/api/legislacion-consolidada`) - oficial, sin llave, con busqueda de texto libre (`query=`); documentacion tecnica publica en PDF, pendiente de confirmar el formato exacto de respuesta en el sitio real.
    - **Luxemburgo** - Legilux (`data.legilux.public.lu/sparql`), SPARQL publico sobre la ontologia JOLux (bien documentada, incluso reutilizada por Suiza/Fedlex); mismo patron que el conector de la Union Europea, pendiente de confirmar en el sitio real.
+   - **Austria** - RIS-OGDService (`data.bka.gv.at/ris/OGDService.asmx`), servicio SOAP oficial sin llave, documentado en el manual tecnico del RIS (busqueda por "Suchworte" en Bundesrecht consolidado); requiere parsear XML doblemente escapado dentro del sobre SOAP, pendiente de confirmar en el sitio real.
 
    Cada conector esta aislado con manejo de errores propio: si uno falla
    (cambio de formato, caida del servicio, etc.), no afecta a los demas
