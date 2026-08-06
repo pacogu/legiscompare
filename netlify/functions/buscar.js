@@ -15,6 +15,17 @@ const CONECTORES_REALES = new Set([
   "israel", "noruega", "espana", "luxemburgo", "austria", "chile",
 ]);
 
+// Corea del Sur requiere una llave gratuita opcional (LAW_KR_OC,
+// identificador "OC" que cualquier persona puede registrar gratis en
+// https://open.law.go.kr). Solo se activa como conector real si esta
+// configurada; si no, el pais sigue funcionando via Groq como cualquier
+// otro pais sin conector.
+function conectoresActivos() {
+  const set = new Set(CONECTORES_REALES);
+  if (process.env.LAW_KR_OC) set.add("corea del sur");
+  return set;
+}
+
 exports.handler = async function (event) {
   const q = (event.queryStringParameters && event.queryStringParameters.q) || "";
   const fuentesParam = (event.queryStringParameters && event.queryStringParameters.fuentes) || "";
@@ -29,8 +40,9 @@ exports.handler = async function (event) {
     return { statusCode: 200, headers: cors(), body: JSON.stringify({ resultados: [], errores: ["No hay fuentes oficiales para los paises seleccionados."] }) };
   }
 
-  const fuentesConConector = fuentesLista.filter((f) => CONECTORES_REALES.has(normalizar(f.pais)));
-  const fuentesSinConector = fuentesLista.filter((f) => !CONECTORES_REALES.has(normalizar(f.pais)));
+  const activos = conectoresActivos();
+  const fuentesConConector = fuentesLista.filter((f) => activos.has(normalizar(f.pais)));
+  const fuentesSinConector = fuentesLista.filter((f) => !activos.has(normalizar(f.pais)));
 
   const errores = [];
   let resultadosReales = [];
@@ -58,6 +70,7 @@ exports.handler = async function (event) {
       else if (pais === "luxemburgo") resultadosReales = resultadosReales.concat(await buscarLuxemburgo(q));
       else if (pais === "austria") resultadosReales = resultadosReales.concat(await buscarAustria(q));
       else if (pais === "chile") resultadosReales = resultadosReales.concat(await buscarChile(q));
+      else if (pais === "corea del sur") resultadosReales = resultadosReales.concat(await buscarCoreaDelSur(q));
     } catch (e) {
       errores.push("Conector de " + pais + ": " + e.message);
     }
@@ -514,6 +527,32 @@ async function buscarChile(q) {
     url: fila.norma ? fila.norma.value : null,
     fecha: null,
     resumen: null,
+    relevancia: null,
+  }));
+}
+
+// --- Conector real (opcional): Ley Coreana / DRF lawSearch.do (Corea
+// del Sur), API oficial del Ministerio de Legislacion del Gobierno
+// (open.law.go.kr), con busqueda de texto real por "query". Requiere
+// una llave gratuita (identificador OC) que cualquier persona registra
+// gratis; se activa via LAW_KR_OC en Netlify. ---
+async function buscarCoreaDelSur(q) {
+  const oc = process.env.LAW_KR_OC;
+  if (!oc) throw new Error("Falta LAW_KR_OC (opcional)");
+  const url = "http://www.law.go.kr/DRF/lawSearch.do?OC=" + encodeURIComponent(oc) +
+    "&target=law&type=JSON&display=8&query=" + encodeURIComponent(q);
+  const r = await fetch(url, { headers: { accept: "application/json" } });
+  if (!r.ok) throw new Error("API DRF Corea " + r.status);
+  const data = await r.json();
+  const bloque = (data && data.LawSearch) || {};
+  const items = bloque.law || [];
+  const arr = Array.isArray(items) ? items : (items ? [items] : []);
+  return arr.map((it) => ({
+    pais: "Corea del Sur",
+    titulo: it["법령명한글"] || it.법령명한글 || "Norma sin titulo",
+    url: it["법령상세링크"] ? "https://www.law.go.kr" + it["법령상세링크"] : null,
+    fecha: it["공포일자"] || null,
+    resumen: it["소관부처명"] || null,
     relevancia: null,
   }));
 }

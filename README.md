@@ -55,6 +55,7 @@ piezas:
    - **Luxemburgo** - Legilux (`data.legilux.public.lu/sparql`), SPARQL publico sobre la ontologia JOLux (bien documentada, incluso reutilizada por Suiza/Fedlex); mismo patron que el conector de la Union Europea, pendiente de confirmar en el sitio real.
    - **Austria** - RIS-OGDService (`data.bka.gv.at/ris/OGDService.asmx`), servicio SOAP oficial sin llave, documentado en el manual tecnico del RIS (busqueda por "Suchworte" en Bundesrecht consolidado); requiere parsear XML doblemente escapado dentro del sobre SOAP, pendiente de confirmar en el sitio real.
    - **Chile** - LeyChile / BCN (`datos.bcn.cl/sparql`), SPARQL publico sobre la ontologia bcn-norms (`bcnnorms:Norm`, `dc:title`), mismo patron que Union Europea y Luxemburgo, pendiente de confirmar en el sitio real.
+   - **Corea del Sur** (opcional) - DRF `lawSearch.do` del Ministerio de Legislacion (`open.law.go.kr`), con busqueda de texto real por "query". Requiere una llave gratuita propia (identificador OC, registro instantaneo y sin costo en open.law.go.kr) configurada como `LAW_KR_OC` en Netlify; sin ella, Corea del Sur sigue funcionando igual via Groq como cualquier pais sin conector.
 
    Cada conector esta aislado con manejo de errores propio: si uno falla
    (cambio de formato, caida del servicio, etc.), no afecta a los demas
@@ -151,7 +152,9 @@ respuesta. Usa la misma variable `GROQ_API_KEY`.
 3. Build settings: sin build command, publish directory = `site`.
 4. En Site settings > Environment variables agrega `GROQ_API_KEY`
    (gratis, sin tarjeta, en https://console.groq.com/keys; marcar
-   "Contains secret values").
+   "Contains secret values"). Opcionalmente agrega `LAW_KR_OC` (gratis,
+   registro instantaneo en https://open.law.go.kr) para activar el
+   conector real de Corea del Sur.
 5. Deploy. La busqueda funciona via `/.netlify/functions/buscar`, con
    fallback automatico al directorio simple si no hay cuota disponible.
 
