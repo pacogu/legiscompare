@@ -12,6 +12,7 @@ const CONECTORES_REALES = new Set([
   "brasil", "reino unido", "union europea", "irlanda",
   "colombia", "panama", "paises bajos", "suecia",
   "dinamarca", "suiza", "nueva zelanda", "canada", "polonia", "japon",
+  "israel", "noruega",
 ]);
 
 exports.handler = async function (event) {
@@ -51,6 +52,8 @@ exports.handler = async function (event) {
       else if (pais === "canada") resultadosReales = resultadosReales.concat(await buscarCanada(q));
       else if (pais === "polonia") resultadosReales = resultadosReales.concat(await buscarPolonia(q));
       else if (pais === "japon") resultadosReales = resultadosReales.concat(await buscarJapon(q));
+      else if (pais === "israel") resultadosReales = resultadosReales.concat(await buscarIsrael(q));
+      else if (pais === "noruega") resultadosReales = resultadosReales.concat(await buscarNoruega(q));
     } catch (e) {
       errores.push("Conector de " + pais + ": " + e.message);
     }
@@ -318,6 +321,77 @@ async function buscarJapon(q) {
     resumen: it.LawNo || null,
     relevancia: null,
   }));
+}
+
+// --- Conector real: Knesset OData (Israel, KNS_Bill, sin llave) ---
+async function buscarIsrael(q) {
+  const termino = q.replace(/'/g, "");
+  const filtro = "substringof('" + termino + "',Name)";
+  const url = "https://knesset.gov.il/Odata/ParliamentInfo.svc/KNS_Bill?$filter=" +
+    encodeURIComponent(filtro) + "&$top=8&$format=json";
+  const r = await fetch(url, { headers: { accept: "application/json" } });
+  if (!r.ok) throw new Error("API Knesset Israel " + r.status);
+  const data = await r.json();
+  const items = (data && data.value) || (data && data.d && data.d.results) || [];
+  return items.map((it) => ({
+    pais: "Israel",
+    titulo: it.Name || "Proyecto de ley sin titulo",
+    url: it.BillID ? "https://main.knesset.gov.il/Activity/Legislation/Laws/Pages/LawBill.aspx?t=lawsuggestionssearch&lawitemid=" + it.BillID : null,
+    fecha: it.PublicationDate ? String(it.PublicationDate).slice(0, 10) : (it.LastUpdatedDate ? String(it.LastUpdatedDate).slice(0, 10) : null),
+    resumen: it.SubTypeDesc || null,
+    relevancia: null,
+  }));
+}
+
+// --- Conector real: Stortinget (Noruega, data.stortinget.no) - la API no
+// tiene busqueda de texto en el servidor, asi que se trae la lista de
+// "saker" (proyectos/casos) de la sesion actual y se filtra por palabra
+// clave del lado del conector, sobre datos 100% reales. ---
+async function buscarNoruega(q) {
+  const sesiones = sesionesStortingCandidatas();
+  const termino = q.toLowerCase();
+  for (const sesionid of sesiones) {
+    const url = "https://data.stortinget.no/eksport/saker?sesjonid=" + sesionid + "&format=json";
+    let r;
+    try {
+      r = await fetch(url, { headers: { accept: "application/json" } });
+    } catch (e) {
+      continue;
+    }
+    if (!r.ok) continue;
+    const data = await r.json();
+    const items = (data && (data.saker_liste || data.saker || data)) || [];
+    const arr = Array.isArray(items) ? items : [];
+    if (!arr.length) continue;
+    const coincidencias = arr.filter((it) =>
+      ((it.tittel || "") + " " + (it.korttittel || "")).toLowerCase().includes(termino)
+    );
+    if (!coincidencias.length) continue;
+    return coincidencias.slice(0, 8).map((it) => ({
+      pais: "Noruega",
+      titulo: it.korttittel || it.tittel || "Sak sin titulo",
+      url: it.id ? "https://www.stortinget.no/no/Saker-og-publikasjoner/Saker/Sak/?p=" + it.id : null,
+      fecha: parsearFechaStorting(it.sist_oppdatert_dato),
+      resumen: it.status || null,
+      relevancia: null,
+    }));
+  }
+  return [];
+}
+
+function sesionesStortingCandidatas() {
+  const hoy = new Date();
+  const anio = hoy.getUTCFullYear();
+  const mes = hoy.getUTCMonth() + 1;
+  const inicio = mes >= 8 ? anio : anio - 1;
+  return [inicio + "-" + (inicio + 1), (inicio - 1) + "-" + inicio];
+}
+
+function parsearFechaStorting(s) {
+  if (!s) return null;
+  const m = String(s).match(/\/Date\((\d+)/);
+  if (!m) return null;
+  return new Date(Number(m[1])).toISOString().slice(0, 10);
 }
 
 function formatearFechaJapon(s) {

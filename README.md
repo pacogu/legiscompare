@@ -49,23 +49,29 @@ piezas:
    - **Canada** - Justice Laws Website (OData).
    - **Polonia** - Sejm/ELI API (`api.sejm.gov.pl/eli/acts/search`) - verificado en vivo, funcionando (titulo, fecha, tipo de norma reales).
    - **Japon** - e-Gov Law API v1 (`laws.e-gov.go.jp/api/1/keyword`) - formato de respuesta confirmado por documentacion oficial (`LawNumbers[].LawName/LawId/PromulgationDate`).
+   - **Israel** - Knesset OData (`knesset.gov.il/Odata/ParliamentInfo.svc/KNS_Bill`) - sin llave, implementado segun documentacion oficial (`substringof('texto',Name)`), pendiente de confirmar en el sitio real.
+   - **Noruega** - Stortinget (`data.stortinget.no/eksport/saker`) - verificado en vivo (devuelve casos/proyectos reales con titulo, id y fecha). Esta API no tiene busqueda de texto en el servidor, asi que el conector trae los "saker" de la sesion parlamentaria actual (con fallback a la sesion anterior) y filtra por palabra clave del lado del servidor, sobre datos 100% reales.
 
    Cada conector esta aislado con manejo de errores propio: si uno falla
    (cambio de formato, caida del servicio, etc.), no afecta a los demas
    paises ni a Groq como respaldo. Colombia, Panama, Paises Bajos, Suecia,
-   Dinamarca, Suiza, Nueva Zelanda y Canada estan implementados segun su
-   documentacion publica pero no se pudieron verificar en vivo con datos
-   reales - probar en el sitio desplegado y ajustar el mapeo de campos si
-   el formato real difiere.
+   Dinamarca, Suiza, Nueva Zelanda, Canada e Israel estan implementados
+   segun su documentacion publica pero no se pudieron verificar en vivo
+   con datos reales - probar en el sitio desplegado y ajustar el mapeo de
+   campos si el formato real difiere.
 
-   El catalogo tiene otras ~9 fuentes con "Tiene_API: Si" (Noruega,
-   Israel, Finlandia, Francia, Austria, Corea del Sur, Australia,
-   Costa Rica, Mexico, Paraguay, Republica Checa) que son candidatas a
-   nuevos conectores, pero requieren llave propia registrada, tienen
-   parametros de busqueda no estandar, o no se pudo confirmar su formato
-   exacto todavia. Se agregan sumando una funcion
-   `buscarNombrePais(q)` en `netlify/functions/buscar.js` y añadiendo el
-   pais a `CONECTORES_REALES`.
+   El catalogo tiene otras ~7 fuentes con "Tiene_API: Si" (Finlandia,
+   Francia, Austria, Corea del Sur, Australia, Costa Rica, Mexico,
+   Paraguay, Republica Checa) que quedan sin conector real: Francia
+   (Légifrance/PISTE) y Corea del Sur (open.law.go.kr) exigen registrar
+   una cuenta/llave gratuita (no solo llamar sin credenciales); Costa
+   Rica, Paraguay y Republica Checa no tienen una API REST de busqueda
+   documentada publicamente (solo portales de datos abiertos genericos o
+   sitios web); Australia tiene un dominio de API (`api.prod.legislation.gov.au`)
+   pero sin documentacion publica confirmada del formato de consulta. Se
+   agregan sumando una funcion `buscarNombrePais(q)` en
+   `netlify/functions/buscar.js` y añadiendo el pais a
+   `CONECTORES_REALES`.
 2. **Catalogo curado** en `site/data/fuentes_oficiales.json`: 46 paises y
    bloques (Union Europea, Alemania, Argentina, Australia, Austria,
    Belgica, Bolivia, Brasil, Canada, Chile, Colombia, Corea del Sur,
