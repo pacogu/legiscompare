@@ -12,7 +12,7 @@ const CONECTORES_REALES = new Set([
   "brasil", "reino unido", "union europea", "irlanda",
   "colombia", "panama", "paises bajos", "suecia",
   "dinamarca", "suiza", "nueva zelanda", "canada", "polonia", "japon",
-  "israel", "noruega", "espana", "luxemburgo", "austria",
+  "israel", "noruega", "espana", "luxemburgo", "austria", "chile",
 ]);
 
 exports.handler = async function (event) {
@@ -57,6 +57,7 @@ exports.handler = async function (event) {
       else if (pais === "espana") resultadosReales = resultadosReales.concat(await buscarEspana(q));
       else if (pais === "luxemburgo") resultadosReales = resultadosReales.concat(await buscarLuxemburgo(q));
       else if (pais === "austria") resultadosReales = resultadosReales.concat(await buscarAustria(q));
+      else if (pais === "chile") resultadosReales = resultadosReales.concat(await buscarChile(q));
     } catch (e) {
       errores.push("Conector de " + pais + ": " + e.message);
     }
@@ -487,6 +488,34 @@ async function buscarAustria(q) {
       relevancia: null,
     };
   });
+}
+
+// --- Conector real: LeyChile / BCN (Chile), SPARQL publico sobre la
+// ontologia bcn-norms, mismo patron que el conector de la Union Europea
+// y Luxemburgo. ---
+async function buscarChile(q) {
+  const termino = q.toLowerCase().replace(/"/g, "");
+  const sparql =
+    "PREFIX bcnnorms: <http://datos.bcn.cl/ontologies/bcn-norms#>\n" +
+    "PREFIX dc: <http://purl.org/dc/elements/1.1/>\n" +
+    "SELECT DISTINCT ?norma ?titulo WHERE {\n" +
+    "  ?norma a bcnnorms:Norm ;\n" +
+    "         dc:title ?titulo .\n" +
+    "  FILTER(CONTAINS(LCASE(STR(?titulo)), \"" + termino + "\"))\n" +
+    "} LIMIT 8";
+  const url = "https://datos.bcn.cl/sparql?format=json&query=" + encodeURIComponent(sparql);
+  const r = await fetch(url, { headers: { accept: "application/sparql-results+json" } });
+  if (!r.ok) throw new Error("BCN Chile SPARQL " + r.status);
+  const data = await r.json();
+  const filas = (data && data.results && data.results.bindings) || [];
+  return filas.map((fila) => ({
+    pais: "Chile",
+    titulo: fila.titulo ? fila.titulo.value : "Norma sin titulo",
+    url: fila.norma ? fila.norma.value : null,
+    fecha: null,
+    resumen: null,
+    relevancia: null,
+  }));
 }
 
 function escaparXml(s) {
